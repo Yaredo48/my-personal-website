@@ -21,13 +21,13 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
         ref={ref}
         id={id}
         className={cn(
-          'py-20 md:py-32 px-4 md:px-8 lg:px-16',
+          'px-5 py-20 sm:px-8 md:py-24 lg:px-12 lg:py-28',
           backgrounds[background],
           className
         )}
         {...props}
       >
-        <div className="max-w-7xl mx-auto">{children}</div>
+        <div className="mx-auto max-w-6xl">{children}</div>
       </section>
     );
   }
@@ -41,7 +41,7 @@ export const SectionHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-center mb-12 md:mb-16', className)}
+    className={cn('mb-12 max-w-3xl md:mb-16', className)}
     {...props}
   />
 ));
@@ -55,7 +55,7 @@ export const SectionTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      'text-3xl md:text-4xl lg:text-5xl font-bold mb-4',
+      'mb-4 text-3xl font-semibold tracking-[-0.035em] md:text-4xl lg:text-[2.75rem]',
       className
     )}
     {...props}
@@ -71,7 +71,7 @@ export const SectionSubtitle = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      'text-lg md:text-xl text-[var(--text-muted)] max-w-3xl mx-auto',
+      'max-w-2xl text-base leading-7 text-[var(--text-muted)] md:text-lg',
       className
     )}
     {...props}

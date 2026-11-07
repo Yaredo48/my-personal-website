@@ -83,14 +83,14 @@ export const Blog = () => {
                 <div className="flex items-center gap-4 text-sm text-[var(--text-muted)] mb-4">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>{post.date}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
                     <span>{post.readTime}</span>
                   </div>
                 </div>
-                <button className="text-[var(--primary)] font-medium flex items-center gap-2 hover:gap-3 transition-all">
+                <button className="text-[var(--primary)] font-medium flex items-center gap-2 hover:gap-3 transition-all hover:text-[var(--primary-light)]">
                   Read More
                   <ArrowRight className="w-4 h-4" />
                 </button>

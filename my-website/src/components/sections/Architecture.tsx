@@ -59,7 +59,7 @@ export const Architecture = () => {
             <h3 className="text-xl font-semibold text-[var(--foreground)] mb-6 text-center">
               RAG System Architecture
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-4 md:gap-2">
               {flowSteps.map((step, index) => (
                 <React.Fragment key={step.label}>
                   <motion.div variants={itemVariants} className="flex flex-col items-center">
@@ -71,7 +71,7 @@ export const Architecture = () => {
                     </p>
                   </motion.div>
                   {index < flowSteps.length - 1 && (
-                    <motion.div variants={itemVariants} className="text-[var(--text-muted)]">
+                    <motion.div variants={itemVariants} className="text-[var(--text-muted)] rotate-90 md:rotate-0">
                       <ArrowRight className="w-5 h-5" />
                     </motion.div>
                   )}

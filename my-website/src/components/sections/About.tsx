@@ -3,115 +3,69 @@
 import React from 'react';
 import { Section, SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
+import { BrainCircuit, Gauge, Network, Workflow } from 'lucide-react';
+
+const strengths = [
+  { icon: BrainCircuit, title: 'Intelligent products', detail: 'ML, deep learning, and generative AI' },
+  { icon: Network, title: 'Knowledge systems', detail: 'RAG, vector search, and AI agents' },
+  { icon: Workflow, title: 'Production engineering', detail: 'APIs, MLOps, and cloud infrastructure' },
+  { icon: Gauge, title: 'Scientific performance', detail: 'GPU, HPC, and parallel computing' },
+];
 
 export const About = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
   return (
-    <Section id="about" background="secondary">
+    <Section id="about">
       <SectionHeader>
-        <SectionTitle>About Me</SectionTitle>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">What I do</p>
+        <SectionTitle>From complex data to dependable intelligence.</SectionTitle>
         <SectionSubtitle>
-          Passionate about building intelligent systems that solve real-world problems
+          I architect AI systems with the rigor of a software engineer and the curiosity of a researcher.
         </SectionSubtitle>
       </SectionHeader>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid lg:grid-cols-2 gap-12 lg:gap-16"
-      >
-        <motion.div variants={itemVariants} className="space-y-6">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-[var(--foreground)] leading-relaxed">
-              I am a Senior AI Engineer and Software Engineer specializing in architecting, developing, and deploying intelligent, scalable AI solutions. My expertise spans Machine Learning, Deep Learning, Generative AI, and Large Language Models (LLMs), with a strong focus on Retrieval-Augmented Generation (RAG) systems, AI agents, and enterprise-grade AI applications.
-            </p>
-            <p className="text-[var(--foreground)] leading-relaxed">
-              I specialize in building end-to-end AI solutions using technologies such as Hugging Face, LangChain, OpenAI and Vector Databases. I have experience designing scalable APIs, integrating AI models into production environments, and implementing MLOps practices for deployment, monitoring, and continuous improvement.
-            </p>
-          </div>
-        </motion.div>
+      <div className="grid gap-px overflow-hidden border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-4">
+        {strengths.map(({ icon: Icon, title, detail }, index) => (
+          <motion.div
+            key={title}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: index * 0.06, duration: 0.35 }}
+            className="group bg-[var(--surface)] p-6 transition-colors hover:bg-[var(--background-secondary)]"
+          >
+            <Icon className="mb-7 h-6 w-6 text-[var(--primary)] transition-transform duration-200 group-hover:-translate-y-1" aria-hidden="true" />
+            <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--foreground)]">{title}</h3>
+            <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{detail}</p>
+          </motion.div>
+        ))}
+      </div>
 
-        <motion.div variants={itemVariants} className="space-y-6">
-          <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-[var(--foreground)] mb-4">
-              Engineering Philosophy
-            </h3>
-            <p className="text-[var(--text-muted)] leading-relaxed">
-              I believe in building systems that are not only intelligent but also reliable, scalable, and maintainable. Every solution I architect balances innovation with practical production considerations, ensuring that AI models deliver measurable business value.
-            </p>
-          </div>
+      <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="border-l-2 border-[var(--primary)] py-1 pl-6">
+          <p className="max-w-2xl text-xl leading-8 tracking-[-0.02em] text-[var(--foreground)] sm:text-2xl">
+            I build end-to-end AI solutions that make advanced models useful, observable, scalable, and safe in production.
+          </p>
+        </div>
+        <details className="group border border-[var(--border)] bg-[var(--background-secondary)] p-5">
+          <summary className="cursor-pointer list-none text-sm font-semibold text-[var(--foreground)] marker:content-none">
+            <span className="flex items-center justify-between gap-4">
+              Engineering philosophy
+              <span className="text-[var(--primary)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </span>
+          </summary>
+          <p className="pt-4 text-sm leading-6 text-[var(--text-muted)]">
+            Every solution balances innovation with practical production concerns: reliability, maintainability, cost, evaluation, monitoring, and measurable business value.
+          </p>
+        </details>
+      </div>
 
-          <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-[var(--foreground)] mb-4">
-              Professional Mission
-            </h3>
-            <p className="text-[var(--text-muted)] leading-relaxed">
-              My primary focus is delivering reliable, high-performance AI solutions that solve real-world problems and drive measurable business value. I am committed to advancing the field of AI engineering through continuous learning, research, and the development of production-grade intelligent applications.
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-16"
-      >
-        <motion.h3
-          variants={itemVariants}
-          className="text-2xl font-semibold text-[var(--foreground)] mb-8 text-center"
-        >
-          Research Interests
-        </motion.h3>
-        <motion.div
-          variants={itemVariants}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          {[
-            'Artificial Intelligence Engineering',
-            'Machine Learning and Deep Learning',
-            'Generative AI and LLM Engineering',
-            'RAG Systems and Knowledge Retrieval',
-            'Agentic AI and Multi-Agent Architectures',
-            'Enterprise AI Applications',
-            'Software Architecture and Backend Engineering',
-            'MLOps and Production AI',
-            'Cloud and Distributed Systems',
-            'High-Performance Computing',
-            'GPU and Parallel Computing',
-            'Scientific Computing and Research',
-          ].map((interest) => (
-            <div
-              key={interest}
-              className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg p-4 hover:border-[var(--primary)] transition-colors duration-300"
-            >
-              <p className="text-sm font-medium text-[var(--foreground)]">{interest}</p>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
+      <div className="mt-10 flex flex-wrap gap-2" aria-label="Research interests">
+        {['Generative AI', 'Retrieval systems', 'Agentic workflows', 'MLOps', 'Distributed systems', 'GPU computing', 'Scientific research'].map((interest) => (
+          <span key={interest} className="border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text-muted)]">
+            {interest}
+          </span>
+        ))}
+      </div>
     </Section>
   );
 };

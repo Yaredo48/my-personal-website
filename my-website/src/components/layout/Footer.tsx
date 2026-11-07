@@ -1,14 +1,23 @@
-import React from 'react';
-import { Code, Linkedin as LinkedIn, Mail } from 'lucide-react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { Code, Link, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const Footer = () => {
+  const [year, setYear] = useState(2024);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setYear(new Date().getFullYear()), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
-    <footer className="bg-[var(--background-secondary)] border-t border-[var(--border)] py-12 px-4 md:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto">
+    <footer className="border-t border-[var(--border)] bg-[var(--background-secondary)] px-5 py-12 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">
+            <h3 className="mb-2 text-xl font-semibold tracking-[-0.025em] text-[var(--foreground)]">
               Yared Asfaw
             </h3>
             <p className="text-[var(--text-muted)]">
@@ -22,9 +31,8 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                'p-3 rounded-lg bg-[var(--card-bg)] border border-[var(--card-border)]',
-                'text-[var(--foreground)] hover:text-[var(--primary)] hover:border-[var(--primary)]',
-                'transition-all duration-300'
+                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
+                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
               )}
               aria-label="GitHub"
             >
@@ -35,20 +43,18 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                'p-3 rounded-lg bg-[var(--card-bg)] border border-[var(--card-border)]',
-                'text-[var(--foreground)] hover:text-[var(--primary)] hover:border-[var(--primary)]',
-                'transition-all duration-300'
+                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
+                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
               )}
               aria-label="LinkedIn"
             >
-              <LinkedIn className="w-5 h-5" />
+              <Link className="w-5 h-5" />
             </a>
             <a
               href="mailto:contact@example.com"
               className={cn(
-                'p-3 rounded-lg bg-[var(--card-bg)] border border-[var(--card-border)]',
-                'text-[var(--foreground)] hover:text-[var(--primary)] hover:border-[var(--primary)]',
-                'transition-all duration-300'
+                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
+                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
               )}
               aria-label="Email"
             >
@@ -59,7 +65,7 @@ export const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-[var(--border)] text-center">
           <p className="text-sm text-[var(--text-muted)]">
-            © {new Date().getFullYear()} Yared Asfaw. All rights reserved.
+            © {year} Yared Asfaw. All rights reserved.
           </p>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Section, SectionHeader, SectionTitle, SectionSubtitle } from '@/compone
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin as LinkedIn, Code, Send } from 'lucide-react';
+import { Mail, Link, Code, Send } from 'lucide-react';
 import { profile } from '@/data/profile';
 
 export const Contact = () => {
@@ -16,11 +16,55 @@ export const Contact = () => {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Form submitted:', formData);
+      alert('Thank you for your message! I will get back to you soon.');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setErrors({});
+    } catch {
+      alert('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -51,7 +95,7 @@ export const Contact = () => {
       <SectionHeader>
         <SectionTitle>Get In Touch</SectionTitle>
         <SectionSubtitle>
-          Let's collaborate on your next AI project
+          Let&apos;s collaborate on your next AI project
         </SectionSubtitle>
       </SectionHeader>
 
@@ -65,10 +109,10 @@ export const Contact = () => {
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
             <h3 className="text-2xl font-semibold text-[var(--foreground)] mb-4">
-              Let's Build Something Amazing Together
+              Let&apos;s Build Something Amazing Together
             </h3>
             <p className="text-[var(--text-muted)] leading-relaxed">
-              I'm always interested in hearing about new projects, research collaborations, and opportunities in AI engineering. Whether you have a question or just want to say hi, feel free to reach out.
+              I&apos;m always interested in hearing about new projects, research collaborations, and opportunities in AI engineering. Whether you have a question or just want to say hi, feel free to reach out.
             </p>
           </div>
 
@@ -93,7 +137,7 @@ export const Contact = () => {
               className="flex items-center gap-4 p-4 rounded-lg bg-[var(--card-bg)] border border-[var(--card-border)] hover:border-[var(--primary)] transition-colors group"
             >
               <div className="p-3 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
-                <LinkedIn className="w-6 h-6" />
+                <Link className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-sm text-[var(--text-muted)]">LinkedIn</p>
@@ -132,10 +176,14 @@ export const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
+                    className={`w-full px-4 py-3 rounded-lg border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all ${
+                      errors.name ? 'border-red-500' : 'border-[var(--border)]'
+                    }`}
                     placeholder="Your name"
                   />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                  )}
                 </div>
 
                 <div>
@@ -148,10 +196,14 @@ export const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
+                    className={`w-full px-4 py-3 rounded-lg border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all ${
+                      errors.email ? 'border-red-500' : 'border-[var(--border)]'
+                    }`}
                     placeholder="your@email.com"
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
                 </div>
 
                 <div>
@@ -164,10 +216,14 @@ export const Contact = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
+                    className={`w-full px-4 py-3 rounded-lg border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all ${
+                      errors.subject ? 'border-red-500' : 'border-[var(--border)]'
+                    }`}
                     placeholder="Project inquiry"
                   />
+                  {errors.subject && (
+                    <p className="mt-1 text-sm text-red-500">{errors.subject}</p>
+                  )}
                 </div>
 
                 <div>
@@ -179,16 +235,34 @@ export const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all resize-none"
+                    className={`w-full px-4 py-3 rounded-lg border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all resize-none ${
+                      errors.message ? 'border-red-500' : 'border-[var(--border)]'
+                    }`}
                     placeholder="Tell me about your project..."
                   />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                  )}
                 </div>
 
-                <Button type="submit" size="lg" className="w-full flex items-center justify-center gap-2">
-                  <Send className="w-5 h-5" />
-                  Send Message
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>

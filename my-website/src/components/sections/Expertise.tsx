@@ -12,7 +12,9 @@ import { cn } from '@/lib/utils';
 export const Expertise = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
+    () => new Set([techCategories.programming])
+  );
 
   const categories = Object.values(techCategories);
 
@@ -46,6 +48,16 @@ export const Expertise = () => {
     });
     return groups;
   }, [filteredTechnologies]);
+
+  const selectCategory = (category: string) => {
+    setSelectedCategory(category);
+    setExpandedCategories(category === 'all' ? new Set([techCategories.programming]) : new Set([category]));
+  };
+
+  const updateSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query) setExpandedCategories(new Set(categories));
+  };
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -94,19 +106,19 @@ export const Expertise = () => {
               type="text"
               placeholder="Search technologies..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
+              onChange={(e) => updateSearch(e.target.value)}
+              className="w-full rounded-md border border-[var(--border)] bg-[var(--card-bg)] py-3 pl-10 pr-4 text-[var(--foreground)] placeholder:text-[var(--text-muted)] transition focus:border-[var(--primary)] focus:outline-none"
             />
           </div>
 
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => setSelectedCategory('all')}
+              onClick={() => selectCategory('all')}
               className={cn(
-                'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+                'rounded-md border px-3 py-2 text-xs font-medium transition-colors sm:text-sm',
                 selectedCategory === 'all'
-                  ? 'bg-[var(--primary)] text-white'
-                  : 'bg-[var(--background-secondary)] text-[var(--foreground)] hover:bg-[var(--primary)]/10'
+                  ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
+                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
               )}
             >
               All
@@ -114,12 +126,12 @@ export const Expertise = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => selectCategory(category)}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+                  'rounded-md border px-3 py-2 text-xs font-medium transition-colors sm:text-sm',
                   selectedCategory === category
-                    ? 'bg-[var(--primary)] text-white'
-                    : 'bg-[var(--background-secondary)] text-[var(--foreground)] hover:bg-[var(--primary)]/10'
+                    ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
+                    : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
                 )}
               >
                 {category}
@@ -134,7 +146,7 @@ export const Expertise = () => {
               <CardContent className="p-0">
                 <button
                   onClick={() => toggleCategory(category)}
-                  className="w-full px-6 py-4 flex items-center justify-between hover:bg-[var(--background-secondary)] transition-colors"
+                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--background-secondary)]"
                 >
                   <h3 className="text-lg font-semibold text-[var(--foreground)]">
                     {category}
