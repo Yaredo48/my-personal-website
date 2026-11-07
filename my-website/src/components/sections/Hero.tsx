@@ -29,9 +29,20 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="hero-surface flex min-h-screen items-center justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12 lg:pb-20"
+      className="hero-cinematic flex min-h-screen items-center justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12 lg:pb-20"
     >
-      <div className="mx-auto w-full max-w-6xl">
+      <video
+        className="hero-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="none"
+        aria-hidden="true"
+      >
+        <source src="/media/ai-network.mp4" type="video/mp4" />
+      </video>
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -107,7 +118,7 @@ export const Hero = () => {
             variants={itemVariants}
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-md overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] p-5 shadow-[0_24px_56px_rgb(15_23_42_/_0.12)] sm:p-7">
+            <div className="relative w-full max-w-md overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] p-5 shadow-[0_24px_56px_rgb(0_0_0_/_0.34)] backdrop-blur-xl sm:p-7">
               <div className="mb-7 flex items-center justify-between border-b border-[var(--border)] pb-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">Systems practice</p>

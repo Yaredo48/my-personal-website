@@ -104,6 +104,61 @@ section { scroll-margin-top: 5.5rem; }
   pointer-events: none;
 }
 
+.hero-cinematic {
+  --foreground: #f5f8ff;
+  --text-muted: #c2cede;
+  --text-subtle: #98a9c2;
+  --surface: rgb(11 20 36 / 0.72);
+  --background-secondary: rgb(18 33 54 / 0.7);
+  --border: rgb(182 204 236 / 0.2);
+  --border-strong: rgb(182 204 236 / 0.42);
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --primary: #a9c7ff;
+  --primary-light: #d3e3ff;
+  --accent-teal: #8de7dc;
+  --accent-emerald: #81e6b9;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #07101d;
+}
+
+.hero-cinematic::before,
+.hero-cinematic::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.hero-cinematic::before {
+  background: linear-gradient(90deg, rgb(4 11 22 / 0.94) 0%, rgb(5 15 29 / 0.84) 44%, rgb(5 15 29 / 0.58) 100%);
+}
+
+.hero-cinematic::after {
+  background-image: linear-gradient(rgb(191 219 254 / 0.055) 1px, transparent 1px), linear-gradient(90deg, rgb(191 219 254 / 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(90deg, black, transparent 85%);
+}
+
+.hero-video {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.8;
+}
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+  .hero-cinematic { background: #07101d; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *,
