@@ -1,4 +1,4 @@
-import { Technology, Project, Experience, Publication, BlogPost } from '@/types';
+import { Technology, Project, Experience, BlogPost } from '@/types';
 
 export const profile = {
   name: 'Yared Asfaw',
@@ -8,8 +8,6 @@ export const profile = {
   email: 'contact@example.com',
   linkedin: 'https://www.linkedin.com/in/yared-birhanu-442273363/',
   github: 'https://github.com/yourprofile',
-  googleScholar: 'https://scholar.google.com/citations?user=yourid',
-  researchGate: 'https://researchgate.net/profile/yourprofile',
 };
 
 export const techCategories = {
@@ -276,24 +274,6 @@ export const experiences: Experience[] = [
       'Contributed to Python full-stack software development in a remote working environment, with a focus on building software applications across backend and frontend development.',
     responsibilities: [],
     technologies: ['Python', 'Full-Stack Development', 'Backend Development', 'Frontend Development'],
-  },
-];
-
-export const publications: Publication[] = [
-  {
-    id: '1',
-    title: 'Advanced Techniques in Retrieval-Augmented Generation',
-    authors: 'Your Name, Co-authors',
-    venue: 'Conference on AI Systems',
-    date: '2024',
-    doi: '10.1000/xyz123',
-  },
-  {
-    id: '2',
-    title: 'Multi-Agent Systems for Complex Task Automation',
-    authors: 'Your Name, Co-authors',
-    venue: 'Journal of Artificial Intelligence Research',
-    date: '2023',
   },
 ];
 

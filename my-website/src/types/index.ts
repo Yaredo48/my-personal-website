@@ -31,16 +31,6 @@ export interface Experience {
   achievements?: string[];
 }
 
-export interface Publication {
-  id: string;
-  title: string;
-  authors: string;
-  venue: string;
-  date: string;
-  doi?: string;
-  url?: string;
-}
-
 export interface BlogPost {
   id: string;
   title: string;
