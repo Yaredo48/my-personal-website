@@ -67,10 +67,10 @@ export const Expertise = () => {
         </SectionSubtitle>
       </SectionHeader>
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(15rem,0.8fr)_minmax(0,1.8fr)] lg:gap-8">
+      <div className="grid gap-6 lg:grid-cols-[minmax(15rem,0.8fr)_minmax(0,1.8fr)] lg:gap-10">
         <div
           aria-label="Technical expertise categories"
-          className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1 lg:gap-2.5"
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-1 lg:gap-3"
           role="group"
         >
           {categories.map(([key, label], index) => {
@@ -159,7 +159,7 @@ export const Expertise = () => {
                     {selectedTechnologies.length} skills
                   </span>
                 </div>
-                <ul className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-6 xl:grid-cols-4">
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-7 xl:grid-cols-4">
                   {selectedTechnologies.map((tech) => (
                     <li key={tech.name} className="flex min-w-0 flex-col items-center gap-2.5 text-center">
                       <div className="flex aspect-square w-full max-w-24 items-center justify-center rounded-xl bg-[var(--background-secondary)] p-3 transition-colors duration-200 hover:bg-[var(--border)] sm:max-w-28 sm:p-4">

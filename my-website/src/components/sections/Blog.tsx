@@ -76,7 +76,7 @@ export const Blog = () => {
         )}
 
         {/* Remaining posts */}
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {rest.map((post, i) => (
             <motion.div key={post.id} custom={i + 1} variants={fadeUp}>
               <div className="group flex h-full cursor-pointer flex-col rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:shadow-[0_12px_32px_rgb(0_0_0/_0.07)]">

@@ -99,7 +99,7 @@ export const Projects = () => {
           AI systems designed to make healthcare workflows more useful and accessible.
         </SectionSubtitle>
       </SectionHeader>
-      <div className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+      <div className="grid items-stretch gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
         {featuredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
@@ -122,7 +122,7 @@ export const Projects = () => {
               images are illustrative previews.
             </p>
           </div>
-          <div className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+          <div className="grid items-stretch gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
             {additionalProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -138,7 +138,7 @@ export const Projects = () => {
           New projects will be added here when they are ready to share.
         </p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
         {emptyProjectSlots.map((slot, index) => (
           <div
             key={slot}

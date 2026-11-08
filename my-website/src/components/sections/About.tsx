@@ -30,7 +30,7 @@ const strengths = [
 ];
 
 export const About = () => (
-  <Section id="about" className="py-14 sm:py-16 lg:py-20">
+  <Section id="about" className="py-16 sm:py-20 lg:py-24">
     <div className="mx-auto max-w-5xl text-center">
       <motion.div
         variants={stagger}
@@ -74,7 +74,7 @@ export const About = () => (
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="mx-auto mt-9 grid max-w-5xl grid-cols-2 gap-3 sm:mt-11 sm:gap-5 lg:grid-cols-4"
+        className="mx-auto mt-9 grid max-w-5xl grid-cols-2 gap-4 sm:mt-11 sm:gap-6 lg:grid-cols-4"
       >
         {strengths.map(({ icon: Icon, title, detail }, index) => (
           <motion.article

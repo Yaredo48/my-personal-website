@@ -71,10 +71,10 @@ export const Contact = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12"
+        className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16"
       >
         {/* Contact links */}
-        <motion.div variants={fadeUp} className="flex flex-col gap-4">
+        <motion.div variants={fadeUp} className="flex flex-col gap-5">
           {contactLinks.map(({ href, icon, label, value }) => (
             <a
               key={label}

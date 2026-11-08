@@ -55,10 +55,10 @@
   --space-32: 8rem;
 
   /* Layout */
-  --content-max: 1200px;
-  --content-wide: 1400px;
-  --section-pad-x: clamp(1.5rem, 5vw, 5rem);
-  --section-pad-y: clamp(4rem, 8vw, 7rem);
+  --content-max: 1440px;
+  --content-wide: 1560px;
+  --section-pad-x: clamp(1.25rem, 4vw, 4.5rem);
+  --section-pad-y: clamp(4.5rem, 7vw, 8rem);
 }
 
 [data-theme='dark'] {
@@ -345,8 +345,8 @@ section + section { border-top: 1px solid var(--border); }
 .testimonials-set {
   display: flex;
   flex: 0 0 auto;
-  gap: 1rem;
-  padding-right: 1rem;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .testimonial-card {
@@ -358,12 +358,12 @@ section + section { border-top: 1px solid var(--border); }
 }
 
 @media (min-width: 640px) {
-  .testimonials-set { gap: 1.25rem; padding-right: 1.25rem; }
-  .testimonial-card { flex-basis: calc((100cqw - 1.25rem) / 2); }
+  .testimonials-set { gap: 1.75rem; padding-right: 1.75rem; }
+  .testimonial-card { flex-basis: calc((100cqw - 1.75rem) / 2); }
 }
 
 @media (min-width: 1024px) {
-  .testimonial-card { flex-basis: calc((100cqw - 2.5rem) / 3); }
+  .testimonial-card { flex-basis: calc((100cqw - 3.5rem) / 3); }
 }
 
 /* ─── Reduced Motion ─────────────────────────────────────────────────────── */
