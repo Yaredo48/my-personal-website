@@ -4,37 +4,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { fadeUp, stagger } from '@/lib/motion';
+import { ContactIcon, type ContactMethod } from '@/components/ui/ContactIcon';
+import { profile } from '@/data/profile';
 
-const socialLinks = [
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/yourprofile',
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/yourprofile',
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Twitter / X',
-    href: 'https://twitter.com/yourprofile',
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
+const socialLinks: { label: ContactMethod; href: string }[] = [
+  { label: 'LinkedIn', href: profile.linkedin },
+  { label: 'GitHub', href: profile.github },
 ];
 
 export const Hero = () => (
@@ -141,7 +116,7 @@ export const Hero = () => (
               Connect
             </span>
             <div className="flex items-center gap-2.5">
-              {socialLinks.map(({ svg, href, label }) => (
+              {socialLinks.map(({ href, label }) => (
                 <a
                   key={label}
                   href={href}
@@ -150,7 +125,7 @@ export const Hero = () => (
                   aria-label={label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] shadow-sm transition-all hover:border-[var(--primary)] hover:text-[var(--primary)] hover:shadow-[0_3px_12px_color-mix(in_srgb,var(--primary)_18%,transparent)]"
                 >
-                  {svg}
+                  <ContactIcon name={label} className="h-4 w-4" />
                 </a>
               ))}
             </div>

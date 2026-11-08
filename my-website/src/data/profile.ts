@@ -5,9 +5,14 @@ export const profile = {
   title: 'Senior AI Engineer | Software Engineer',
   tagline: 'Building Intelligent Systems. Engineering the Future.',
   bio: 'I architect, engineer, and deploy scalable AI solutions that transform complex challenges into intelligent products.',
-  email: 'contact@example.com',
+  phone: '+251948078990',
+  email: 'yaredberhanu246@gmail.com',
   linkedin: 'https://www.linkedin.com/in/yared-birhanu-442273363/',
-  github: 'https://github.com/yourprofile',
+  github: 'https://github.com/Yaredo48',
+  facebook: 'https://web.facebook.com/Yaredo48',
+  twitter: 'https://x.com/Yared_Berhanu48',
+  telegram: 'https://t.me/Yaredo48',
+  instagram: 'https://www.instagram.com/yaredo_48/',
 };
 
 export const techCategories = {

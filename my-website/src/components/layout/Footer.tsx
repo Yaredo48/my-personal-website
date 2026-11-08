@@ -1,13 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Code, Link, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ContactIcon, type ContactMethod } from '@/components/ui/ContactIcon';
+import { profile } from '@/data/profile';
 
-const socialLinks = [
-  { href: 'https://github.com/yourprofile', icon: Code, label: 'GitHub' },
-  { href: 'https://linkedin.com/in/yourprofile', icon: Link, label: 'LinkedIn' },
-  { href: 'mailto:contact@example.com', icon: Mail, label: 'Email' },
+const contactLinks: { href: string; icon: ContactMethod; label: string; external?: boolean }[] = [
+  { href: `tel:${profile.phone}`, icon: 'Phone', label: 'Phone' },
+  { href: `mailto:${profile.email}`, icon: 'Email', label: 'Email' },
+  { href: profile.linkedin, icon: 'LinkedIn', label: 'LinkedIn', external: true },
+  { href: profile.github, icon: 'GitHub', label: 'GitHub', external: true },
+  { href: profile.facebook, icon: 'Facebook', label: 'Facebook', external: true },
+  { href: profile.twitter, icon: 'X', label: 'X / Twitter', external: true },
+  { href: profile.telegram, icon: 'Telegram', label: 'Telegram', external: true },
+  { href: profile.instagram, icon: 'Instagram', label: 'Instagram', external: true },
 ];
 
 export const Footer = () => {
@@ -25,20 +31,24 @@ export const Footer = () => {
             <p className="mt-0.5 text-sm text-[var(--text-muted)]">Senior AI Engineer · Software Engineer</p>
           </div>
 
-          <div className="flex items-center gap-3">
-            {socialLinks.map(({ href, icon: Icon, label }) => (
+          <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
+            <span className="text-sm font-medium text-[var(--text-muted)]">Find us on:</span>
+            {contactLinks.map(({ href, icon, label, external }) => (
               <a
                 key={label}
                 href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
                 aria-label={label}
                 className={cn(
-                  'rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2.5',
+                  'flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2.5',
                   'text-[var(--text-muted)] transition-all hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
                 )}
               >
-                <Icon className="h-4 w-4" />
+                <ContactIcon
+                  name={icon}
+                  className="h-[1.125rem] w-[1.125rem] transition-colors"
+                />
               </a>
             ))}
           </div>

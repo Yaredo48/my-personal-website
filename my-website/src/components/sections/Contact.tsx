@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import { Mail, Link, Code, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { profile } from '@/data/profile';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 import { cn } from '@/lib/utils';
+import { ContactIcon, type ContactMethod } from '@/components/ui/ContactIcon';
 
-const contactLinks = [
-  { href: `mailto:${profile.email}`, icon: Mail, label: 'Email', value: profile.email },
-  { href: profile.linkedin, icon: Link, label: 'LinkedIn', value: 'Connect with me', external: true },
-  { href: profile.github, icon: Code, label: 'GitHub', value: 'View my work', external: true },
+const contactLinks: { href: string; icon: ContactMethod; label: ContactMethod; value: string }[] = [
+  { href: `tel:${profile.phone}`, icon: 'Phone', label: 'Phone', value: profile.phone },
+  { href: `mailto:${profile.email}`, icon: 'Email', label: 'Email', value: profile.email },
 ];
 
 const inputClass = (hasError: boolean) =>
@@ -75,20 +75,18 @@ export const Contact = () => {
       >
         {/* Contact links */}
         <motion.div variants={fadeUp} className="flex flex-col gap-4">
-          {contactLinks.map(({ href, icon: Icon, label, value, external }) => (
+          {contactLinks.map(({ href, icon, label, value }) => (
             <a
               key={label}
               href={href}
-              target={external ? '_blank' : undefined}
-              rel={external ? 'noopener noreferrer' : undefined}
               className="group flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--primary)] hover:shadow-[0_8px_24px_rgb(0_0_0/_0.07)]"
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
-                <Icon className="h-5 w-5" />
+                <ContactIcon name={icon} className="h-5 w-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">{label}</p>
-                <p className="mt-0.5 text-sm font-medium text-[var(--foreground)]">{value}</p>
+                <p className="mt-0.5 break-all text-sm font-medium text-[var(--foreground)]">{value}</p>
               </div>
             </a>
           ))}

@@ -4,8 +4,8 @@ import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Expertise } from '@/components/sections/Expertise';
 import { Projects } from '@/components/sections/Projects';
-import { Architecture } from '@/components/sections/Architecture';
 import { Experience } from '@/components/sections/Experience';
+import { Testimonials } from '@/components/sections/Testimonials';
 import { Research } from '@/components/sections/Research';
 import { Blog } from '@/components/sections/Blog';
 import { Contact } from '@/components/sections/Contact';
@@ -20,8 +20,8 @@ export default function Home() {
         <Expertise />
         <Projects />
         <Experience />
+        <Testimonials />
         <Research />
-        <Architecture />
         <Blog />
         <Contact />
       </main>
