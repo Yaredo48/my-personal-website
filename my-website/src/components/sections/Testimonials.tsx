@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { Section, SectionHeader, SectionLabel, SectionTitle } from '@/components/ui/Section';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
@@ -15,6 +15,7 @@ const testimonials = [
     name: 'Yakob Dereje',
     role: 'Software Engineer',
     image: '/media/testimonials/yakob.jpg',
+    rating: 5,
   },
   {
     quote:
@@ -22,6 +23,7 @@ const testimonials = [
     name: 'Besufikad Lema',
     role: 'Odo Developer',
     image: '/media/testimonials/besu.jpeg',
+    rating: 4,
   },
   {
     quote:
@@ -29,6 +31,7 @@ const testimonials = [
     name: 'Yohanes Dereje',
     role: 'Software Engineer',
     image: '/media/testimonials/yohanes.jpeg',
+    rating: 5,
   },
   {
     quote:
@@ -36,6 +39,7 @@ const testimonials = [
     name: 'Nahome Addisu',
     role: 'Electrical Engineer',
     image: '/media/testimonials/sample-profile-4.svg',
+    rating: 4,
   },
   {
     quote:
@@ -43,6 +47,7 @@ const testimonials = [
     name: 'Yordanos Habtamu',
     role: 'Software Engineer',
     image: '/media/testimonials/yordi.jpeg',
+    rating: 5,
   },
 ];
 
@@ -109,11 +114,6 @@ export const Testimonials = () => {
                         />
                       </div>
 
-                      <Quote
-                        aria-hidden="true"
-                        className="mb-3 h-7 w-7 fill-[var(--primary)]/10 text-[var(--primary)]"
-                        strokeWidth={2.5}
-                      />
                       <blockquote className="flex flex-1 items-center text-[0.9375rem] leading-[1.8] text-[var(--text-muted)] sm:text-base">
                         <p>
                           <span className="text-[var(--primary)]">&ldquo;</span>
@@ -125,6 +125,19 @@ export const Testimonials = () => {
                       <div className="mt-6">
                         <h3 className="font-semibold text-[var(--foreground)]">{testimonial.name}</h3>
                         <p className="mt-1 text-xs leading-relaxed text-[var(--text-subtle)]">{testimonial.role}</p>
+                        <div
+                          className="mt-3 flex justify-center gap-1 text-[var(--accent-amber)]"
+                          role="img"
+                          aria-label={`${testimonial.rating} out of 5 stars`}
+                        >
+                          {Array.from({ length: 5 }, (_, star) => (
+                            <Star
+                              key={star}
+                              aria-hidden="true"
+                              className={`h-3.5 w-3.5 ${star < testimonial.rating ? 'fill-current' : 'fill-transparent opacity-35'}`}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </article>
                   ))}
