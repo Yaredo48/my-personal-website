@@ -74,7 +74,7 @@ export const Research = () => {
         <h2 className="mb-4 text-[2.4rem] font-semibold leading-[1.08] tracking-[-0.055em] text-[var(--foreground)] sm:text-5xl lg:text-[3.5rem]">
           Publications
         </h2>
-        <p className="max-w-2xl text-sm leading-[1.75] text-[var(--text-muted)] sm:text-base">
+        <p className="max-w-2xl text-base leading-[1.75] text-[var(--text-muted)] sm:text-lg">
           Selected research directions across machine learning, RAG, generative AI, and
           high-performance computing. Proposed titles are working ideas, not published papers.
         </p>
@@ -90,7 +90,7 @@ export const Research = () => {
           aria-pressed={view === 'proposed'}
           onClick={() => setView('proposed')}
           className={cn(
-            'relative min-h-11 text-[0.625rem] font-semibold uppercase tracking-[0.12em] transition-colors',
+            'relative min-h-11 text-sm font-semibold uppercase tracking-[0.12em] transition-colors',
             view === 'proposed'
               ? 'text-[var(--primary)] after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:bg-[var(--primary)]'
               : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'
@@ -103,7 +103,7 @@ export const Research = () => {
           aria-pressed={view === 'publications'}
           onClick={() => setView('publications')}
           className={cn(
-            'relative min-h-11 text-[0.625rem] font-semibold uppercase tracking-[0.12em] transition-colors',
+            'relative min-h-11 text-sm font-semibold uppercase tracking-[0.12em] transition-colors',
             view === 'publications'
               ? 'text-[var(--primary)] after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:bg-[var(--primary)]'
               : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'
@@ -116,7 +116,7 @@ export const Research = () => {
       {view === 'proposed' ? (
         <div id="proposed-topics-panel">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-b border-[var(--border)] py-4">
-            <span className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+            <span className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
               Browse by topic
             </span>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
@@ -127,7 +127,7 @@ export const Research = () => {
                   aria-pressed={selectedTopic === topic}
                   onClick={() => setSelectedTopic(topic)}
                   className={cn(
-                    'min-h-8 text-[0.625rem] uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]',
+                    'min-h-9 text-sm uppercase tracking-[0.08em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]',
                     selectedTopic === topic
                       ? 'font-bold text-[var(--foreground)] underline decoration-[var(--primary)] underline-offset-4'
                       : 'font-medium text-[var(--text-muted)] hover:text-[var(--foreground)]'
@@ -160,15 +160,15 @@ export const Research = () => {
                     index % 2 === 1 && 'sm:pr-0'
                   )}
                 >
-                  <p className="mb-2 text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
                     {item.type}
                   </p>
-                  <h4 className="text-base font-semibold leading-snug tracking-[-0.015em] text-[var(--foreground)] sm:text-[1.0625rem]">
+                  <h4 className="text-lg font-semibold leading-snug tracking-[-0.015em] text-[var(--foreground)] sm:text-xl">
                     {item.title}
                   </h4>
-                  <p className="mt-2 text-xs font-medium text-[var(--text-subtle)]">{item.topic}</p>
+                  <p className="mt-2 text-sm font-medium text-[var(--text-subtle)]">{item.topic}</p>
                   <details className="group mt-3">
-                    <summary className="flex min-h-8 cursor-pointer list-none items-center gap-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] [&::-webkit-details-marker]:hidden">
+                    <summary className="flex min-h-10 cursor-pointer list-none items-center gap-1.5 text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] [&::-webkit-details-marker]:hidden">
                       <span className="group-open:hidden">Show Abstract</span>
                       <span className="hidden group-open:inline">Hide Abstract</span>
                       <ChevronDown
@@ -177,10 +177,10 @@ export const Research = () => {
                       />
                     </summary>
                     <div className="mt-2 border-l-2 border-[var(--primary)]/40 pl-3">
-                      <p className="mb-1 text-[0.5625rem] font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
                         Draft abstract · proposed research
                       </p>
-                      <p className="text-xs leading-[1.75] text-[var(--text-muted)]">
+                      <p className="text-sm leading-[1.75] text-[var(--text-muted)] sm:text-base">
                         {item.abstract}
                       </p>
                     </div>
@@ -192,7 +192,7 @@ export const Research = () => {
         </div>
       ) : (
         <div id="publications-panel" className="py-12 sm:py-16">
-          <p className="text-sm leading-[1.75] text-[var(--text-muted)]">
+          <p className="text-base leading-[1.75] text-[var(--text-muted)] sm:text-lg">
             No verified publication details have been added yet. This section is reserved for
             completed papers and will be updated when publication information is available.
           </p>

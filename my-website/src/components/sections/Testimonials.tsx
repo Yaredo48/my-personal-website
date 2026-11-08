@@ -128,10 +128,10 @@ export const Testimonials = () => {
                             />
                           ))}
                         </span>
-                        <span className="text-sm font-semibold text-[var(--foreground)]">{testimonial.rating}</span>
+                        <span className="text-base font-semibold text-[var(--foreground)]">{testimonial.rating}</span>
                       </div>
 
-                      <blockquote className="flex flex-1 items-center text-[0.9375rem] leading-[1.8] text-[var(--text-muted)] sm:text-base">
+                      <blockquote className="flex flex-1 items-center text-base leading-[1.8] text-[var(--text-muted)] sm:text-lg">
                         <p>
                           <span className="text-[var(--primary)]">&ldquo;</span>
                           {testimonial.quote}
@@ -140,8 +140,8 @@ export const Testimonials = () => {
                       </blockquote>
 
                       <div className="mt-6">
-                        <h3 className="font-semibold text-[var(--foreground)]">{testimonial.name}</h3>
-                        <p className="mt-1 text-xs leading-relaxed text-[var(--text-subtle)]">{testimonial.role}</p>
+                        <h3 className="text-lg font-semibold text-[var(--foreground)]">{testimonial.name}</h3>
+                        <p className="mt-1 text-sm leading-relaxed text-[var(--text-subtle)]">{testimonial.role}</p>
                       </div>
                     </article>
                   ))}

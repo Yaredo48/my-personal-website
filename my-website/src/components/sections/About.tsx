@@ -57,7 +57,7 @@ export const About = () => (
 
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-6 max-w-4xl text-sm leading-[1.8] text-[var(--text-muted)] sm:text-base"
+          className="mx-auto mt-6 max-w-4xl text-base leading-[1.8] text-[var(--text-muted)] sm:text-lg"
         >
           Results-driven AI Engineer with 3+ years of experience architecting, training, and
           deploying scalable LLM-powered applications, RAG pipelines, and agentic workflows in
@@ -87,10 +87,10 @@ export const About = () => (
               className="mb-3 h-7 w-7 text-[var(--primary)] transition-transform duration-200 group-hover:-translate-y-0.5 sm:h-8 sm:w-8"
               aria-hidden="true"
             />
-            <h3 className="text-sm font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-base">
+            <h3 className="text-base font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-lg">
               {title}
             </h3>
-            <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-muted)] sm:text-sm">
+            <p className="mt-1.5 text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
               {detail}
             </p>
           </motion.article>

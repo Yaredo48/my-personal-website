@@ -52,7 +52,7 @@ export const SectionHeader = React.forwardRef<
 SectionHeader.displayName = 'SectionHeader';
 
 export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">
+  <p className="mb-3 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">
     {children}
   </p>
 );
@@ -64,7 +64,7 @@ export const SectionTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      'mb-4 text-[2rem] font-bold leading-[1.15] tracking-[-0.04em] text-[var(--foreground)] sm:text-[2.375rem] lg:text-[2.75rem]',
+      'mb-4 text-[2.25rem] font-bold leading-[1.15] tracking-[-0.04em] text-[var(--foreground)] sm:text-[2.625rem] lg:text-[3rem]',
       className
     )}
     {...props}
@@ -79,7 +79,7 @@ export const SectionSubtitle = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      'max-w-2xl text-[1.0625rem] leading-[1.75] text-[var(--text-muted)] md:text-lg',
+      'max-w-2xl text-lg leading-[1.75] text-[var(--text-muted)] md:text-xl',
       className
     )}
     {...props}

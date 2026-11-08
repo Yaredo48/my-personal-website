@@ -44,7 +44,7 @@ export const Hero = () => (
           {/* Eyebrow label */}
           <motion.p
             variants={fadeUp}
-            className="mb-4 inline-flex w-fit items-center gap-2 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-[var(--primary)]"
+            className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[var(--primary)]"
           >
             <span
               className="inline-block h-px w-6 bg-[var(--primary)]"
@@ -66,7 +66,7 @@ export const Hero = () => (
           {/* Role subtitle */}
           <motion.p
             variants={fadeUp}
-            className="mb-5 text-base font-semibold tracking-[-0.01em] text-[var(--foreground)] sm:text-lg"
+            className="mb-5 text-lg font-semibold tracking-[-0.01em] text-[var(--foreground)] sm:text-xl"
           >
             AI Engineer · ML Researcher · Software Architect
           </motion.p>
@@ -74,7 +74,7 @@ export const Hero = () => (
           {/* Bio */}
           <motion.p
             variants={fadeUp}
-            className="mb-9 max-w-[460px] text-[0.9375rem] leading-[1.8] text-[var(--text-muted)]"
+            className="mb-9 max-w-[460px] text-base leading-[1.8] text-[var(--text-muted)] sm:text-lg"
           >
             I architect, engineer, and deploy scalable AI solutions that
             transform complex challenges into intelligent products. Specializing
@@ -89,7 +89,7 @@ export const Hero = () => (
                 e.preventDefault();
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_8px_26px_color-mix(in_srgb,var(--primary)_40%,transparent)] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary)] px-7 py-3.5 text-base font-semibold text-white shadow-[0_4px_18px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_8px_26px_color-mix(in_srgb,var(--primary)_40%,transparent)] active:scale-[0.98]"
             >
               Hire Me
             </a>
@@ -99,7 +99,7 @@ export const Hero = () => (
                 e.preventDefault();
                 document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-sm font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
             >
               See Projects
               <ArrowRight className="h-4 w-4" />
@@ -112,7 +112,7 @@ export const Hero = () => (
             className="mt-9 flex items-center gap-4"
           >
             <span className="h-px flex-1 max-w-[2rem] bg-[var(--border)]" aria-hidden="true" />
-            <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[var(--text-subtle)]">
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-subtle)]">
               Connect
             </span>
             <div className="flex items-center gap-2.5">

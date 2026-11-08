@@ -104,10 +104,10 @@ export const Expertise = () => {
                   <Icon aria-hidden="true" className="h-[18px] w-[18px]" />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-xs font-semibold leading-snug text-[var(--foreground)] sm:text-sm">
+                  <span className="block text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base">
                     {label}
                   </span>
-                  <span className="mt-0.5 block text-[0.6875rem] leading-tight text-[var(--text-subtle)]">
+                  <span className="mt-0.5 block text-xs leading-tight text-[var(--text-subtle)] sm:text-sm">
                     {skillCount} skills
                   </span>
                 </span>
@@ -137,7 +137,7 @@ export const Expertise = () => {
                   <SelectedIcon aria-hidden="true" className="h-6 w-6 sm:h-7 sm:w-7" />
                 </span>
                 <div className="min-w-0 pt-0.5">
-                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+                  <p className="text-sm font-medium uppercase tracking-[0.12em] text-[var(--text-subtle)]">
                     Expertise area
                   </p>
                   <h3 className="mt-1 text-xl font-semibold leading-tight tracking-[-0.03em] text-[var(--foreground)] sm:text-2xl">
@@ -146,16 +146,16 @@ export const Expertise = () => {
                 </div>
               </div>
 
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--text-muted)] sm:mt-6 sm:text-base">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-muted)] sm:mt-6 sm:text-lg">
                 {techCategoryDescriptions[selectedCategory]}
               </p>
 
               <div className="mt-6 border-t border-[var(--border)] pt-5 sm:mt-7 sm:pt-6">
                 <div className="mb-5 flex items-center justify-between gap-3">
-                  <h4 className="text-sm font-semibold text-[var(--foreground)]">
+                  <h4 className="text-base font-semibold text-[var(--foreground)]">
                     Tools &amp; technologies
                   </h4>
-                  <span className="text-xs text-[var(--text-subtle)]">
+                  <span className="text-sm text-[var(--text-subtle)]">
                     {selectedTechnologies.length} skills
                   </span>
                 </div>
@@ -165,7 +165,7 @@ export const Expertise = () => {
                       <div className="flex aspect-square w-full max-w-24 items-center justify-center rounded-xl bg-[var(--background-secondary)] p-3 transition-colors duration-200 hover:bg-[var(--border)] sm:max-w-28 sm:p-4">
                         <TechnologyLogo name={tech.name} />
                       </div>
-                      <span className="max-w-full text-xs font-medium leading-snug text-[var(--foreground)] sm:text-sm">
+                      <span className="max-w-full text-sm font-medium leading-snug text-[var(--foreground)] sm:text-base">
                         {tech.name}
                       </span>
                     </li>

@@ -17,7 +17,7 @@ const contactLinks: { href: string; icon: ContactMethod; label: ContactMethod; v
 
 const inputClass = (hasError: boolean) =>
   cn(
-    'w-full rounded-xl border bg-[var(--background)] px-4 py-3.5 text-sm text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/15',
+    'w-full rounded-xl border bg-[var(--background)] px-4 py-3.5 text-base text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/15',
     hasError ? 'border-red-500 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--primary)]'
   );
 
@@ -85,8 +85,8 @@ export const Contact = () => {
                 <ContactIcon name={icon} className="h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">{label}</p>
-                <p className="mt-0.5 break-all text-sm font-medium text-[var(--foreground)]">{value}</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">{label}</p>
+                <p className="mt-0.5 break-all text-base font-medium text-[var(--foreground)]">{value}</p>
               </div>
             </a>
           ))}
@@ -102,7 +102,7 @@ export const Contact = () => {
                   { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
                 ].map(({ id, label, type, placeholder }) => (
                   <div key={id}>
-                    <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
+                    <label htmlFor={id} className="mb-1.5 block text-base font-medium text-[var(--foreground)]">
                       {label}
                     </label>
                     <input
@@ -114,13 +114,13 @@ export const Contact = () => {
                       placeholder={placeholder}
                       className={inputClass(!!errors[id])}
                     />
-                    {errors[id] && <p className="mt-1 text-xs text-red-500">{errors[id]}</p>}
+                    {errors[id] && <p className="mt-1 text-sm text-red-500">{errors[id]}</p>}
                   </div>
                 ))}
               </div>
 
               <div>
-                <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
+                <label htmlFor="subject" className="mb-1.5 block text-base font-medium text-[var(--foreground)]">
                   Subject
                 </label>
                 <input
@@ -132,11 +132,11 @@ export const Contact = () => {
                   placeholder="Project inquiry"
                   className={inputClass(!!errors.subject)}
                 />
-                {errors.subject && <p className="mt-1 text-xs text-red-500">{errors.subject}</p>}
+                {errors.subject && <p className="mt-1 text-sm text-red-500">{errors.subject}</p>}
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
+                <label htmlFor="message" className="mb-1.5 block text-base font-medium text-[var(--foreground)]">
                   Message
                 </label>
                 <textarea
@@ -148,7 +148,7 @@ export const Contact = () => {
                   placeholder="Tell me about your project…"
                   className={cn(inputClass(!!errors.message), 'resize-none')}
                 />
-                {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
 
               <Button type="submit" size="lg" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>

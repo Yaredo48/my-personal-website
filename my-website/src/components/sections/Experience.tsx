@@ -36,13 +36,13 @@ export const Experience = () => (
           className="relative grid grid-cols-[2rem_minmax(0,1fr)] gap-x-3 border-b border-[var(--border)] py-7 first:pt-0 last:border-b-0 last:pb-0 sm:grid-cols-[minmax(0,36%)_2rem_minmax(0,1fr)] sm:gap-x-5 sm:py-9"
         >
           <div className="col-start-1 row-start-1 hidden pr-3 text-right sm:block">
-            <p className="text-sm font-semibold leading-snug text-[var(--foreground)] sm:text-base">
+            <p className="text-base font-semibold leading-snug text-[var(--foreground)] sm:text-lg">
               {experience.organization}
             </p>
-            <p className="mt-2 text-xs font-medium text-[var(--text-muted)] sm:text-sm">
+            <p className="mt-2 text-sm font-medium text-[var(--text-muted)] sm:text-base">
               {experience.startDate} – {experience.endDate ?? 'Present'}
             </p>
-            <p className="mt-1.5 inline-flex items-center justify-end gap-1.5 text-xs text-[var(--text-subtle)]">
+            <p className="mt-1.5 inline-flex items-center justify-end gap-1.5 text-sm text-[var(--text-subtle)]">
               {experience.employmentType && <span>{experience.employmentType} ·</span>}
               <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
               {experience.location}
@@ -58,29 +58,29 @@ export const Experience = () => (
 
           <article className="col-start-2 row-start-1 min-w-0 sm:col-start-3">
             <div className="mb-2 flex flex-wrap items-center gap-2 sm:hidden">
-              <span className="text-xs font-semibold text-[var(--foreground)]">
+              <span className="text-sm font-semibold text-[var(--foreground)]">
                 {experience.organization}
               </span>
               <span aria-hidden="true" className="text-[var(--text-subtle)]">·</span>
-              <span className="text-xs text-[var(--text-muted)]">
+              <span className="text-sm text-[var(--text-muted)]">
                 {experience.startDate} – {experience.endDate ?? 'Present'}
               </span>
             </div>
-            <p className="mb-2 inline-flex items-center gap-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
+            <p className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
               <BriefcaseBusiness aria-hidden="true" className="h-3 w-3" />
               Role overview
             </p>
-            <h3 className="text-xl font-semibold leading-snug tracking-[-0.025em] text-[var(--foreground)] sm:text-2xl">
+            <h3 className="text-2xl font-semibold leading-snug tracking-[-0.025em] text-[var(--foreground)] sm:text-[1.75rem]">
               {experience.title}
             </h3>
-            <p className="mt-2 text-sm leading-[1.8] text-[var(--text-muted)] sm:text-[0.9375rem]">
+            <p className="mt-2 text-base leading-[1.8] text-[var(--text-muted)] sm:text-lg">
               {experience.description}
             </p>
 
             {((experience.responsibilities && experience.responsibilities.length > 0) ||
               (experience.achievements && experience.achievements.length > 0)) && (
               <details className="group mt-4 rounded-xl border border-[var(--border)] bg-[var(--surface)]/60">
-                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 text-xs font-semibold text-[var(--foreground)] marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring)] [&::-webkit-details-marker]:hidden">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring)] [&::-webkit-details-marker]:hidden">
                   Responsibilities &amp; impact
                   <ArrowDown
                     aria-hidden="true"
@@ -93,7 +93,7 @@ export const Experience = () => (
                       {experience.responsibilities.map((responsibility) => (
                     <li
                       key={responsibility}
-                      className="flex items-start gap-2.5 text-xs leading-[1.7] text-[var(--text-muted)] sm:text-sm"
+                      className="flex items-start gap-2.5 text-sm leading-[1.7] text-[var(--text-muted)] sm:text-base"
                     >
                       <span className="mt-[0.55rem] h-1 w-1 shrink-0 rounded-full bg-[var(--primary)]" />
                       {responsibility}
@@ -103,14 +103,14 @@ export const Experience = () => (
                   )}
                   {experience.achievements && experience.achievements.length > 0 && (
                     <div className="rounded-lg bg-[var(--accent-emerald)]/5 p-3">
-                      <p className="mb-2 text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-[var(--accent-emerald)]">
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent-emerald)]">
                         Achievements &amp; impact
                       </p>
                       <ul className="space-y-2">
                         {experience.achievements.map((achievement) => (
                           <li
                             key={achievement}
-                            className="text-xs leading-[1.7] text-[var(--text-muted)] sm:text-sm"
+                            className="text-sm leading-[1.7] text-[var(--text-muted)] sm:text-base"
                           >
                             {achievement}
                           </li>
@@ -125,7 +125,7 @@ export const Experience = () => (
             {experience.technologies && experience.technologies.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {experience.technologies.slice(0, 5).map((technology) => (
-                  <Badge key={technology} variant="outline" size="sm" className="text-[0.6875rem]">
+                  <Badge key={technology} variant="outline" size="md">
                     {technology}
                   </Badge>
                 ))}
@@ -145,7 +145,7 @@ export const Experience = () => (
               target="_blank"
               rel="noreferrer"
               aria-label={`View ${experience.title} on LinkedIn`}
-              className="mt-4 inline-flex min-h-9 items-center gap-1.5 text-xs font-semibold text-[var(--text-subtle)] transition-colors hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+              className="mt-4 inline-flex min-h-9 items-center gap-1.5 text-sm font-semibold text-[var(--text-subtle)] transition-colors hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               LinkedIn profile
               <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -153,7 +153,7 @@ export const Experience = () => (
           </article>
 
           <div className="col-start-2 row-start-2 mt-3 sm:hidden">
-            <p className="inline-flex items-center gap-1.5 text-xs text-[var(--text-subtle)]">
+            <p className="inline-flex items-center gap-1.5 text-sm text-[var(--text-subtle)]">
               <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
               {experience.location}
               {experience.employmentType && ` · ${experience.employmentType}`}

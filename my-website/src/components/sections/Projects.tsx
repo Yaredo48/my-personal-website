@@ -26,30 +26,30 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <span
             className={
               project.status === 'completed'
-                ? 'inline-flex rounded-full bg-[var(--accent-emerald)]/10 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--accent-emerald)]'
-                : 'inline-flex rounded-full bg-[var(--primary)]/10 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--primary)]'
+                ? 'inline-flex rounded-full bg-[var(--accent-emerald)]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--accent-emerald)]'
+                : 'inline-flex rounded-full bg-[var(--primary)]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--primary)]'
             }
           >
             {project.status === 'completed' ? 'Completed' : 'Planned · concept preview'}
           </span>
         </div>
-        <h3 className="text-base font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-lg">
+        <h3 className="text-lg font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-xl">
           {project.name}
         </h3>
-        <p className="mt-2 text-sm leading-[1.7] text-[var(--text-muted)]">
+        <p className="mt-2 text-base leading-[1.7] text-[var(--text-muted)]">
           {project.description}
         </p>
 
         <div className="mt-4 flex flex-wrap gap-1.5">
           {project.technologies.slice(0, 4).map((technology) => (
-            <Badge key={technology} variant="outline" size="sm" className="text-[0.6875rem]">
+            <Badge key={technology} variant="outline" size="md">
               {technology}
             </Badge>
           ))}
           {project.technologies.length > 4 && (
             <span
               aria-label={`${project.technologies.length - 4} more technologies`}
-              className="inline-flex items-center px-1 text-xs font-medium text-[var(--text-subtle)]"
+              className="inline-flex items-center px-1 text-sm font-medium text-[var(--text-subtle)]"
             >
               +{project.technologies.length - 4}
             </span>
@@ -62,7 +62,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-4 text-xs font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--background-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-4 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--background-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
               GitHub
               <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -72,7 +72,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             href={project.demo ?? `/projects/${project.id}`}
             target={project.demo ? '_blank' : undefined}
             rel={project.demo ? 'noreferrer' : undefined}
-            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[var(--primary)] px-4 text-xs font-semibold text-white transition-colors hover:bg-[var(--primary-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[var(--primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           >
             View Project
             <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -109,7 +109,7 @@ export const Projects = () => {
           type="button"
           aria-expanded={showAllProjects}
           onClick={() => setShowAllProjects((showAll) => !showAll)}
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-5 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-5 text-base font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
         >
           {showAllProjects ? 'Show featured projects' : 'View all projects'}
         </button>
@@ -117,7 +117,7 @@ export const Projects = () => {
       {showAllProjects && (
         <div className="mt-8" id="all-projects">
           <div className="mb-5 text-center">
-            <p className="text-sm leading-[1.7] text-[var(--text-muted)]">
+            <p className="text-base leading-[1.7] text-[var(--text-muted)]">
               These additional concepts are planned work, not completed or deployed projects. Their
               images are illustrative previews.
             </p>
@@ -131,10 +131,10 @@ export const Projects = () => {
       )}
       <div className="mb-6 mt-14 text-center md:mt-20">
         <SectionLabel>Future work</SectionLabel>
-        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-[var(--foreground)] sm:text-3xl">
+        <h2 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-[var(--foreground)] sm:text-4xl">
           Planned Projects
         </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-sm leading-[1.7] text-[var(--text-muted)]">
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-[1.7] text-[var(--text-muted)]">
           New projects will be added here when they are ready to share.
         </p>
       </div>
@@ -144,13 +144,13 @@ export const Projects = () => {
             key={slot}
             className="flex min-h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--border-strong)] bg-[var(--surface)]/60 p-6 text-center"
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+            <span className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
               Project {String(index + 1).padStart(2, '0')}
             </span>
-            <p className="mt-3 text-sm font-medium text-[var(--text-muted)]">
+            <p className="mt-3 text-base font-medium text-[var(--text-muted)]">
               A new project will appear here
             </p>
-            <span className="mt-2 text-xs text-[var(--text-subtle)]">Coming soon</span>
+            <span className="mt-2 text-sm text-[var(--text-subtle)]">Coming soon</span>
           </div>
         ))}
       </div>
