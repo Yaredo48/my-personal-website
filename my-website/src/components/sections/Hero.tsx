@@ -121,30 +121,14 @@ export const Hero = () => (
       transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
       className="absolute bottom-0 right-0 top-0 hidden w-[52%] lg:block"
     >
-      {/* Portrait image with background-removal effect via layered gradients */}
       <div className="relative h-full w-full">
-        {/* The actual photo */}
         <img
-          src="/media/portrait.jpg"
+          src="/media/portrait.png"
           alt="Yared Asfaw"
-          className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
+          className="absolute bottom-0 right-0 h-full w-full object-contain object-bottom"
         />
-
-        {/* Strong left-edge fade — merges photo into hero bg */}
-        <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-56" />
-
-        {/* Bottom fade — grounds the figure */}
-        <div className="hero-portrait-bottom absolute inset-x-0 bottom-0 z-10 h-48" />
-
-        {/* Top fade */}
-        <div className="hero-portrait-top absolute inset-x-0 top-0 z-10 h-32" />
-
-        {/* Right edge fade */}
-        <div className="hero-portrait-right absolute inset-y-0 right-0 z-10 w-16" />
-
-        {/* Luminosity overlay — desaturates/lightens the brick background
-            so it blends into the page's light gray */}
-        <div className="hero-portrait-overlay absolute inset-0 z-20" />
+        {/* Subtle left-edge fade to merge into hero bg */}
+        <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-32 pointer-events-none" />
       </div>
     </motion.div>
 
