@@ -5,37 +5,44 @@ import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
-import { Section, SectionHeader, SectionLabel, SectionSubtitle, SectionTitle } from '@/components/ui/Section';
+import { Section, SectionHeader, SectionLabel, SectionTitle } from '@/components/ui/Section';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
 const testimonials = [
   {
     quote:
-      'Working together felt thoughtful and well organized. Complex ideas were made clear, and every detail was handled with care.',
-    name: 'Sample client',
-    role: 'Product team · Example organization',
-    image: '/media/testimonials/sample-profile-1.svg',
+      'Yared turns complex technical ideas into practical solutions with creativity and dedication.',
+    name: 'Yakob Dereje',
+    role: 'Software Engineer',
+    image: '/media/testimonials/yakob.jpg',
   },
   {
     quote:
-      'A dependable collaborator who brings curiosity, strong technical judgment, and a real focus on practical outcomes.',
-    name: 'Sample collaborator',
-    role: 'Engineering · Example organization',
-    image: '/media/testimonials/sample-profile-2.svg',
+      'Yared brings creativity, collaboration, and a strong commitment to quality to software development.',
+    name: 'Besufikad Lema',
+    role: 'Odo Developer',
+    image: '/media/testimonials/besu.jpeg',
   },
   {
     quote:
-      'The work balanced ambitious ideas with a clear, measured approach. Communication stayed open from the first discussion through delivery.',
-    name: 'Sample teammate',
-    role: 'Research · Example organization',
-    image: '/media/testimonials/sample-profile-3.svg',
+      'Yared is a thoughtful problem-solver who is committed to learning and building effective solutions.',
+    name: 'Yohanes Dereje',
+    role: 'Software Engineer',
+    image: '/media/testimonials/yohanes.jpeg',
   },
   {
     quote:
-      'A positive partner for challenging projects: responsive, analytical, and always willing to find a thoughtful way forward.',
-    name: 'Sample partner',
-    role: 'Technology · Example organization',
+      'Yared’s curiosity and problem-solving skills help turn challenging ideas into meaningful solutions.',
+    name: 'Nahome Addisu',
+    role: 'Electrical Engineer',
     image: '/media/testimonials/sample-profile-4.svg',
+  },
+  {
+    quote:
+      'Yared combines analytical thinking and determination to build thoughtful, high-quality solutions.',
+    name: 'Yordanos Habtamu',
+    role: 'Software Engineer',
+    image: '/media/testimonials/yordi.jpeg',
   },
 ];
 
@@ -62,9 +69,6 @@ export const Testimonials = () => {
       <SectionHeader className="mb-9 md:mb-12">
         <SectionLabel>Kind words</SectionLabel>
         <SectionTitle>Testimonials</SectionTitle>
-        <SectionSubtitle>
-          A glimpse of the thoughtful collaboration and practical impact I strive to bring to every project.
-        </SectionSubtitle>
       </SectionHeader>
 
       <motion.div
@@ -73,14 +77,6 @@ export const Testimonials = () => {
         whileInView="visible"
         viewport={viewportOnce}
       >
-        <motion.p
-          variants={fadeUp}
-          className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--text-muted)]"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-amber)]" aria-hidden="true" />
-          Illustrative placeholders — replace with genuine testimonials before publishing.
-        </motion.p>
-
         <motion.div variants={fadeUp}>
           <div
             className="testimonials-carousel"
@@ -106,7 +102,7 @@ export const Testimonials = () => {
                       <div className="relative mb-6 h-[5.25rem] w-[5.25rem] shrink-0 overflow-hidden rounded-full border-[3px] border-[var(--surface)] shadow-[0_0_0_1px_var(--border),0_8px_20px_rgb(0_0_0/_0.08)]">
                         <Image
                           src={testimonial.image}
-                          alt="Illustrative placeholder portrait, not a real testimonial author"
+                          alt={`Illustrative avatar for ${testimonial.name}; not a photograph`}
                           fill
                           sizes="84px"
                           className="object-cover"
