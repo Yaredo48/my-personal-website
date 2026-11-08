@@ -151,20 +151,58 @@ section { scroll-margin-top: 5rem; }
 
 /* Portrait fade — blends photo into hero background */
 .hero-portrait-fade {
-  background: linear-gradient(to right, #ebebeb, transparent);
+  background: linear-gradient(to right, #ebebeb 20%, transparent);
+  pointer-events: none;
 }
-
 [data-theme='dark'] .hero-portrait-fade {
-  background: linear-gradient(to right, #111118, transparent);
+  background: linear-gradient(to right, #111118 20%, transparent);
 }
 
-/* Bottom gradient on portrait */
 .hero-portrait-bottom {
-  background: linear-gradient(to top, rgb(235 235 235 / 0.6), transparent);
+  background: linear-gradient(to top, #ebebeb 30%, transparent);
+  pointer-events: none;
+}
+[data-theme='dark'] .hero-portrait-bottom {
+  background: linear-gradient(to top, #111118 30%, transparent);
 }
 
-[data-theme='dark'] .hero-portrait-bottom {
-  background: linear-gradient(to top, rgb(17 17 24 / 0.6), transparent);
+.hero-portrait-top {
+  background: linear-gradient(to bottom, #ebebeb 10%, transparent);
+  pointer-events: none;
+}
+[data-theme='dark'] .hero-portrait-top {
+  background: linear-gradient(to bottom, #111118 10%, transparent);
+}
+
+.hero-portrait-right {
+  background: linear-gradient(to left, #ebebeb 10%, transparent);
+  pointer-events: none;
+}
+[data-theme='dark'] .hero-portrait-right {
+  background: linear-gradient(to left, #111118 10%, transparent);
+}
+
+/* Luminosity overlay — washes out the dark brick background
+   so the photo blends into the light page background */
+.hero-portrait-overlay {
+  background: radial-gradient(
+    ellipse 60% 70% at 55% 35%,
+    transparent 0%,
+    transparent 30%,
+    rgb(235 235 235 / 0.45) 60%,
+    rgb(235 235 235 / 0.82) 100%
+  );
+  mix-blend-mode: normal;
+  pointer-events: none;
+}
+[data-theme='dark'] .hero-portrait-overlay {
+  background: radial-gradient(
+    ellipse 60% 70% at 55% 35%,
+    transparent 0%,
+    transparent 30%,
+    rgb(17 17 24 / 0.45) 60%,
+    rgb(17 17 24 / 0.82) 100%
+  );
 }
 .section-default {
   background: var(--background);

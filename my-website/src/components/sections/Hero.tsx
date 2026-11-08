@@ -121,36 +121,30 @@ export const Hero = () => (
       transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
       className="absolute bottom-0 right-0 top-0 hidden w-[52%] lg:block"
     >
-      {/* Gradient fade on left edge to blend with background */}
-      <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-48" />
-
-      {/* Portrait image — replace src with actual photo */}
-      <div className="relative h-full w-full overflow-hidden">
+      {/* Portrait image with background-removal effect via layered gradients */}
+      <div className="relative h-full w-full">
+        {/* The actual photo */}
         <img
           src="/media/portrait.jpg"
           alt="Yared Asfaw"
-          className="h-full w-full object-cover object-[center_15%]"
-          onError={(e) => {
-            // Fallback: show a styled placeholder
-            const target = e.currentTarget;
-            target.style.display = 'none';
-            const parent = target.parentElement;
-            if (parent && !parent.querySelector('.portrait-fallback')) {
-              const fallback = document.createElement('div');
-              fallback.className = 'portrait-fallback absolute inset-0 flex items-end justify-center pb-0';
-              fallback.innerHTML = `
-                <div style="width:100%;height:100%;background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,#7c3aed 8%,transparent) 100%);display:flex;align-items:flex-end;justify-content:center;">
-                  <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" style="width:72%;max-width:420px;opacity:0.18;">
-                    <ellipse cx="100" cy="85" rx="52" ry="52" fill="#7c3aed"/>
-                    <path d="M10 280 Q10 160 100 160 Q190 160 190 280Z" fill="#7c3aed"/>
-                  </svg>
-                </div>`;
-              parent.appendChild(fallback);
-            }
-          }}
+          className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
         />
-        {/* Subtle bottom gradient */}
-        <div className="hero-portrait-bottom absolute inset-x-0 bottom-0 h-32 pointer-events-none" />
+
+        {/* Strong left-edge fade — merges photo into hero bg */}
+        <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-56" />
+
+        {/* Bottom fade — grounds the figure */}
+        <div className="hero-portrait-bottom absolute inset-x-0 bottom-0 z-10 h-48" />
+
+        {/* Top fade */}
+        <div className="hero-portrait-top absolute inset-x-0 top-0 z-10 h-32" />
+
+        {/* Right edge fade */}
+        <div className="hero-portrait-right absolute inset-y-0 right-0 z-10 w-16" />
+
+        {/* Luminosity overlay — desaturates/lightens the brick background
+            so it blends into the page's light gray */}
+        <div className="hero-portrait-overlay absolute inset-0 z-20" />
       </div>
     </motion.div>
 
