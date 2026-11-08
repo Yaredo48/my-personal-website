@@ -27,7 +27,7 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
         )}
         {...props}
       >
-        <div className="relative mx-auto max-w-6xl">{children}</div>
+        <div className="relative w-full">{children}</div>
       </section>
     );
   }

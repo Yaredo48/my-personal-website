@@ -42,13 +42,15 @@ export const Hero = () => (
     id="home"
     className="hero-cinematic relative flex min-h-screen overflow-hidden"
   >
-    {/* Left content column */}
-    <div className="relative z-10 flex w-full flex-col justify-center px-6 pb-24 pt-28 sm:px-10 lg:w-[52%] lg:px-16 xl:px-20">
+    {/* Two-column grid — text left, portrait right, no gap */}
+    <div className="relative z-10 grid w-full grid-cols-1 items-center px-6 pb-10 pt-24 sm:px-10 lg:grid-cols-2 lg:px-16 lg:py-0 xl:px-24" style={{ minHeight: '100svh' }}>
+
+      {/* ── Left: text content ── */}
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="visible"
-        className="max-w-xl"
+        className="flex flex-col justify-center"
       >
         {/* Greeting */}
         <motion.h1
@@ -97,7 +99,7 @@ export const Hero = () => (
         </motion.div>
 
         {/* Social icons */}
-        <motion.div variants={fadeUp} className="mt-12 flex items-center gap-3">
+        <motion.div variants={fadeUp} className="mt-8 flex items-center gap-3">
           {socialLinks.map(({ svg, href, label }) => (
             <a
               key={label}
@@ -112,25 +114,23 @@ export const Hero = () => (
           ))}
         </motion.div>
       </motion.div>
-    </div>
 
-    {/* Right portrait column */}
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-      className="absolute bottom-0 right-0 top-0 hidden w-[52%] lg:block"
-    >
-      <div className="relative h-full w-full">
-        {/* mix-blend-mode: multiply makes white pixels transparent,
-            so the image background becomes the same as the page bg */}
+      {/* ── Right: portrait ── */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.65, delay: 0.15, ease: 'easeOut' }}
+        className="hidden lg:flex items-end justify-center h-full"
+        style={{ minHeight: '100svh' }}
+      >
         <img
           src="/media/portrait.png"
           alt="Yared Asfaw"
-          className="absolute bottom-0 right-0 h-full w-full object-contain object-bottom portrait-blend"
+          className="portrait-blend w-auto max-w-full"
+          style={{ height: '92%', objectFit: 'contain', objectPosition: 'bottom center', display: 'block' }}
         />
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
 
     {/* Decorative purple blob — subtle background accent */}
     <div

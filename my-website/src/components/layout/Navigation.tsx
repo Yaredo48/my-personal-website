@@ -55,7 +55,7 @@ export const Navigation = () => {
           : 'bg-transparent'
       )}
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      <div className="mx-auto w-full px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="flex h-[4.5rem] items-center justify-between">
 
           {/* Logo */}
