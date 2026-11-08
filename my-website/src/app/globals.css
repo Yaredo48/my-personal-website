@@ -181,23 +181,92 @@ section { scroll-margin-top: 5rem; }
 #__next > *, body > div { position: relative; z-index: 2; }
 
 /* ─── Hero Section ───────────────────────────────────────────────────────── */
+/*
+ * Background: pure white on the right half (portrait side) so that
+ * mix-blend-mode:multiply erases the portrait's white background perfectly.
+ * Left half carries the brand tint for the text column.
+ */
 .hero-cinematic {
-  background: linear-gradient(150deg, #f0eeff 0%, #f5f5f7 45%, #eef0f5 100%);
+  background: linear-gradient(
+    to right,
+    #edeaff 0%,
+    #f3f2f9 36%,
+    #fafafa 56%,
+    #ffffff 100%
+  );
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
 
 [data-theme='dark'] .hero-cinematic {
-  background: linear-gradient(150deg, #12101a 0%, #0f0f13 45%, #0d0f15 100%);
+  background: linear-gradient(
+    to right,
+    #13101c 0%,
+    #0f0f13 40%,
+    #0f0f13 100%
+  );
 }
 
+/* ── Portrait column ─────────────────────────────────────────────────────── */
+.portrait-col {
+  /*
+   * The column itself is a flex container that centers the image both
+   * horizontally and vertically within the full hero height.
+   * overflow:hidden clips any image bleed beyond the column bounds.
+   */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/*
+ * portrait-blend: the <img> element.
+ *
+ * mix-blend-mode:multiply — white image pixels × white background = white
+ * (invisible). Subject pixels are preserved.
+ *
+ * mask-image: three directional fades applied simultaneously via
+ * mask-composite:intersect so all three are active at once:
+ *   • left  — 20% fade: dissolves into the gradient transition zone
+ *   • top   — 14% fade: no hard top edge
+ *   • right —  6% fade: no hard right edge
+ *   • bottom — kept solid so the figure is grounded
+ */
 .portrait-blend {
   mix-blend-mode: multiply;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%,   black 20%),
+    linear-gradient(to bottom, transparent 0%,   black 14%),
+    linear-gradient(to left,   transparent 0%,   black 6%);
+  -webkit-mask-composite: destination-in, destination-in;
+  mask-image:
+    linear-gradient(to right,  transparent 0%,   black 20%),
+    linear-gradient(to bottom, transparent 0%,   black 14%),
+    linear-gradient(to left,   transparent 0%,   black 6%);
+  mask-composite: intersect;
 }
+
 [data-theme='dark'] .portrait-blend {
   mix-blend-mode: normal;
-  filter: brightness(0.9);
+  filter: brightness(0.9) contrast(1.02);
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%,   black 20%),
+    linear-gradient(to bottom, transparent 0%,   black 14%),
+    linear-gradient(to left,   transparent 0%,   black 6%);
+  -webkit-mask-composite: destination-in, destination-in;
+  mask-image:
+    linear-gradient(to right,  transparent 0%,   black 20%),
+    linear-gradient(to bottom, transparent 0%,   black 14%),
+    linear-gradient(to left,   transparent 0%,   black 6%);
+  mask-composite: intersect;
 }
 
 /* ─── Section Backgrounds ────────────────────────────────────────────────── */
