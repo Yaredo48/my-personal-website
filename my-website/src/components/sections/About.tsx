@@ -1,76 +1,99 @@
 'use client';
 
-import React from 'react';
-import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Network, Workflow, Gauge } from 'lucide-react';
+import { BrainCircuit, Cloud, Gauge, Network } from 'lucide-react';
+import Image from 'next/image';
+import { Section, SectionLabel, SectionTitle } from '@/components/ui/Section';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
 const strengths = [
-  { icon: BrainCircuit, title: 'Intelligent products', detail: 'ML, deep learning, and generative AI systems built for production.' },
-  { icon: Network, title: 'Knowledge systems', detail: 'RAG pipelines, vector search, and multi-step AI agents.' },
-  { icon: Workflow, title: 'Production engineering', detail: 'Scalable APIs, MLOps workflows, and cloud infrastructure.' },
-  { icon: Gauge, title: 'Scientific performance', detail: 'GPU acceleration, HPC, and parallel computing at scale.' },
+  {
+    icon: BrainCircuit,
+    title: 'AI engineering',
+    detail: 'Scalable, LLM-powered applications built for production.',
+  },
+  {
+    icon: Network,
+    title: 'RAG & agentic workflows',
+    detail: 'LangChain, LlamaIndex, LangGraph, and vector databases.',
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud infrastructure',
+    detail: 'Docker and AWS for scalable AI applications.',
+  },
+  {
+    icon: Gauge,
+    title: 'Performance',
+    detail: 'Reduced latency and operational costs by 30%.',
+  },
 ];
 
 export const About = () => (
-  <Section id="about">
-    <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:items-start">
-      {/* Left: narrative */}
+  <Section id="about" className="py-14 sm:py-16 lg:py-20">
+    <div className="mx-auto max-w-5xl text-center">
       <motion.div
         variants={stagger}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
       >
-        <SectionHeader className="mb-0">
-          <SectionLabel>What I do</SectionLabel>
-          <SectionTitle>From complex data to dependable intelligence.</SectionTitle>
-          <SectionSubtitle>
-            I architect AI systems with the rigor of a software engineer and the curiosity of a researcher.
-            My work spans the full stack — from raw data pipelines to deployed, monitored, production-grade AI.
-          </SectionSubtitle>
-        </SectionHeader>
-
-        <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-6 text-sm text-[var(--text-muted)]">
-          <div>
-            <p className="text-2xl font-bold tracking-tight text-[var(--foreground)]">5+</p>
-            <p className="mt-0.5">Years in AI engineering</p>
-          </div>
-          <div className="w-px bg-[var(--border)]" />
-          <div>
-            <p className="text-2xl font-bold tracking-tight text-[var(--foreground)]">20+</p>
-            <p className="mt-0.5">Production systems shipped</p>
-          </div>
-          <div className="w-px bg-[var(--border)]" />
-          <div>
-            <p className="text-2xl font-bold tracking-tight text-[var(--foreground)]">10+</p>
-            <p className="mt-0.5">Research publications</p>
-          </div>
+        <motion.div variants={fadeUp}>
+          <SectionLabel>Professional profile</SectionLabel>
+          <SectionTitle className="mb-0 text-[2.5rem] sm:text-5xl lg:text-6xl">
+            About Me
+          </SectionTitle>
         </motion.div>
+
+        <motion.div variants={fadeUp} className="mx-auto mt-7 h-48 w-48 sm:mt-8 sm:h-60 sm:w-60">
+          <Image
+            src="/media/portrait.png"
+            alt="Portrait of Yared Asfaw"
+            width={853}
+            height={1280}
+            className="h-full w-full rounded-full border-[3px] border-[var(--primary)] bg-[var(--surface)] object-cover object-[center_20%]"
+          />
+        </motion.div>
+
+        <motion.p
+          variants={fadeUp}
+          className="mx-auto mt-6 max-w-4xl text-sm leading-[1.8] text-[var(--text-muted)] sm:text-base"
+        >
+          Results-driven AI Engineer with 3+ years of experience architecting, training, and
+          deploying scalable LLM-powered applications, RAG pipelines, and agentic workflows in
+          production. Proficient in Python, PyTorch, LangChain/LlamaIndex, LangGraph, and vector
+          databases (Pinecone, pgvector), with deep expertise in Docker and AWS cloud
+          infrastructure. Proven track record of reducing latency and cutting operational costs
+          by 30%. Adept at bridging core software engineering and machine learning to deliver
+          measurable business value.
+        </motion.p>
       </motion.div>
 
-      {/* Right: strength cards */}
       <motion.div
         variants={stagger}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+        className="mx-auto mt-9 grid max-w-5xl grid-cols-2 gap-3 sm:mt-11 sm:gap-5 lg:grid-cols-4"
       >
-        {strengths.map(({ icon: Icon, title, detail }, i) => (
-          <motion.div
+        {strengths.map(({ icon: Icon, title, detail }, index) => (
+          <motion.article
             key={title}
-            custom={i}
+            custom={index}
             variants={fadeUp}
-            className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-[0_12px_32px_rgb(0_0_0/_0.07)]"
+            className="group flex min-h-40 flex-col items-start rounded-2xl border border-[var(--border)] border-b-[5px] border-b-[var(--primary)] bg-[var(--surface)] p-4 text-left shadow-[0_1px_4px_rgb(0_0_0/_0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:border-b-[var(--primary)] hover:shadow-[0_12px_32px_rgb(0_0_0/_0.08)] sm:min-h-44 sm:p-5"
           >
-            <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] transition-transform duration-200 group-hover:-translate-y-0.5">
-              <Icon className="h-5 w-5" aria-hidden="true" />
-            </div>
-            <h3 className="mb-1.5 text-[0.9375rem] font-semibold tracking-[-0.02em] text-[var(--foreground)]">{title}</h3>
-            <p className="text-sm leading-[1.65] text-[var(--text-muted)]">{detail}</p>
-          </motion.div>
+            <Icon
+              className="mb-3 h-7 w-7 text-[var(--primary)] transition-transform duration-200 group-hover:-translate-y-0.5 sm:h-8 sm:w-8"
+              aria-hidden="true"
+            />
+            <h3 className="text-sm font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-base">
+              {title}
+            </h3>
+            <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-muted)] sm:text-sm">
+              {detail}
+            </p>
+          </motion.article>
         ))}
       </motion.div>
     </div>
