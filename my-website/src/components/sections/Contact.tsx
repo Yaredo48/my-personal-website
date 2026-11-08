@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
-import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 import { Mail, Link, Code, Send } from 'lucide-react';
@@ -18,7 +17,7 @@ const contactLinks = [
 
 const inputClass = (hasError: boolean) =>
   cn(
-    'w-full rounded-lg border bg-[var(--background)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20',
+    'w-full rounded-xl border bg-[var(--background)] px-4 py-3.5 text-sm text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/15',
     hasError ? 'border-red-500 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--primary)]'
   );
 
@@ -72,24 +71,24 @@ export const Contact = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="grid gap-10 lg:grid-cols-2"
+        className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12"
       >
         {/* Contact links */}
-        <motion.div variants={fadeUp} className="space-y-4">
+        <motion.div variants={fadeUp} className="flex flex-col gap-4">
           {contactLinks.map(({ href, icon: Icon, label, value, external }) => (
             <a
               key={label}
               href={href}
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
-              className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:border-[var(--primary)] hover:shadow-sm"
+              className="group flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--primary)] hover:shadow-[0_8px_24px_rgb(0_0_0/_0.07)]"
             >
-              <div className="rounded-lg bg-[var(--primary)]/10 p-3 text-[var(--primary)] transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
                 <Icon className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs font-medium text-[var(--text-muted)]">{label}</p>
-                <p className="text-sm font-semibold text-[var(--foreground)]">{value}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">{label}</p>
+                <p className="mt-0.5 text-sm font-medium text-[var(--foreground)]">{value}</p>
               </div>
             </a>
           ))}
@@ -97,13 +96,12 @@ export const Contact = () => {
 
         {/* Contact form */}
         <motion.div variants={fadeUp}>
-          <Card>
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+              <div className="grid gap-5 sm:grid-cols-2">
                 {[
                   { id: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
                   { id: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
-                  { id: 'subject', label: 'Subject', type: 'text', placeholder: 'Project inquiry' },
                 ].map(({ id, label, type, placeholder }) => (
                   <div key={id}>
                     <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
@@ -121,39 +119,55 @@ export const Contact = () => {
                     {errors[id] && <p className="mt-1 text-xs text-red-500">{errors[id]}</p>}
                   </div>
                 ))}
+              </div>
 
-                <div>
-                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    placeholder="Tell me about your project…"
-                    className={cn(inputClass(!!errors.message), 'resize-none')}
-                  />
-                  {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
-                </div>
+              <div>
+                <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Project inquiry"
+                  className={inputClass(!!errors.subject)}
+                />
+                {errors.subject && <p className="mt-1 text-xs text-red-500">{errors.subject}</p>}
+              </div>
 
-                <Button type="submit" size="lg" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                      Sending…
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+              <div>
+                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-[var(--foreground)]">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={5}
+                  placeholder="Tell me about your project…"
+                  className={cn(inputClass(!!errors.message), 'resize-none')}
+                />
+                {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+              </div>
+
+              <Button type="submit" size="lg" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
         </motion.div>
       </motion.div>
     </Section>

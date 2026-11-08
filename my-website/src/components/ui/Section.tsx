@@ -21,13 +21,13 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
         ref={ref}
         id={id}
         className={cn(
-          'relative px-5 py-20 sm:px-8 md:py-24 lg:px-12 lg:py-28',
+          'relative py-[var(--section-pad-y)]',
           backgrounds[background],
           className
         )}
         {...props}
       >
-        <div className="relative w-full">{children}</div>
+        <div className="container relative">{children}</div>
       </section>
     );
   }
@@ -37,14 +37,22 @@ Section.displayName = 'Section';
 
 export const SectionHeader = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('mb-12 max-w-3xl md:mb-16', className)} {...props} />
+  React.HTMLAttributes<HTMLDivElement> & { centered?: boolean }
+>(({ className, centered = false, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      'mb-14 md:mb-16',
+      centered && 'text-center',
+      className
+    )}
+    {...props}
+  />
 ));
 SectionHeader.displayName = 'SectionHeader';
 
 export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
+  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--primary)]">
     {children}
   </p>
 );
@@ -56,7 +64,7 @@ export const SectionTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      'mb-4 text-3xl font-semibold tracking-[-0.035em] text-[var(--foreground)] md:text-4xl lg:text-[2.6rem]',
+      'mb-4 text-[2rem] font-bold leading-[1.15] tracking-[-0.04em] text-[var(--foreground)] sm:text-[2.375rem] lg:text-[2.75rem]',
       className
     )}
     {...props}
@@ -70,7 +78,10 @@ export const SectionSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('max-w-2xl text-base leading-7 text-[var(--text-muted)] md:text-lg', className)}
+    className={cn(
+      'max-w-2xl text-[1.0625rem] leading-[1.75] text-[var(--text-muted)] md:text-lg',
+      className
+    )}
     {...props}
   />
 ));

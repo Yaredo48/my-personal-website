@@ -36,14 +36,14 @@ export const Projects = () => {
         </SectionSubtitle>
       </SectionHeader>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:gap-8">
         {/* Project list */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-2.5"
         >
           {projects.map((project, index) => {
             const ProjectIcon = projectIcons[index % projectIcons.length];
@@ -57,23 +57,20 @@ export const Projects = () => {
                 onClick={() => setActiveProjectId(project.id)}
                 aria-pressed={isActive}
                 className={cn(
-                  'group relative overflow-hidden rounded-xl border p-5 text-left transition-all duration-200',
+                  'group relative overflow-hidden rounded-2xl border p-5 text-left transition-all duration-200',
                   isActive
-                    ? 'border-[var(--primary)] bg-[var(--primary)] text-white shadow-[0_8px_24px_color-mix(in_srgb,var(--primary)_25%,transparent)]'
-                    : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:shadow-md'
+                    ? 'border-[var(--primary)] bg-[var(--primary)] text-white shadow-[0_8px_28px_color-mix(in_srgb,var(--primary)_22%,transparent)]'
+                    : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:shadow-[0_8px_24px_rgb(0_0_0/_0.07)]'
                 )}
               >
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <span className={cn('text-xs font-semibold tracking-[0.12em]', isActive ? 'text-white/60' : 'text-[var(--text-subtle)]')}>
-                    0{index + 1}
+                <div className="mb-3 flex items-start justify-between gap-4">
+                  <span className={cn('text-[10px] font-bold tracking-[0.14em] uppercase', isActive ? 'text-white/50' : 'text-[var(--text-subtle)]')}>
+                    {projectTypes[index % projectTypes.length]}
                   </span>
-                  <ProjectIcon className={cn('h-5 w-5', isActive ? 'text-white/80' : 'text-[var(--primary)]')} aria-hidden="true" />
+                  <ProjectIcon className={cn('h-4.5 w-4.5 shrink-0', isActive ? 'text-white/70' : 'text-[var(--primary)]')} aria-hidden="true" />
                 </div>
-                <p className={cn('mb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em]', isActive ? 'text-white/60' : 'text-[var(--text-subtle)]')}>
-                  {projectTypes[index % projectTypes.length]}
-                </p>
-                <h3 className="text-base font-semibold leading-snug tracking-[-0.02em]">{project.name}</h3>
-                <p className={cn('mt-1.5 line-clamp-2 text-sm leading-6', isActive ? 'text-white/75' : 'text-[var(--text-muted)]')}>
+                <h3 className="text-[0.9375rem] font-semibold leading-snug tracking-[-0.02em]">{project.name}</h3>
+                <p className={cn('mt-1.5 line-clamp-2 text-sm leading-[1.6]', isActive ? 'text-white/70' : 'text-[var(--text-muted)]')}>
                   {project.description}
                 </p>
               </motion.button>
@@ -88,41 +85,41 @@ export const Projects = () => {
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -16 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-7"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8"
           >
-            <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--primary)]/10">
-                <ActiveIcon className="h-5 w-5 text-[var(--primary)]" />
+            <div className="mb-6 flex items-center gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10">
+                <ActiveIcon className="h-6 w-6 text-[var(--primary)]" />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-subtle)]">
                   {projectTypes[activeIndex % projectTypes.length]}
                 </p>
-                <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--foreground)]">
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-[var(--foreground)]">
                   {activeProject.name}
                 </h3>
               </div>
             </div>
 
-            <div className="space-y-5 text-sm leading-7 text-[var(--text-muted)]">
+            <div className="space-y-5 text-sm leading-[1.75] text-[var(--text-muted)]">
               <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--foreground)]">Problem</p>
+                <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">Problem</p>
                 <p>{activeProject.problem}</p>
               </div>
               <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--foreground)]">Architecture</p>
+                <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">Architecture</p>
                 <p>{activeProject.architecture}</p>
               </div>
               {activeProject.results && (
                 <div>
-                  <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--foreground)]">Results</p>
+                  <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">Results</p>
                   <p>{activeProject.results}</p>
                 </div>
               )}
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {activeProject.technologies.map((tech) => (
                 <Badge key={tech} variant="outline" size="sm">
                   {tech}
@@ -130,7 +127,7 @@ export const Projects = () => {
               ))}
             </div>
 
-            <div className="mt-6 flex gap-3">
+            <div className="mt-7 flex gap-3">
               <Button size="sm" variant="outline" className="flex items-center gap-1.5">
                 <ArrowUpRight className="h-3.5 w-3.5" />
                 View Project

@@ -17,8 +17,8 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className="relative border-t border-[var(--border)] bg-[var(--background-secondary)]/90 px-5 py-10 sm:px-8 lg:px-12">
-      <div className="w-full">
+    <footer className="relative border-t border-[var(--border)] bg-[var(--background-secondary)]/90 py-10">
+      <div className="container">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
             <h3 className="text-lg font-semibold tracking-[-0.025em] text-[var(--foreground)]">Yared Asfaw</h3>

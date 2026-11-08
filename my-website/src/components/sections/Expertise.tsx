@@ -133,7 +133,7 @@ export const Expertise = () => {
                     onClick={() => toggleCategory(category)}
                     className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--background-secondary)]"
                   >
-                    <h3 className="text-sm font-semibold text-[var(--foreground)]">{category}</h3>
+                    <h3 className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-[var(--foreground)]">{category}</h3>
                     {expandedCategories.has(category) ? (
                       <ChevronUp className="h-4 w-4 text-[var(--text-muted)]" />
                     ) : (

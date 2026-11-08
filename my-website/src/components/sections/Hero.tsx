@@ -42,9 +42,10 @@ export const Hero = () => (
     id="home"
     className="hero-cinematic relative flex min-h-screen overflow-hidden"
   >
-    {/* Two-column grid — text left, portrait right, no gap */}
-    <div className="relative z-10 grid w-full grid-cols-1 items-center px-6 pb-10 pt-24 sm:px-10 lg:grid-cols-2 lg:px-16 lg:py-0 xl:px-24" style={{ minHeight: '100svh' }}>
-
+    <div
+      className="container relative z-10 grid w-full grid-cols-1 items-center gap-12 pb-16 pt-28 lg:grid-cols-[1fr_0.85fr] lg:gap-0 lg:py-0"
+      style={{ minHeight: '100svh' }}
+    >
       {/* ── Left: text content ── */}
       <motion.div
         variants={stagger}
@@ -52,27 +53,27 @@ export const Hero = () => (
         animate="visible"
         className="flex flex-col justify-center"
       >
-        {/* Greeting */}
+        {/* Eyebrow */}
+        <motion.p
+          variants={fadeUp}
+          className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--primary)]"
+        >
+          Senior AI Engineer
+        </motion.p>
+
+        {/* Name */}
         <motion.h1
           variants={fadeUp}
-          className="mb-3 text-4xl font-bold leading-tight tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem]"
+          className="mb-6 text-[2.75rem] font-bold leading-[1.08] tracking-[-0.045em] text-[var(--foreground)] sm:text-[3.5rem] lg:text-[4.25rem] xl:text-[5rem]"
         >
           Hi, I&apos;m{' '}
           <span className="text-[var(--primary)]">Yared Asfaw</span>
         </motion.h1>
 
-        {/* Title */}
-        <motion.p
-          variants={fadeUp}
-          className="mb-5 text-xl font-bold text-[var(--foreground)] sm:text-2xl"
-        >
-          Senior AI Engineer
-        </motion.p>
-
         {/* Bio */}
         <motion.p
           variants={fadeUp}
-          className="mb-8 max-w-md text-base leading-7 text-[var(--text-muted)]"
+          className="mb-10 max-w-[520px] text-[1.0625rem] leading-[1.75] text-[var(--text-muted)] lg:text-lg"
         >
           I architect, engineer, and deploy scalable AI solutions that transform
           complex challenges into intelligent products. Specializing in ML,
@@ -80,18 +81,18 @@ export const Hero = () => (
         </motion.p>
 
         {/* CTA Buttons */}
-        <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+        <motion.div variants={fadeUp} className="flex flex-wrap gap-3.5">
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2 rounded-lg bg-[var(--primary)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_color-mix(in_srgb,var(--primary)_35%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_6px_24px_color-mix(in_srgb,var(--primary)_45%,transparent)] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary)] px-8 py-4 text-sm font-semibold text-white shadow-[0_4px_20px_color-mix(in_srgb,var(--primary)_32%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_8px_28px_color-mix(in_srgb,var(--primary)_42%,transparent)] active:scale-[0.98]"
           >
             Hire Me
           </a>
           <a
             href="#projects"
             onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-sm font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-8 py-4 text-sm font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
           >
             See Projects
             <ArrowRight className="h-4 w-4" />
@@ -99,7 +100,7 @@ export const Hero = () => (
         </motion.div>
 
         {/* Social icons */}
-        <motion.div variants={fadeUp} className="mt-8 flex items-center gap-3">
+        <motion.div variants={fadeUp} className="mt-10 flex items-center gap-3">
           {socialLinks.map(({ svg, href, label }) => (
             <a
               key={label}
@@ -107,7 +108,7 @@ export const Hero = () => (
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--primary)] text-white shadow-[0_4px_12px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all hover:scale-110 hover:bg-[var(--primary-light)] hover:shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_40%,transparent)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] shadow-sm transition-all hover:border-[var(--primary)] hover:text-[var(--primary)] hover:shadow-[0_4px_14px_color-mix(in_srgb,var(--primary)_20%,transparent)]"
             >
               {svg}
             </a>
@@ -119,7 +120,7 @@ export const Hero = () => (
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.65, delay: 0.15, ease: 'easeOut' }}
+        transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
         className="hidden lg:flex items-end justify-center h-full"
         style={{ minHeight: '100svh' }}
       >
@@ -127,14 +128,14 @@ export const Hero = () => (
           src="/media/portrait.png"
           alt="Yared Asfaw"
           className="portrait-blend w-auto max-w-full"
-          style={{ height: '92%', objectFit: 'contain', objectPosition: 'bottom center', display: 'block' }}
+          style={{ height: '90%', objectFit: 'contain', objectPosition: 'bottom center', display: 'block' }}
         />
       </motion.div>
     </div>
 
-    {/* Decorative purple blob — subtle background accent */}
+    {/* Decorative blob */}
     <div
-      className="pointer-events-none absolute right-[10%] top-[15%] h-[500px] w-[500px] rounded-full opacity-[0.07]"
+      className="pointer-events-none absolute right-[8%] top-[12%] h-[600px] w-[600px] rounded-full opacity-[0.06]"
       style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)' }}
     />
   </section>

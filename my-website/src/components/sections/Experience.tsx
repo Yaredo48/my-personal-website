@@ -23,14 +23,14 @@ export const Experience = () => {
         </SectionSubtitle>
       </SectionHeader>
 
-      <div className="grid gap-6 lg:grid-cols-[0.65fr_1.35fr] lg:gap-8">
+      <div className="grid gap-6 lg:grid-cols-[0.6fr_1.4fr] lg:gap-8">
         {/* Timeline list */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="relative flex flex-col gap-1 border-l border-[var(--border)] pl-6"
+          className="relative flex flex-col gap-1 border-l-2 border-[var(--border)] pl-6"
         >
           {experiences.map((exp, i) => {
             const isActive = exp.id === activeId;
@@ -45,21 +45,21 @@ export const Experience = () => {
                 className={cn(
                   'relative w-full rounded-xl p-4 text-left transition-all duration-200',
                   isActive
-                    ? 'bg-[var(--surface)] shadow-[0_2px_12px_rgb(15_28_53_/_0.07)]'
-                    : 'hover:bg-[var(--surface)]/60'
+                    ? 'bg-[var(--surface)] shadow-[0_2px_16px_rgb(0_0_0/_0.07)]'
+                    : 'hover:bg-[var(--surface)]/70'
                 )}
               >
                 {/* Timeline dot */}
                 <span
                   className={cn(
-                    'absolute -left-[1.85rem] top-5 h-3 w-3 rounded-full border-2 border-[var(--background)]',
+                    'absolute -left-[1.9rem] top-5 h-3.5 w-3.5 rounded-full border-2 border-[var(--background)] transition-colors',
                     isActive ? 'bg-[var(--primary)]' : 'bg-[var(--border-strong)]'
                   )}
                 />
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
                   {exp.startDate} — {exp.endDate ?? 'Present'}
                 </p>
-                <p className="font-semibold tracking-[-0.02em] text-[var(--foreground)]">{exp.title}</p>
+                <p className="text-[0.9375rem] font-semibold tracking-[-0.02em] text-[var(--foreground)]">{exp.title}</p>
                 <p className="mt-0.5 flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
                   <Building2 className="h-3.5 w-3.5 shrink-0" />
                   {exp.organization}
@@ -79,30 +79,30 @@ export const Experience = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-7"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8"
           >
-            <div className="mb-5 border-b border-[var(--border)] pb-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--text-subtle)]">
+            <div className="mb-6 border-b border-[var(--border)] pb-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-subtle)]">
                 {active.startDate} — {active.endDate ?? 'Present'}
               </p>
-              <h3 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-[var(--foreground)]">
+              <h3 className="mt-1.5 text-[1.375rem] font-bold tracking-[-0.03em] text-[var(--foreground)]">
                 {active.title}
               </h3>
-              <p className="mt-0.5 flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
+              <p className="mt-1 flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
                 <Building2 className="h-4 w-4 shrink-0" />
                 {active.organization}
               </p>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div>
-                <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--foreground)]">
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">
                   Responsibilities
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {active.responsibilities.map((r) => (
-                    <li key={r} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--text-muted)]">
+                    <li key={r} className="flex items-start gap-3 text-sm leading-[1.7] text-[var(--text-muted)]">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-emerald)]" />
                       {r}
                     </li>
@@ -112,12 +112,12 @@ export const Experience = () => {
 
               {active.achievements && active.achievements.length > 0 && (
                 <div>
-                  <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--foreground)]">
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">
                     Key Achievements
                   </p>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {active.achievements.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--text-muted)]">
+                      <li key={a} className="flex items-start gap-3 text-sm leading-[1.7] text-[var(--text-muted)]">
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary)]" />
                         {a}
                       </li>
