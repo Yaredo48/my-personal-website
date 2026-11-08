@@ -12,9 +12,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'inline-flex items-center justify-center rounded-md font-semibold tracking-[-0.01em] transition duration-200 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 active:translate-y-px';
 
     const variants = {
-      primary: 'bg-[var(--primary)] text-white shadow-sm hover:bg-[var(--primary-light)] hover:shadow-md',
+      primary: 'bg-[var(--primary)] text-white shadow-[0_4px_14px_color-mix(in_srgb,var(--primary)_30%,transparent)] hover:bg-[var(--primary-light)] hover:shadow-[0_6px_20px_color-mix(in_srgb,var(--primary)_40%,transparent)]',
       secondary: 'bg-[var(--foreground)] text-[var(--background)] shadow-sm hover:opacity-90',
-      outline: 'border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)]',
+      outline: 'border-2 border-[var(--primary)] bg-transparent text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white',
       ghost: 'text-[var(--foreground)] hover:bg-[var(--background-secondary)]',
     };
 

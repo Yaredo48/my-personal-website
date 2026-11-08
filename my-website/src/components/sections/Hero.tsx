@@ -1,131 +1,163 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/Button';
-import { Code, Link, Mail, ArrowRight, Download, Cpu, Database, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
+import { ArrowRight } from 'lucide-react';
+import { fadeUp, stagger } from '@/lib/motion';
 
-const capabilities = [
-  { icon: Cpu, label: 'ML & Deep Learning', color: 'text-[var(--primary)]' },
-  { icon: Database, label: 'RAG Systems', color: 'text-[var(--secondary)]' },
-  { icon: Zap, label: 'Agentic AI', color: 'text-[var(--accent-teal)]' },
-  { icon: Code, label: 'LLM Engineering', color: 'text-[var(--accent-emerald)]' },
+const socialLinks = [
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/yourprofile',
+    svg: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/yourprofile',
+    svg: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Twitter / X',
+    href: 'https://twitter.com/yourprofile',
+    svg: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
 ];
 
 export const Hero = () => (
   <section
     id="home"
-    className="hero-cinematic flex min-h-screen items-center justify-center px-5 pb-16 pt-28 sm:px-8 lg:px-12 lg:pb-20"
+    className="hero-cinematic relative flex min-h-screen overflow-hidden"
   >
-    <div className="relative z-10 mx-auto w-full max-w-6xl">
+    {/* Left content column */}
+    <div className="relative z-10 flex w-full flex-col justify-center px-6 pb-24 pt-28 sm:px-10 lg:w-[52%] lg:px-16 xl:px-20">
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="visible"
-        className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
+        className="max-w-xl"
       >
-        {/* Left column */}
-        <div className="space-y-8">
-          <motion.div variants={fadeUp} className="space-y-5">
-            <div className="flex flex-wrap gap-2">
-              {[
-                { label: 'Senior AI Engineer', color: 'border-[var(--primary)]/30 bg-[var(--primary)]/12 text-[var(--primary)]' },
-                { label: 'Software Engineer', color: 'border-[var(--border-strong)] bg-[var(--surface)] text-[var(--secondary)]' },
-                { label: 'AI Systems Architect', color: 'border-[var(--accent-teal)]/30 bg-[var(--accent-teal)]/12 text-[var(--accent-teal)]' },
-              ].map(({ label, color }) => (
-                <span
-                  key={label}
-                  className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] ${color}`}
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
+        {/* Greeting */}
+        <motion.h1
+          variants={fadeUp}
+          className="mb-3 text-4xl font-bold leading-tight tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem]"
+        >
+          Hi, I&apos;m{' '}
+          <span className="text-[var(--primary)]">Yared Asfaw</span>
+        </motion.h1>
 
-            <h1 className="max-w-3xl text-4xl font-semibold leading-[1.06] tracking-[-0.05em] text-[var(--foreground)] sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-              Building Intelligent Systems.{' '}
-              <span className="text-[var(--primary)]">Engineering the Future.</span>
-            </h1>
+        {/* Title */}
+        <motion.p
+          variants={fadeUp}
+          className="mb-5 text-xl font-bold text-[var(--foreground)] sm:text-2xl"
+        >
+          Senior AI Engineer
+        </motion.p>
 
-            <p className="max-w-xl text-lg leading-8 text-[var(--text-muted)] md:text-xl">
-              I architect, engineer, and deploy scalable AI solutions that transform complex challenges into intelligent products.
-            </p>
-          </motion.div>
+        {/* Bio */}
+        <motion.p
+          variants={fadeUp}
+          className="mb-8 max-w-md text-base leading-7 text-[var(--text-muted)]"
+        >
+          I architect, engineer, and deploy scalable AI solutions that transform
+          complex challenges into intelligent products. Specializing in ML,
+          Generative AI, RAG Systems, and Agentic AI.
+        </motion.p>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-            <Button
-              size="lg"
-              className="flex items-center gap-2"
-              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+        {/* CTA Buttons */}
+        <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+            className="inline-flex items-center gap-2 rounded-lg bg-[var(--primary)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_4px_18px_color-mix(in_srgb,var(--primary)_35%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_6px_24px_color-mix(in_srgb,var(--primary)_45%,transparent)] active:scale-[0.98]"
+          >
+            Hire Me
+          </a>
+          <a
+            href="#projects"
+            onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-sm font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+          >
+            See Projects
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.div>
+
+        {/* Social icons */}
+        <motion.div variants={fadeUp} className="mt-12 flex items-center gap-3">
+          {socialLinks.map(({ svg, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--primary)] text-white shadow-[0_4px_12px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all hover:scale-110 hover:bg-[var(--primary-light)] hover:shadow-[0_6px_18px_color-mix(in_srgb,var(--primary)_40%,transparent)]"
             >
-              Explore My Work
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="flex items-center gap-2">
-              <Download className="h-4 w-4" />
-              Download Resume
-            </Button>
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="flex items-center gap-3">
-            {[
-              { href: 'https://github.com/yourprofile', icon: Code, label: 'GitHub' },
-              { href: 'https://linkedin.com/in/yourprofile', icon: Link, label: 'LinkedIn' },
-              { href: 'mailto:contact@example.com', icon: Mail, label: 'Email' },
-            ].map(({ href, icon: Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                aria-label={label}
-                className="rounded-lg border border-[var(--card-border)] bg-[var(--surface)] p-3 text-[var(--foreground)] transition-all hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]"
-              >
-                <Icon className="h-5 w-5" />
-              </a>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Right column — capability card */}
-        <motion.div variants={fadeUp} className="flex items-center justify-center lg:justify-end">
-          <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] p-6 shadow-[0_24px_56px_rgb(0_0_0_/_0.32)] backdrop-blur-xl sm:p-7">
-            <div className="mb-6 flex items-center justify-between border-b border-[var(--border)] pb-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
-                  Systems practice
-                </p>
-                <p className="mt-0.5 text-sm font-semibold text-[var(--foreground)]">
-                  Applied AI engineering
-                </p>
-              </div>
-              <span
-                className="h-2.5 w-2.5 rounded-full bg-[var(--accent-emerald)] shadow-[0_0_0_4px_color-mix(in_srgb,var(--accent-emerald)_20%,transparent)]"
-                aria-label="Available"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              {capabilities.map(({ icon: Icon, label, color }) => (
-                <div
-                  key={label}
-                  className="rounded-xl border border-[var(--border)] bg-[var(--background-secondary)] p-4 transition-colors hover:border-[var(--border-strong)]"
-                >
-                  <Icon className={`mb-2.5 h-7 w-7 ${color}`} />
-                  <p className="text-sm font-semibold leading-5 text-[var(--foreground)]">{label}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-5 border-t border-[var(--border)] pt-4">
-              <p className="text-center text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
-                End-to-End AI Solutions
-              </p>
-            </div>
-          </div>
+              {svg}
+            </a>
+          ))}
         </motion.div>
       </motion.div>
     </div>
+
+    {/* Right portrait column — bleeds to edge like the reference */}
+    <motion.div
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+      className="absolute bottom-0 right-0 top-0 hidden w-[52%] lg:block"
+    >
+      {/* Gradient fade on left edge to blend with background */}
+      <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-48" />
+
+      {/* Portrait image — replace src with actual photo */}
+      <div className="relative h-full w-full overflow-hidden">
+        <img
+          src="/media/portrait.jpg"
+          alt="Yared Asfaw"
+          className="h-full w-full object-cover object-[center_15%]"
+          onError={(e) => {
+            // Fallback: show a styled placeholder
+            const target = e.currentTarget;
+            target.style.display = 'none';
+            const parent = target.parentElement;
+            if (parent && !parent.querySelector('.portrait-fallback')) {
+              const fallback = document.createElement('div');
+              fallback.className = 'portrait-fallback absolute inset-0 flex items-end justify-center pb-0';
+              fallback.innerHTML = `
+                <div style="width:100%;height:100%;background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,#7c3aed 8%,transparent) 100%);display:flex;align-items:flex-end;justify-content:center;">
+                  <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" style="width:72%;max-width:420px;opacity:0.18;">
+                    <ellipse cx="100" cy="85" rx="52" ry="52" fill="#7c3aed"/>
+                    <path d="M10 280 Q10 160 100 160 Q190 160 190 280Z" fill="#7c3aed"/>
+                  </svg>
+                </div>`;
+              parent.appendChild(fallback);
+            }
+          }}
+        />
+        {/* Subtle bottom gradient */}
+        <div className="hero-portrait-bottom absolute inset-x-0 bottom-0 h-32 pointer-events-none" />
+      </div>
+    </motion.div>
+
+    {/* Decorative purple blob — subtle background accent */}
+    <div
+      className="pointer-events-none absolute right-[10%] top-[15%] h-[500px] w-[500px] rounded-full opacity-[0.07]"
+      style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)' }}
+    />
   </section>
 );

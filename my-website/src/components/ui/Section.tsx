@@ -11,8 +11,8 @@ interface SectionProps {
 export const Section = React.forwardRef<HTMLElement, SectionProps>(
   ({ children, className, id, background = 'default', ...props }, ref) => {
     const backgrounds = {
-      default: 'bg-[var(--background)]/80',
-      secondary: 'bg-[var(--background-secondary)]/85',
+      default: 'bg-[var(--background)]',
+      secondary: 'bg-[var(--background-secondary)]',
       none: '',
     };
 
