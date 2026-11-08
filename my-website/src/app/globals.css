@@ -149,14 +149,15 @@ section { scroll-margin-top: 5rem; }
   background: linear-gradient(135deg, #111118 0%, #1a1a24 50%, #111118 100%);
 }
 
-/* Portrait fade — left edge blends photo into hero background */
-.hero-portrait-fade {
-  background: linear-gradient(to right, #ebebeb, transparent);
-  pointer-events: none;
+/* Portrait blend — multiply makes white bg transparent on light backgrounds */
+.portrait-blend {
+  mix-blend-mode: multiply;
 }
-[data-theme='dark'] .hero-portrait-fade {
-  background: linear-gradient(to right, #111118, transparent);
+[data-theme='dark'] .portrait-blend {
+  mix-blend-mode: normal;
+  filter: brightness(0.92);
 }
+
 .section-default {
   background: var(--background);
 }

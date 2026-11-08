@@ -114,7 +114,7 @@ export const Hero = () => (
       </motion.div>
     </div>
 
-    {/* Right portrait column — bleeds to edge like the reference */}
+    {/* Right portrait column */}
     <motion.div
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
@@ -122,13 +122,13 @@ export const Hero = () => (
       className="absolute bottom-0 right-0 top-0 hidden w-[52%] lg:block"
     >
       <div className="relative h-full w-full">
+        {/* mix-blend-mode: multiply makes white pixels transparent,
+            so the image background becomes the same as the page bg */}
         <img
           src="/media/portrait.png"
           alt="Yared Asfaw"
-          className="absolute bottom-0 right-0 h-full w-full object-contain object-bottom"
+          className="absolute bottom-0 right-0 h-full w-full object-contain object-bottom portrait-blend"
         />
-        {/* Subtle left-edge fade to merge into hero bg */}
-        <div className="hero-portrait-fade absolute inset-y-0 left-0 z-10 w-32 pointer-events-none" />
       </div>
     </motion.div>
 
