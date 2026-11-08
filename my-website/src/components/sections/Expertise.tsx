@@ -1,13 +1,21 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Section, SectionHeader, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
+import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { technologies, techCategories } from '@/data/profile';
 import { cn } from '@/lib/utils';
+import { fadeUp, viewportOnce } from '@/lib/motion';
+
+const levelStyles: Record<string, string> = {
+  experienced: 'bg-[var(--accent-emerald)]/10 text-[var(--accent-emerald)] border-[var(--accent-emerald)]/25',
+  proficient: 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/25',
+  familiar: 'bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] border-[var(--accent-teal)]/25',
+  learning: 'bg-[var(--accent-amber)]/10 text-[var(--accent-amber)] border-[var(--accent-amber)]/25',
+};
 
 export const Expertise = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -18,36 +26,32 @@ export const Expertise = () => {
 
   const categories = Object.values(techCategories);
 
-  const filteredTechnologies = useMemo(() => {
-    return technologies.filter((tech) => {
-      const matchesCategory = selectedCategory === 'all' || tech.category === selectedCategory;
-      const matchesSearch = tech.name.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
-  }, [selectedCategory, searchQuery]);
-
-  const toggleCategory = (category: string) => {
-    setExpandedCategories((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(category)) {
-        newSet.delete(category);
-      } else {
-        newSet.add(category);
-      }
-      return newSet;
-    });
-  };
+  const filteredTechnologies = useMemo(
+    () =>
+      technologies.filter((tech) => {
+        const matchesCategory = selectedCategory === 'all' || tech.category === selectedCategory;
+        const matchesSearch = tech.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      }),
+    [selectedCategory, searchQuery]
+  );
 
   const groupedTechnologies = useMemo(() => {
     const groups: Record<string, typeof technologies> = {};
     filteredTechnologies.forEach((tech) => {
-      if (!groups[tech.category]) {
-        groups[tech.category] = [];
-      }
+      if (!groups[tech.category]) groups[tech.category] = [];
       groups[tech.category].push(tech);
     });
     return groups;
   }, [filteredTechnologies]);
+
+  const toggleCategory = (category: string) => {
+    setExpandedCategories((prev) => {
+      const next = new Set(prev);
+      next.has(category) ? next.delete(category) : next.add(category);
+      return next;
+    });
+  };
 
   const selectCategory = (category: string) => {
     setSelectedCategory(category);
@@ -59,55 +63,27 @@ export const Expertise = () => {
     if (query) setExpandedCategories(new Set(categories));
   };
 
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case 'experienced':
-        return 'bg-[var(--accent-emerald)]/10 text-[var(--accent-emerald)] border-[var(--accent-emerald)]/20';
-      case 'proficient':
-        return 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/20';
-      case 'familiar':
-        return 'bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] border-[var(--accent-teal)]/20';
-      case 'learning':
-        return 'bg-[var(--accent-amber)]/10 text-[var(--accent-amber)] border-[var(--accent-amber)]/20';
-      default:
-        return 'bg-[var(--background-secondary)] text-[var(--foreground)] border-[var(--border)]';
-    }
-  };
-
-  const getLevelLabel = (level: string) => {
-    switch (level) {
-      case 'experienced':
-        return 'Experienced';
-      case 'proficient':
-        return 'Proficient';
-      case 'familiar':
-        return 'Familiar';
-      case 'learning':
-        return 'Learning';
-      default:
-        return level;
-    }
-  };
-
   return (
-    <Section id="expertise">
+    <Section id="expertise" background="secondary">
       <SectionHeader>
+        <SectionLabel>Skills & tools</SectionLabel>
         <SectionTitle>Technical Expertise</SectionTitle>
         <SectionSubtitle>
-          A comprehensive technology ecosystem spanning AI, ML, software engineering, and infrastructure
+          A comprehensive technology ecosystem spanning AI, ML, software engineering, and infrastructure.
         </SectionSubtitle>
       </SectionHeader>
 
-      <div className="space-y-8">
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-          <div className="relative w-full md:w-96">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
+      <div className="space-y-6">
+        {/* Controls */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="relative w-full md:w-80">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]" />
             <input
               type="text"
-              placeholder="Search technologies..."
+              placeholder="Search technologies…"
               value={searchQuery}
               onChange={(e) => updateSearch(e.target.value)}
-              className="w-full rounded-md border border-[var(--border)] bg-[var(--card-bg)] py-3 pl-10 pr-4 text-[var(--foreground)] placeholder:text-[var(--text-muted)] transition focus:border-[var(--primary)] focus:outline-none"
+              className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] py-2.5 pl-9 pr-4 text-sm text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition focus:border-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/15"
             />
           </div>
 
@@ -115,7 +91,7 @@ export const Expertise = () => {
             <button
               onClick={() => selectCategory('all')}
               className={cn(
-                'rounded-md border px-3 py-2 text-xs font-medium transition-colors sm:text-sm',
+                'rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors',
                 selectedCategory === 'all'
                   ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
                   : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
@@ -128,7 +104,7 @@ export const Expertise = () => {
                 key={category}
                 onClick={() => selectCategory(category)}
                 className={cn(
-                  'rounded-md border px-3 py-2 text-xs font-medium transition-colors sm:text-sm',
+                  'rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors',
                   selectedCategory === category
                     ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
                     : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
@@ -140,71 +116,65 @@ export const Expertise = () => {
           </div>
         </div>
 
-        <div className="space-y-6">
-          {Object.entries(groupedTechnologies).map(([category, techs]) => (
-            <Card key={category} className="overflow-hidden">
-              <CardContent className="p-0">
-                <button
-                  onClick={() => toggleCategory(category)}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--background-secondary)]"
-                >
-                  <h3 className="text-lg font-semibold text-[var(--foreground)]">
-                    {category}
-                  </h3>
-                  {expandedCategories.has(category) ? (
-                    <ChevronUp className="w-5 h-5 text-[var(--text-muted)]" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-[var(--text-muted)]" />
-                  )}
-                </button>
+        {/* Category groups */}
+        <div className="space-y-3">
+          {Object.entries(groupedTechnologies).map(([category, techs], i) => (
+            <motion.div
+              key={category}
+              custom={i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <Card className="overflow-hidden p-0">
+                <CardContent className="p-0">
+                  <button
+                    onClick={() => toggleCategory(category)}
+                    className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--background-secondary)]"
+                  >
+                    <h3 className="text-sm font-semibold text-[var(--foreground)]">{category}</h3>
+                    {expandedCategories.has(category) ? (
+                      <ChevronUp className="h-4 w-4 text-[var(--text-muted)]" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 text-[var(--text-muted)]" />
+                    )}
+                  </button>
 
-                <AnimatePresence>
-                  {expandedCategories.has(category) && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6">
-                        <div className="flex flex-wrap gap-3">
+                  <AnimatePresence>
+                    {expandedCategories.has(category) && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-wrap gap-2 px-6 pb-5 pt-1">
                           {techs.map((tech) => (
-                            <div
+                            <Badge
                               key={tech.name}
-                              className="flex items-center gap-2"
+                              variant="outline"
+                              size="sm"
+                              className={cn('border', levelStyles[tech.level] ?? '')}
                             >
-                              <Badge
-                                variant="outline"
-                                size="md"
-                                className={cn(
-                                  'border-2',
-                                  getLevelColor(tech.level)
-                                )}
-                              >
-                                {tech.name}
-                              </Badge>
-                              <span className="text-xs text-[var(--text-muted)]">
-                                {getLevelLabel(tech.level)}
-                              </span>
-                            </div>
+                              {tech.name}
+                            </Badge>
                           ))}
                         </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </CardContent>
-            </Card>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {filteredTechnologies.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-[var(--text-muted)] text-lg">
-              No technologies found matching your search.
-            </p>
-          </div>
+          <p className="py-12 text-center text-[var(--text-muted)]">
+            No technologies found matching your search.
+          </p>
         )}
       </div>
     </Section>

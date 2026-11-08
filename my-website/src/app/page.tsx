@@ -12,7 +12,7 @@ import { Contact } from '@/components/sections/Contact';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--background)]">
+    <div className="relative z-10 min-h-screen">
       <Navigation />
       <main>
         <Hero />

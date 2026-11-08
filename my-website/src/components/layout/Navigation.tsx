@@ -20,31 +20,42 @@ const navItems = [
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    navItems.forEach(({ href }) => {
+      const el = document.querySelector(href);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollTo = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'border-b border-[var(--border)] bg-[var(--background)]/95 shadow-[0_1px_0_rgb(15_23_42_/_0.03)] backdrop-blur-md'
+          ? 'border-b border-[var(--border)] bg-[var(--nav-bg)] shadow-[0_1px_12px_rgb(15_28_53_/_0.06)] backdrop-blur-xl'
           : 'bg-transparent'
       )}
     >
@@ -52,79 +63,82 @@ export const Navigation = () => {
         <div className="flex h-16 items-center justify-between lg:h-[4.5rem]">
           <a
             href="#home"
+            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
             className="text-xl font-bold tracking-[-0.08em] text-[var(--foreground)] transition-colors hover:text-[var(--primary)] md:text-2xl"
           >
             YA
           </a>
 
-          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--primary)]"
+                onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  activeSection === item.href.slice(1)
+                    ? 'text-[var(--primary)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'
+                )}
               >
                 {item.name}
               </a>
             ))}
             <button
               onClick={toggleTheme}
-              className="rounded-md border border-[var(--border)] bg-[var(--surface)] p-2 text-[var(--foreground)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
+              className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 text-[var(--foreground)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </button>
-            <Button size="sm" className="flex items-center gap-2">
-              <Download className="w-4 h-4" />
-              Download CV
+            <Button size="sm" className="flex items-center gap-1.5">
+              <Download className="h-3.5 w-3.5" />
+              Resume
             </Button>
           </div>
 
           <button
-            className="p-2 text-[var(--foreground)] lg:hidden"
+            className="rounded-lg p-2 text-[var(--foreground)] transition-colors hover:bg-[var(--background-secondary)] lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="border-b border-[var(--border)] bg-[var(--background)] shadow-lg lg:hidden">
-          <div className="space-y-1 px-5 py-5">
+        <div className="border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-xl lg:hidden">
+          <div className="space-y-0.5 px-5 py-4">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="block rounded-md px-3 py-2 text-base font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--background-secondary)] hover:text-[var(--primary)]"
+                onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+                className={cn(
+                  'block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                  activeSection === item.href.slice(1)
+                    ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                    : 'text-[var(--foreground)] hover:bg-[var(--background-secondary)]'
+                )}
               >
                 {item.name}
               </a>
             ))}
-            <button
-              onClick={toggleTheme}
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--background-secondary)] hover:text-[var(--primary)]"
-            >
-              {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-              {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-            </button>
-            <Button size="md" className="mt-3 flex w-full items-center justify-center gap-2">
-              <Download className="w-4 h-4" />
-              Download CV
-            </Button>
+            <div className="flex items-center gap-3 pt-3">
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--background-secondary)]"
+              >
+                {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+              </button>
+              <Button size="sm" className="ml-auto flex items-center gap-1.5">
+                <Download className="h-3.5 w-3.5" />
+                Resume
+              </Button>
+            </div>
           </div>
         </div>
       )}

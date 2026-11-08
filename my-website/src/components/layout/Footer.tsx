@@ -4,67 +4,48 @@ import React, { useEffect, useState } from 'react';
 import { Code, Link, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+const socialLinks = [
+  { href: 'https://github.com/yourprofile', icon: Code, label: 'GitHub' },
+  { href: 'https://linkedin.com/in/yourprofile', icon: Link, label: 'LinkedIn' },
+  { href: 'mailto:contact@example.com', icon: Mail, label: 'Email' },
+];
+
 export const Footer = () => {
   const [year, setYear] = useState(2024);
-
   useEffect(() => {
-    const timer = window.setTimeout(() => setYear(new Date().getFullYear()), 0);
-    return () => window.clearTimeout(timer);
+    setYear(new Date().getFullYear());
   }, []);
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--background-secondary)] px-5 py-12 sm:px-8 lg:px-12">
+    <footer className="relative border-t border-[var(--border)] bg-[var(--background-secondary)]/90 px-5 py-10 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
-            <h3 className="mb-2 text-xl font-semibold tracking-[-0.025em] text-[var(--foreground)]">
-              Yared Asfaw
-            </h3>
-            <p className="text-[var(--text-muted)]">
-              Senior AI Engineer | Software Engineer
-            </p>
+            <h3 className="text-lg font-semibold tracking-[-0.025em] text-[var(--foreground)]">Yared Asfaw</h3>
+            <p className="mt-0.5 text-sm text-[var(--text-muted)]">Senior AI Engineer · Software Engineer</p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/yourprofile"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
-                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
-              )}
-              aria-label="GitHub"
-            >
-              <Code className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com/in/yourprofile"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
-                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
-              )}
-              aria-label="LinkedIn"
-            >
-              <Link className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:contact@example.com"
-              className={cn(
-                'rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-3',
-                'text-[var(--foreground)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
-              )}
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+          <div className="flex items-center gap-3">
+            {socialLinks.map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                aria-label={label}
+                className={cn(
+                  'rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2.5',
+                  'text-[var(--text-muted)] transition-all hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]'
+                )}
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-[var(--border)] text-center">
-          <p className="text-sm text-[var(--text-muted)]">
+        <div className="mt-8 border-t border-[var(--border)] pt-6 text-center">
+          <p className="text-xs text-[var(--text-subtle)]">
             © {year} Yared Asfaw. All rights reserved.
           </p>
         </div>
