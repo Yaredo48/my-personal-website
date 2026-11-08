@@ -104,7 +104,7 @@ export const Testimonials = () => {
                       key={`${testimonial.name}-${index}`}
                       className="testimonial-card group flex min-h-[25rem] flex-col items-center rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-6 py-8 text-center shadow-[0_12px_36px_rgb(0_0_0/_0.035)] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgb(0_0_0/_0.08)] sm:px-7"
                     >
-                      <div className="relative mb-6 h-[5.25rem] w-[5.25rem] shrink-0 overflow-hidden rounded-full border-[3px] border-[var(--surface)] shadow-[0_0_0_1px_var(--border),0_8px_20px_rgb(0_0_0/_0.08)]">
+                      <div className="relative h-[5.25rem] w-[5.25rem] shrink-0 overflow-hidden rounded-full border-[3px] border-[var(--surface)] shadow-[0_0_0_1px_var(--border),0_8px_20px_rgb(0_0_0/_0.08)]">
                         <Image
                           src={testimonial.image}
                           alt={`Illustrative avatar for ${testimonial.name}; not a photograph`}
@@ -112,6 +112,23 @@ export const Testimonials = () => {
                           sizes="84px"
                           className="object-cover"
                         />
+                      </div>
+
+                      <div
+                        className="my-4 flex items-center justify-center gap-2 text-[var(--accent-amber)]"
+                        role="img"
+                        aria-label={`${testimonial.rating} out of 5 stars`}
+                      >
+                        <span className="flex gap-1">
+                          {Array.from({ length: 5 }, (_, star) => (
+                            <Star
+                              key={star}
+                              aria-hidden="true"
+                              className={`h-3.5 w-3.5 ${star < testimonial.rating ? 'fill-current' : 'fill-transparent opacity-35'}`}
+                            />
+                          ))}
+                        </span>
+                        <span className="text-sm font-semibold text-[var(--foreground)]">{testimonial.rating}</span>
                       </div>
 
                       <blockquote className="flex flex-1 items-center text-[0.9375rem] leading-[1.8] text-[var(--text-muted)] sm:text-base">
@@ -125,19 +142,6 @@ export const Testimonials = () => {
                       <div className="mt-6">
                         <h3 className="font-semibold text-[var(--foreground)]">{testimonial.name}</h3>
                         <p className="mt-1 text-xs leading-relaxed text-[var(--text-subtle)]">{testimonial.role}</p>
-                        <div
-                          className="mt-3 flex justify-center gap-1 text-[var(--accent-amber)]"
-                          role="img"
-                          aria-label={`${testimonial.rating} out of 5 stars`}
-                        >
-                          {Array.from({ length: 5 }, (_, star) => (
-                            <Star
-                              key={star}
-                              aria-hidden="true"
-                              className={`h-3.5 w-3.5 ${star < testimonial.rating ? 'fill-current' : 'fill-transparent opacity-35'}`}
-                            />
-                          ))}
-                        </div>
                       </div>
                     </article>
                   ))}
