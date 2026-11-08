@@ -9,12 +9,6 @@ import { blogPosts } from '@/data/profile';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
-const categories = [
-  'AI Engineering', 'Machine Learning', 'Deep Learning', 'LLM Engineering',
-  'RAG Architecture', 'Agentic AI', 'MLOps', 'Software Architecture',
-  'HPC and CUDA', 'Scientific Computing',
-];
-
 export const Blog = () => {
   const [featured, ...rest] = blogPosts;
 
@@ -27,14 +21,6 @@ export const Blog = () => {
           Knowledge sharing and insights from AI engineering practice.
         </SectionSubtitle>
       </SectionHeader>
-
-      <div className="mb-8 flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <Badge key={category} variant="outline" size="md">
-            {category}
-          </Badge>
-        ))}
-      </div>
 
       <motion.div
         variants={stagger}
