@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="668" viewBox="0 0 1280 668" fill="none">
+  <rect width="1280" height="668" rx="20" fill="#F4F6FB"/>
+  <rect width="1280" height="62" rx="20" fill="#fff"/>
+  <path d="M0 62h1280" stroke="#E4E8F0"/>
+  <circle cx="34" cy="31" r="13" fill="#6759D8"/>
+  <path d="M29 31h10M34 26v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <text x="58" y="36" fill="#17243A" font-family="Arial,sans-serif" font-size="18" font-weight="700">Research Orchestration Workspace</text>
+  <rect x="1083" y="17" width="164" height="28" rx="14" fill="#F0EDFF"/>
+  <text x="1101" y="36" fill="#6759D8" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1">CONCEPT PREVIEW</text>
+  <rect y="62" width="208" height="606" fill="#17243A"/>
+  <text x="24" y="105" fill="#AEB9CA" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">AGENT WORKSPACE</text>
+  <rect x="14" y="124" width="180" height="42" rx="9" fill="#2B3A54"/>
+  <circle cx="37" cy="145" r="7" stroke="#C9C4FF" stroke-width="2"/>
+  <text x="56" y="150" fill="#fff" font-family="Arial,sans-serif" font-size="13" font-weight="600">Run overview</text>
+  <text x="56" y="201" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Research requests</text>
+  <text x="56" y="245" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Agent traces</text>
+  <text x="56" y="289" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Source library</text>
+  <text x="56" y="333" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Review queue</text>
+  <text x="240" y="112" fill="#17243A" font-family="Arial,sans-serif" font-size="24" font-weight="700">Research run · Evidence synthesis</text>
+  <text x="240" y="138" fill="#778399" font-family="Arial,sans-serif" font-size="13">Specialized agents collaborate with traceable sources and review gates</text>
+  <rect x="240" y="160" width="1000" height="98" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="264" y="190" fill="#778399" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1">RESEARCH QUESTION</text>
+  <text x="264" y="220" fill="#17243A" font-family="Arial,sans-serif" font-size="15" font-weight="600">Compare recent evidence and summarize the strongest findings with cited sources.</text>
+  <rect x="240" y="278" width="1000" height="250" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="264" y="312" fill="#17243A" font-family="Arial,sans-serif" font-size="15" font-weight="700">Coordinated agent workflow</text>
+  <path d="M434 410H490M674 410H730M914 410H970" stroke="#B8C0D0" stroke-width="2" stroke-dasharray="6 6"/>
+  <rect x="264" y="348" width="170" height="116" rx="12" fill="#F5F3FF" stroke="#DED9FF"/>
+  <circle cx="290" cy="374" r="11" fill="#6759D8"/>
+  <text x="310" y="378" fill="#5147A9" font-family="Arial,sans-serif" font-size="10" font-weight="700">01 · ROUTER</text>
+  <text x="282" y="414" fill="#17243A" font-family="Arial,sans-serif" font-size="13" font-weight="700">Plan the task</text>
+  <text x="282" y="437" fill="#778399" font-family="Arial,sans-serif" font-size="11">Scope &amp; delegate</text>
+  <rect x="504" y="348" width="170" height="116" rx="12" fill="#EFF8F7" stroke="#CBE9E3"/>
+  <circle cx="530" cy="374" r="11" fill="#24A88B"/>
+  <text x="550" y="378" fill="#17836D" font-family="Arial,sans-serif" font-size="10" font-weight="700">02 · RESEARCH</text>
+  <text x="522" y="414" fill="#17243A" font-family="Arial,sans-serif" font-size="13" font-weight="700">Find evidence</text>
+  <text x="522" y="437" fill="#778399" font-family="Arial,sans-serif" font-size="11">Search &amp; cite sources</text>
+  <rect x="744" y="348" width="170" height="116" rx="12" fill="#FFF8EC" stroke="#F2E0B8"/>
+  <circle cx="770" cy="374" r="11" fill="#E2A23A"/>
+  <text x="790" y="378" fill="#AA7620" font-family="Arial,sans-serif" font-size="10" font-weight="700">03 · REVIEW</text>
+  <text x="762" y="414" fill="#17243A" font-family="Arial,sans-serif" font-size="13" font-weight="700">Check claims</text>
+  <text x="762" y="437" fill="#778399" font-family="Arial,sans-serif" font-size="11">Verify &amp; resolve gaps</text>
+  <rect x="984" y="348" width="218" height="116" rx="12" fill="#F2F5FB" stroke="#DAE1EC"/>
+  <circle cx="1010" cy="374" r="11" fill="#4966D6"/>
+  <text x="1030" y="378" fill="#3E56B6" font-family="Arial,sans-serif" font-size="10" font-weight="700">04 · SYNTHESIS</text>
+  <text x="1002" y="414" fill="#17243A" font-family="Arial,sans-serif" font-size="13" font-weight="700">Draft findings</text>
+  <text x="1002" y="437" fill="#778399" font-family="Arial,sans-serif" font-size="11">Human approval gate</text>
+  <rect x="240" y="548" width="1000" height="74" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <circle cx="274" cy="585" r="8" fill="#24A88B"/>
+  <text x="296" y="580" fill="#17243A" font-family="Arial,sans-serif" font-size="13" font-weight="700">Review checkpoint</text>
+  <text x="296" y="601" fill="#778399" font-family="Arial,sans-serif" font-size="11">A person approves cited evidence before the final synthesis is shared.</text>
+  <text x="1050" y="590" fill="#778399" font-family="Arial,sans-serif" font-size="11">Illustrative interface</text>
+</svg>

@@ -1,142 +1,74 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, CheckCircle2, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Section, SectionLabel, SectionTitle } from '@/components/ui/Section';
 import { experiences } from '@/data/profile';
-import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
-export const Experience = () => {
-  const [activeId, setActiveId] = useState(experiences[0].id);
-  const active = experiences.find((e) => e.id === activeId) ?? experiences[0];
+export const Experience = () => (
+  <Section id="experience">
+    <div className="grid gap-10 lg:grid-cols-[minmax(15rem,0.9fr)_minmax(0,1.5fr)] lg:gap-16 xl:gap-24">
+      <header className="lg:sticky lg:top-32 lg:h-fit">
+        <SectionLabel>Career history</SectionLabel>
+        <SectionTitle className="mb-0 text-4xl sm:text-5xl lg:text-[3.5rem]">
+          Experience
+        </SectionTitle>
+      </header>
 
-  return (
-    <Section id="experience">
-      <SectionHeader>
-        <SectionLabel>Career path</SectionLabel>
-        <SectionTitle>Engineering leadership in practice.</SectionTitle>
-        <SectionSubtitle>
-          A focused view of the roles, responsibilities, and outcomes that shape my approach to building systems.
-        </SectionSubtitle>
-      </SectionHeader>
-
-      <div className="grid gap-6 lg:grid-cols-[0.6fr_1.4fr] lg:gap-8">
-        {/* Timeline list */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="relative flex flex-col gap-1 border-l-2 border-[var(--border)] pl-6"
-        >
-          {experiences.map((exp, i) => {
-            const isActive = exp.id === activeId;
-            return (
-              <motion.button
-                key={exp.id}
-                custom={i}
-                variants={fadeUp}
-                type="button"
-                onClick={() => setActiveId(exp.id)}
-                aria-pressed={isActive}
-                className={cn(
-                  'relative w-full rounded-xl p-4 text-left transition-all duration-200',
-                  isActive
-                    ? 'bg-[var(--surface)] shadow-[0_2px_16px_rgb(0_0_0/_0.07)]'
-                    : 'hover:bg-[var(--surface)]/70'
-                )}
-              >
-                {/* Timeline dot */}
-                <span
-                  className={cn(
-                    'absolute -left-[1.9rem] top-5 h-3.5 w-3.5 rounded-full border-2 border-[var(--background)] transition-colors',
-                    isActive ? 'bg-[var(--primary)]' : 'bg-[var(--border-strong)]'
-                  )}
-                />
-                <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
-                  {exp.startDate} — {exp.endDate ?? 'Present'}
-                </p>
-                <p className="text-[0.9375rem] font-semibold tracking-[-0.02em] text-[var(--foreground)]">{exp.title}</p>
-                <p className="mt-0.5 flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
-                  <Building2 className="h-3.5 w-3.5 shrink-0" />
-                  {exp.organization}
-                </p>
-                {isActive && (
-                  <ChevronRight className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--primary)]" />
-                )}
-              </motion.button>
-            );
-          })}
-        </motion.div>
-
-        {/* Detail panel */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeId}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8"
+      <ol aria-label="Professional experience timeline">
+        {experiences.map((experience, index) => (
+          <motion.li
+            key={experience.id}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.35, delay: index * 0.06 }}
+            className="relative grid grid-cols-[2rem_minmax(0,1fr)] border-b border-[var(--border)] last:border-b-0 sm:grid-cols-[minmax(0,0.85fr)_2rem_minmax(0,1.4fr)]"
           >
-            <div className="mb-6 border-b border-[var(--border)] pb-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-subtle)]">
-                {active.startDate} — {active.endDate ?? 'Present'}
+            <div className="col-start-2 row-start-2 py-1 sm:col-start-1 sm:row-start-1 sm:py-7 sm:pr-4 sm:text-right">
+              <p className="text-sm font-semibold leading-snug text-[var(--foreground)]">
+                {experience.organization}
               </p>
-              <h3 className="mt-1.5 text-[1.375rem] font-bold tracking-[-0.03em] text-[var(--foreground)]">
-                {active.title}
-              </h3>
-              <p className="mt-1 flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
-                <Building2 className="h-4 w-4 shrink-0" />
-                {active.organization}
+              <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-muted)] sm:text-sm">
+                {experience.startDate} – {experience.endDate ?? 'Present'}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-[var(--text-subtle)]">
+                {experience.location}
+                {experience.employmentType && ` · ${experience.employmentType}`}
               </p>
             </div>
 
-            <div className="space-y-6">
-              <div>
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">
-                  Responsibilities
-                </p>
-                <ul className="space-y-2.5">
-                  {active.responsibilities.map((r) => (
-                    <li key={r} className="flex items-start gap-3 text-sm leading-[1.7] text-[var(--text-muted)]">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-emerald)]" />
-                      {r}
+            <div
+              aria-hidden="true"
+              className="relative col-start-1 row-span-2 row-start-1 flex justify-center sm:col-start-2 sm:row-span-1"
+            >
+              <span className="absolute inset-y-0 w-px bg-[var(--border-strong)]" />
+              <span className="relative mt-2.5 h-3.5 w-3.5 rounded-full border-[3px] border-[var(--background)] bg-[var(--primary)] shadow-[0_0_0_1px_var(--primary)] sm:mt-10" />
+            </div>
+
+            <div className="col-start-2 row-start-1 py-6 sm:col-start-3 sm:row-start-1 sm:py-7 sm:pl-4">
+              <h3 className="text-xl font-semibold leading-snug tracking-[-0.025em] text-[var(--foreground)] sm:text-2xl">
+                {experience.title}
+              </h3>
+              <p className="mt-2 text-sm leading-[1.75] text-[var(--text-muted)] sm:text-[0.9375rem]">
+                {experience.description}
+              </p>
+              {experience.responsibilities && experience.responsibilities.length > 0 && (
+                <ul className="mt-3 space-y-1.5">
+                  {experience.responsibilities.map((responsibility) => (
+                    <li
+                      key={responsibility}
+                      className="flex items-start gap-2 text-xs leading-[1.65] text-[var(--text-muted)] sm:text-sm"
+                    >
+                      <span className="mt-[0.55rem] h-1 w-1 shrink-0 rounded-full bg-[var(--primary)]" />
+                      {responsibility}
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {active.achievements && active.achievements.length > 0 && (
-                <div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--foreground)]">
-                    Key Achievements
-                  </p>
-                  <ul className="space-y-2.5">
-                    {active.achievements.map((a) => (
-                      <li key={a} className="flex items-start gap-3 text-sm leading-[1.7] text-[var(--text-muted)]">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary)]" />
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               )}
-
-              <div className="flex flex-wrap gap-2 pt-1">
-                {active.technologies.map((tech) => (
-                  <Badge key={tech} variant="outline" size="sm">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </Section>
-  );
-};
+          </motion.li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+);

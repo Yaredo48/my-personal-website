@@ -1,196 +1,94 @@
 'use client';
 
-import {
-  ArrowUpRight,
-  BrainCircuit,
-  Boxes,
-  ChartNoAxesCombined,
-  Code2,
-  Cpu,
-  Database,
-  FileText,
-  GitBranch,
-  Gauge,
-  Network,
-  Play,
-  Search,
-  Server,
-  ShieldCheck,
-  Sparkles,
-  Workflow,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Section, SectionHeader, SectionLabel, SectionSubtitle, SectionTitle } from '@/components/ui/Section';
-import { projectCategories, projects } from '@/data/profile';
-import { cn } from '@/lib/utils';
-import type { Project, ProjectCategory } from '@/types';
+import { projects } from '@/data/profile';
+import type { Project } from '@/types';
 
-const categoryIcons: Record<ProjectCategory, LucideIcon> = {
-  'RAG & Knowledge': Database,
-  'Machine Learning': BrainCircuit,
-  'Agentic AI': Workflow,
-  'Generative AI': Sparkles,
-  'High-Performance Computing': Cpu,
-};
-
-const previewIcons: Record<ProjectCategory, LucideIcon[]> = {
-  'RAG & Knowledge': [FileText, Search, Database, BrainCircuit],
-  'Machine Learning': [Database, ChartNoAxesCombined, BrainCircuit, Gauge],
-  'Agentic AI': [Workflow, Network, BrainCircuit, GitBranch],
-  'Generative AI': [Code2, Server, Sparkles, ShieldCheck],
-  'High-Performance Computing': [Cpu, Boxes, Gauge, Network],
-};
-
-const projectFilters = ['All Projects', ...projectCategories] as const;
-type ProjectFilter = (typeof projectFilters)[number];
-
-const ProjectPreview = ({ project }: { project: Project }) => {
-  const ProjectIcon = categoryIcons[project.category];
-  const steps = previewIcons[project.category];
-
+const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <div
-      aria-label={`Illustrative ${project.category} project diagram`}
-      className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-[var(--border)] bg-[var(--background-secondary)] px-5 py-4"
-      role="img"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-size:28px_28px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--primary)]/10 blur-2xl"
-      />
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_1px_4px_rgb(0_0_0/_0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-[0_12px_30px_rgb(0_0_0/_0.09)]">
+      <div className="relative aspect-[1280/668] overflow-hidden border-b border-[var(--border)] bg-[var(--background-secondary)]">
+        <Image
+          src={project.image}
+          alt={`${project.name} dashboard`}
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
 
-      <div className="relative w-full max-w-sm">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)]/90 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)]">
-            <ProjectIcon aria-hidden="true" className="h-3 w-3 text-[var(--primary)]" />
-            System overview
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="mb-3">
+          <span
+            className={
+              project.status === 'completed'
+                ? 'inline-flex rounded-full bg-[var(--accent-emerald)]/10 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--accent-emerald)]'
+                : 'inline-flex rounded-full bg-[var(--primary)]/10 px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--primary)]'
+            }
+          >
+            {project.status === 'completed' ? 'Completed' : 'Planned · concept preview'}
           </span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-emerald)]" />
         </div>
+        <h3 className="text-base font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-lg">
+          {project.name}
+        </h3>
+        <p className="mt-2 text-sm leading-[1.7] text-[var(--text-muted)]">
+          {project.description}
+        </p>
 
-        <div className="flex items-center justify-between gap-2 sm:gap-3">
-          {steps.map((Icon, index) => (
-            <div className="flex min-w-0 flex-1 items-center gap-1.5 sm:gap-2" key={index}>
-              <span
-                className={cn(
-                  'flex aspect-square w-full max-w-14 shrink-0 items-center justify-center rounded-xl border bg-[var(--surface)] shadow-[0_3px_12px_rgb(0_0_0/_0.05)] sm:max-w-16',
-                  index === 1 && 'border-[var(--primary)]/40 bg-[var(--primary)]/10'
-                )}
-              >
-                <Icon
-                  aria-hidden="true"
-                  className={cn(
-                    'h-5 w-5 sm:h-6 sm:w-6',
-                    index === 1 ? 'text-[var(--primary)]' : 'text-[var(--text-muted)]'
-                  )}
-                />
-              </span>
-              {index < steps.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="h-px min-w-1 flex-1 border-t border-dashed border-[var(--border-strong)]"
-                />
-              )}
-            </div>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 4).map((technology) => (
+            <Badge key={technology} variant="outline" size="sm" className="text-[0.6875rem]">
+              {technology}
+            </Badge>
           ))}
-        </div>
-
-        <div className="mt-4 flex justify-center">
-          <span className="max-w-full truncate rounded-md border border-[var(--border)] bg-[var(--surface)]/80 px-2.5 py-1 text-[0.625rem] font-medium text-[var(--text-subtle)]">
-            {project.technologies.slice(0, 3).join(' · ')}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ProjectCard = ({ project }: { project: Project }) => (
-  <article
-    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_1px_4px_rgb(0_0_0/_0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-[0_12px_30px_rgb(0_0_0/_0.09)]"
-  >
-    <ProjectPreview project={project} />
-
-    <div className="flex flex-1 flex-col p-5 sm:p-6">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <span className="rounded-full bg-[var(--primary)]/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-[var(--primary)]">
-          {project.category}
-        </span>
-      </div>
-
-      <h3 className="text-base font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)] sm:text-lg">
-        {project.name}
-      </h3>
-      <p className="mt-2 text-sm leading-[1.7] text-[var(--text-muted)]">
-        {project.description}
-      </p>
-
-      <div className="mt-4 border-t border-[var(--border)] pt-4">
-        <p className="mb-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
-          Technical approach
-        </p>
-        <p className="line-clamp-3 text-xs leading-[1.7] text-[var(--text-muted)] sm:text-[0.8125rem]">
-          {project.architecture}
-        </p>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {project.technologies.slice(0, 4).map((technology) => (
-          <Badge key={technology} variant="outline" size="sm" className="text-[0.6875rem]">
-            {technology}
-          </Badge>
-        ))}
-        {project.technologies.length > 4 && (
-          <span className="inline-flex items-center px-1 text-xs text-[var(--text-subtle)]">
-            +{project.technologies.length - 4}
-          </span>
-        )}
-      </div>
-
-      {(project.demo || project.github) && (
-        <div className="mt-auto flex gap-4 pt-5">
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-9 items-center gap-1.5 text-xs font-semibold text-[var(--primary)] transition-colors hover:text-[var(--primary-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          {project.technologies.length > 4 && (
+            <span
+              aria-label={`${project.technologies.length - 4} more technologies`}
+              className="inline-flex items-center px-1 text-xs font-medium text-[var(--text-subtle)]"
             >
-              <Play aria-hidden="true" className="h-3.5 w-3.5" />
-              Live demo
-              <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-            </a>
+              +{project.technologies.length - 4}
+            </span>
           )}
+        </div>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-6">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-9 items-center gap-1.5 text-xs font-semibold text-[var(--text-muted)] transition-colors hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[var(--border)] px-4 text-xs font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--background-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             >
-              <Code2 aria-hidden="true" className="h-3.5 w-3.5" />
-              Source
+              GitHub
               <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
             </a>
           )}
+          <a
+            href={project.demo ?? `/projects/${project.id}`}
+            target={project.demo ? '_blank' : undefined}
+            rel={project.demo ? 'noreferrer' : undefined}
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[var(--primary)] px-4 text-xs font-semibold text-white transition-colors hover:bg-[var(--primary-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          >
+            View Project
+            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+          </a>
         </div>
-      )}
-    </div>
-  </article>
-);
+      </div>
+    </article>
+  );
+};
+
+const emptyProjectSlots = ['project-slot-1', 'project-slot-2', 'project-slot-3'];
 
 export const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState<ProjectFilter>('All Projects');
-  const visibleProjects =
-    activeFilter === 'All Projects'
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const featuredProjects = projects.filter((project) => project.featured);
+  const additionalProjects = projects.filter((project) => !project.featured);
 
   return (
     <Section id="projects">
@@ -198,48 +96,62 @@ export const Projects = () => {
         <SectionLabel>Selected work</SectionLabel>
         <SectionTitle id="featured-projects-heading">Featured Projects</SectionTitle>
         <SectionSubtitle className="mx-auto">
-          A closer look at AI systems, intelligent applications, and computing platforms.
+          AI systems designed to make healthcare workflows more useful and accessible.
         </SectionSubtitle>
       </SectionHeader>
-
-      <div className="mb-7 flex flex-wrap justify-center gap-2 sm:mb-9">
-        {projectFilters.map((filter) => {
-          const isActive = activeFilter === filter;
-          const count =
-            filter === 'All Projects'
-              ? projects.length
-              : projects.filter((project) => project.category === filter).length;
-
-          return (
-            <button
-              key={filter}
-              type="button"
-              aria-pressed={isActive}
-              onClick={() => setActiveFilter(filter)}
-              className={cn(
-                'min-h-10 rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]',
-                isActive
-                  ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
-                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:border-[var(--primary)] hover:text-[var(--foreground)]'
-              )}
-            >
-              {filter}
-              <span className={cn('ml-1.5 text-[0.6875rem]', isActive ? 'text-white/75' : 'text-[var(--text-subtle)]')}>
-                {count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div
-        aria-live="polite"
-        aria-label="Featured project cards"
-        className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3"
-      >
-        {visibleProjects.map((project) => (
+      <div className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+        {featuredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
+      <div className="mt-8 text-center">
+        <button
+          type="button"
+          aria-expanded={showAllProjects}
+          onClick={() => setShowAllProjects((showAll) => !showAll)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-5 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+        >
+          {showAllProjects ? 'Show featured projects' : 'View all projects'}
+        </button>
+      </div>
+      {showAllProjects && (
+        <div className="mt-8" id="all-projects">
+          <div className="mb-5 text-center">
+            <p className="text-sm leading-[1.7] text-[var(--text-muted)]">
+              These additional concepts are planned work, not completed or deployed projects. Their
+              images are illustrative previews.
+            </p>
+          </div>
+          <div className="grid items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+            {additionalProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+      <div className="mb-6 mt-14 text-center md:mt-20">
+        <SectionLabel>Future work</SectionLabel>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-[var(--foreground)] sm:text-3xl">
+          Planned Projects
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm leading-[1.7] text-[var(--text-muted)]">
+          New projects will be added here when they are ready to share.
+        </p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+        {emptyProjectSlots.map((slot, index) => (
+          <div
+            key={slot}
+            className="flex min-h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--border-strong)] bg-[var(--surface)]/60 p-6 text-center"
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+              Project {String(index + 1).padStart(2, '0')}
+            </span>
+            <p className="mt-3 text-sm font-medium text-[var(--text-muted)]">
+              A new project will appear here
+            </p>
+            <span className="mt-2 text-xs text-[var(--text-subtle)]">Coming soon</span>
+          </div>
         ))}
       </div>
     </Section>

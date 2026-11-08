@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="668" viewBox="0 0 1280 668" fill="none">
+  <rect width="1280" height="668" rx="20" fill="#F4F6FB"/>
+  <rect width="1280" height="62" rx="20" fill="#fff"/>
+  <path d="M0 62h1280" stroke="#E4E8F0"/>
+  <circle cx="34" cy="31" r="13" fill="#6759D8"/>
+  <path d="M30 31h8M34 27v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <text x="58" y="36" fill="#17243A" font-family="Arial,sans-serif" font-size="18" font-weight="700">Knowledge Evaluation Studio</text>
+  <rect x="1083" y="17" width="164" height="28" rx="14" fill="#F0EDFF"/>
+  <text x="1101" y="36" fill="#6759D8" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1">CONCEPT PREVIEW</text>
+  <rect y="62" width="208" height="606" fill="#17243A"/>
+  <text x="24" y="105" fill="#AEB9CA" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">WORKSPACE</text>
+  <rect x="14" y="124" width="180" height="42" rx="9" fill="#2B3A54"/>
+  <circle cx="37" cy="145" r="7" stroke="#C9C4FF" stroke-width="2"/>
+  <text x="56" y="150" fill="#fff" font-family="Arial,sans-serif" font-size="13" font-weight="600">Overview</text>
+  <text x="56" y="201" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Knowledge sources</text>
+  <text x="56" y="245" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Retrieval experiments</text>
+  <text x="56" y="289" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Evaluation sets</text>
+  <text x="56" y="333" fill="#BCC6D4" font-family="Arial,sans-serif" font-size="13">Trace explorer</text>
+  <text x="240" y="112" fill="#17243A" font-family="Arial,sans-serif" font-size="24" font-weight="700">RAG quality overview</text>
+  <text x="240" y="138" fill="#778399" font-family="Arial,sans-serif" font-size="13">Compare retrieval quality, groundedness, and response behavior</text>
+  <rect x="240" y="160" width="232" height="94" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="260" y="190" fill="#778399" font-family="Arial,sans-serif" font-size="12">Grounded answers</text>
+  <text x="260" y="229" fill="#17243A" font-family="Arial,sans-serif" font-size="25" font-weight="700">Measure</text>
+  <rect x="488" y="160" width="232" height="94" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="508" y="190" fill="#778399" font-family="Arial,sans-serif" font-size="12">Relevant retrieval</text>
+  <text x="508" y="229" fill="#17243A" font-family="Arial,sans-serif" font-size="25" font-weight="700">Compare</text>
+  <rect x="736" y="160" width="232" height="94" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="756" y="190" fill="#778399" font-family="Arial,sans-serif" font-size="12">Median latency</text>
+  <text x="756" y="229" fill="#17243A" font-family="Arial,sans-serif" font-size="25" font-weight="700">Baseline</text>
+  <rect x="984" y="160" width="256" height="94" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="1004" y="190" fill="#778399" font-family="Arial,sans-serif" font-size="12">Active experiments</text>
+  <text x="1004" y="229" fill="#17243A" font-family="Arial,sans-serif" font-size="25" font-weight="700">Drafts</text>
+  <rect x="240" y="274" width="620" height="330" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="264" y="309" fill="#17243A" font-family="Arial,sans-serif" font-size="15" font-weight="700">Retrieval strategy comparison</text>
+  <text x="264" y="334" fill="#778399" font-family="Arial,sans-serif" font-size="11">Answer relevance across evaluation runs</text>
+  <path d="M292 535H824M292 485H824M292 435H824M292 385H824" stroke="#E9ECF2"/>
+  <path d="M302 500C360 478 385 471 432 453S516 435 560 411 644 418 691 386 776 370 812 351" stroke="#6759D8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M302 518C360 512 385 496 432 488S516 475 560 461 644 451 691 438 776 432 812 419" stroke="#24A88B" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 7"/>
+  <rect x="882" y="274" width="358" height="330" rx="12" fill="#fff" stroke="#E4E8F0"/>
+  <text x="906" y="309" fill="#17243A" font-family="Arial,sans-serif" font-size="15" font-weight="700">Grounding checks</text>
+  <rect x="906" y="334" width="310" height="58" rx="9" fill="#F7F8FC"/>
+  <circle cx="928" cy="363" r="7" fill="#24A88B"/>
+  <text x="947" y="359" fill="#24324A" font-family="Arial,sans-serif" font-size="12" font-weight="600">Claims with citations</text>
+  <text x="947" y="378" fill="#778399" font-family="Arial,sans-serif" font-size="11">Citation coverage · review</text>
+  <rect x="906" y="402" width="310" height="58" rx="9" fill="#F7F8FC"/>
+  <circle cx="928" cy="431" r="7" fill="#6759D8"/>
+  <text x="947" y="427" fill="#24324A" font-family="Arial,sans-serif" font-size="12" font-weight="600">Context precision</text>
+  <text x="947" y="446" fill="#778399" font-family="Arial,sans-serif" font-size="11">Reranked context · diagnostics</text>
+  <rect x="906" y="470" width="310" height="58" rx="9" fill="#F7F8FC"/>
+  <circle cx="928" cy="499" r="7" fill="#E2A23A"/>
+  <text x="947" y="495" fill="#24324A" font-family="Arial,sans-serif" font-size="12" font-weight="600">Needs review</text>
+  <text x="947" y="514" fill="#778399" font-family="Arial,sans-serif" font-size="11">Flagged claims · review queue</text>
+  <text x="906" y="567" fill="#778399" font-family="Arial,sans-serif" font-size="11">Illustrative interface · planned project</text>
+</svg>
