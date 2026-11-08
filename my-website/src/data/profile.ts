@@ -1,4 +1,4 @@
-import { Technology, Project, Experience, Publication, BlogPost } from '@/types';
+import { Technology, Project, ProjectCategory, Experience, Publication, BlogPost } from '@/types';
 
 export const profile = {
   name: 'Yared Asfaw',
@@ -25,6 +25,20 @@ export const techCategories = {
   hpc: 'High-Performance Computing',
   testing: 'Testing & AI Quality',
 } as const;
+
+export const techCategoryDescriptions: Record<keyof typeof techCategories, string> = {
+  programming: 'The languages I use to build reliable software, data workflows, and AI products.',
+  ml: 'A practical toolkit for preparing data, training models, and delivering machine learning.',
+  genai: 'Building and adapting language models for useful, production-ready applications.',
+  rag: 'Connecting language models to trusted knowledge through retrieval and vector search.',
+  agents: 'Designing tool-using AI systems with clear workflows, safeguards, and evaluation.',
+  backend: 'Engineering robust services and APIs that make intelligent products dependable.',
+  databases: 'Designing data stores and pipelines that keep application and analytics data useful.',
+  mlops: 'Taking models and services from development to repeatable, observable deployments.',
+  cloud: 'Running AI workloads and services on scalable cloud and GPU infrastructure.',
+  hpc: 'Accelerating compute-heavy workloads with parallel programming and GPU technologies.',
+  testing: 'Validating software behavior, system performance, and the quality of AI outputs.',
+};
 
 export const technologies: Technology[] = [
   // Programming Languages
@@ -148,6 +162,7 @@ export const technologies: Technology[] = [
 export const projects: Project[] = [
   {
     id: '1',
+    category: 'RAG & Knowledge',
     name: 'Enterprise RAG Knowledge Assistant',
     description: 'A production-ready RAG system for enterprise knowledge management',
     problem: 'Organizations struggle to efficiently access and utilize their vast knowledge bases across documents, databases, and internal systems.',
@@ -158,6 +173,7 @@ export const projects: Project[] = [
   },
   {
     id: '2',
+    category: 'Machine Learning',
     name: 'AI-Powered Prediction System',
     description: 'Machine learning system for predictive analytics and forecasting',
     problem: 'Businesses need accurate predictions for demand forecasting, customer behavior, and resource planning.',
@@ -167,6 +183,7 @@ export const projects: Project[] = [
   },
   {
     id: '3',
+    category: 'Agentic AI',
     name: 'Intelligent Multi-Agent AI Platform',
     description: 'Multi-agent system for complex task automation and decision making',
     problem: 'Complex workflows require coordination between multiple AI agents with different capabilities.',
@@ -176,6 +193,7 @@ export const projects: Project[] = [
   },
   {
     id: '4',
+    category: 'Generative AI',
     name: 'Production-Ready LLM Application',
     description: 'Scalable LLM application with proper monitoring and guardrails',
     problem: 'Deploying LLMs to production requires careful attention to performance, cost, and safety.',
@@ -185,6 +203,7 @@ export const projects: Project[] = [
   },
   {
     id: '5',
+    category: 'High-Performance Computing',
     name: 'High-Performance GPU Computing System',
     description: 'Optimized GPU computing infrastructure for large-scale ML workloads',
     problem: 'Large-scale ML training and inference require efficient GPU resource utilization.',
@@ -194,6 +213,7 @@ export const projects: Project[] = [
   },
   {
     id: '6',
+    category: 'Machine Learning',
     name: 'Scientific Machine Learning Application',
     description: 'ML application for scientific computing and research',
     problem: 'Scientific problems require combining domain knowledge with ML techniques.',
@@ -201,6 +221,14 @@ export const projects: Project[] = [
     technologies: ['PyTorch', 'NumPy', 'SciPy', 'CUDA', 'JAX', 'Scientific Computing'],
     decisions: ['Incorporated physical constraints into models', 'Used automatic differentiation', 'Implemented uncertainty quantification'],
   },
+];
+
+export const projectCategories: ProjectCategory[] = [
+  'RAG & Knowledge',
+  'Generative AI',
+  'Agentic AI',
+  'Machine Learning',
+  'High-Performance Computing',
 ];
 
 export const experiences: Experience[] = [

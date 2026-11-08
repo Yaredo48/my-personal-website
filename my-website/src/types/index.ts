@@ -5,9 +5,17 @@ export interface Technology {
   logo?: string;
 }
 
+export type ProjectCategory =
+  | 'RAG & Knowledge'
+  | 'Machine Learning'
+  | 'Agentic AI'
+  | 'Generative AI'
+  | 'High-Performance Computing';
+
 export interface Project {
   id: string;
   name: string;
+  category: ProjectCategory;
   description: string;
   problem: string;
   architecture: string;

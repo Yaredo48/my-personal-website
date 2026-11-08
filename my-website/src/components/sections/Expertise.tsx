@@ -1,181 +1,180 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { Section, SectionHeader, SectionLabel, SectionTitle, SectionSubtitle } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Search, ChevronDown, ChevronUp } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { technologies, techCategories } from '@/data/profile';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  BrainCircuit,
+  Boxes,
+  Cloud,
+  Code2,
+  Database,
+  Gauge,
+  Network,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+  type LucideIcon,
+} from 'lucide-react';
+import { useState } from 'react';
+import { Section, SectionHeader, SectionLabel, SectionSubtitle, SectionTitle } from '@/components/ui/Section';
+import { TechnologyLogo } from '@/components/ui/TechnologyLogo';
+import { techCategories, techCategoryDescriptions, technologies } from '@/data/profile';
 import { cn } from '@/lib/utils';
-import { fadeUp, viewportOnce } from '@/lib/motion';
 
-const levelStyles: Record<string, string> = {
-  experienced: 'bg-[var(--accent-emerald)]/10 text-[var(--accent-emerald)] border-[var(--accent-emerald)]/25',
-  proficient: 'bg-[var(--primary)]/10 text-[var(--primary)] border-[var(--primary)]/25',
-  familiar: 'bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] border-[var(--accent-teal)]/25',
-  learning: 'bg-[var(--accent-amber)]/10 text-[var(--accent-amber)] border-[var(--accent-amber)]/25',
+const categoryIcons: Record<keyof typeof techCategories, LucideIcon> = {
+  programming: Code2,
+  ml: BrainCircuit,
+  genai: Sparkles,
+  rag: Database,
+  agents: Workflow,
+  backend: Server,
+  databases: Network,
+  mlops: Boxes,
+  cloud: Cloud,
+  hpc: Gauge,
+  testing: ShieldCheck,
 };
 
+const categories = Object.entries(techCategories) as [
+  keyof typeof techCategories,
+  (typeof techCategories)[keyof typeof techCategories],
+][];
+
+const getCategoryTechnologies = (category: string) =>
+  Array.from(
+    new Map(
+      technologies
+        .filter((tech) => tech.category === category)
+        .map((tech) => [tech.name, tech])
+    ).values()
+  );
+
 export const Expertise = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    () => new Set([techCategories.programming])
-  );
-
-  const categories = Object.values(techCategories);
-
-  const filteredTechnologies = useMemo(
-    () =>
-      technologies.filter((tech) => {
-        const matchesCategory = selectedCategory === 'all' || tech.category === selectedCategory;
-        const matchesSearch = tech.name.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
-      }),
-    [selectedCategory, searchQuery]
-  );
-
-  const groupedTechnologies = useMemo(() => {
-    const groups: Record<string, typeof technologies> = {};
-    filteredTechnologies.forEach((tech) => {
-      if (!groups[tech.category]) groups[tech.category] = [];
-      groups[tech.category].push(tech);
-    });
-    return groups;
-  }, [filteredTechnologies]);
-
-  const toggleCategory = (category: string) => {
-    setExpandedCategories((prev) => {
-      const next = new Set(prev);
-      next.has(category) ? next.delete(category) : next.add(category);
-      return next;
-    });
-  };
-
-  const selectCategory = (category: string) => {
-    setSelectedCategory(category);
-    setExpandedCategories(category === 'all' ? new Set([techCategories.programming]) : new Set([category]));
-  };
-
-  const updateSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query) setExpandedCategories(new Set(categories));
-  };
+  const [selectedCategory, setSelectedCategory] =
+    useState<keyof typeof techCategories>('programming');
+  const selectedLabel = techCategories[selectedCategory];
+  const selectedTechnologies = getCategoryTechnologies(selectedLabel);
+  const SelectedIcon = categoryIcons[selectedCategory];
 
   return (
     <Section id="expertise" background="secondary">
-      <SectionHeader>
-        <SectionLabel>Skills & tools</SectionLabel>
+      <SectionHeader className="mb-9 md:mb-12">
+        <SectionLabel>Skills &amp; Tools</SectionLabel>
         <SectionTitle>Technical Expertise</SectionTitle>
         <SectionSubtitle>
-          A comprehensive technology ecosystem spanning AI, ML, software engineering, and infrastructure.
+          Explore the tools and technologies I use to build production-ready AI systems and
+          software.
         </SectionSubtitle>
       </SectionHeader>
 
-      <div className="space-y-6">
-        {/* Controls */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]" />
-            <input
-              type="text"
-              placeholder="Search technologies…"
-              value={searchQuery}
-              onChange={(e) => updateSearch(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] py-2.5 pl-9 pr-4 text-sm text-[var(--foreground)] placeholder:text-[var(--text-subtle)] transition focus:border-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/15"
-            />
-          </div>
+      <div className="grid gap-5 lg:grid-cols-[minmax(15rem,0.8fr)_minmax(0,1.8fr)] lg:gap-8">
+        <div
+          aria-label="Technical expertise categories"
+          className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1 lg:gap-2.5"
+          role="group"
+        >
+          {categories.map(([key, label], index) => {
+            const Icon = categoryIcons[key];
+            const isSelected = selectedCategory === key;
+            const skillCount = getCategoryTechnologies(label).length;
 
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => selectCategory('all')}
-              className={cn(
-                'rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors',
-                selectedCategory === 'all'
-                  ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
-                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
-              )}
-            >
-              All
-            </button>
-            {categories.map((category) => (
+            return (
               <button
-                key={category}
-                onClick={() => selectCategory(category)}
+                key={key}
+                type="button"
+                aria-controls="expertise-details"
+                aria-pressed={isSelected}
+                onClick={() => setSelectedCategory(key)}
                 className={cn(
-                  'rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors',
-                  selectedCategory === category
-                    ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
-                    : 'border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--primary)]'
+                  'group flex min-h-14 min-w-0 items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left transition-colors duration-200 sm:gap-3 sm:px-3.5',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background-secondary)]',
+                  isSelected
+                    ? 'border-[var(--primary)] bg-[var(--surface)] text-[var(--foreground)]'
+                    : 'border-transparent bg-transparent text-[var(--text-muted)] hover:border-[var(--border)] hover:bg-[var(--surface)]'
                 )}
               >
-                {category}
+                <span
+                  className={cn(
+                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors',
+                    isSelected
+                      ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                      : 'bg-[var(--surface)] text-[var(--text-muted)] group-hover:text-[var(--primary)]'
+                  )}
+                >
+                  <Icon aria-hidden="true" className="h-[18px] w-[18px]" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs font-semibold leading-snug text-[var(--foreground)] sm:text-sm">
+                    {label}
+                  </span>
+                  <span className="mt-0.5 block text-[0.6875rem] leading-tight text-[var(--text-subtle)]">
+                    {skillCount} skills
+                  </span>
+                </span>
+                <span className="hidden text-xs tabular-nums text-[var(--text-subtle)] lg:block">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Category groups */}
-        <div className="space-y-3">
-          {Object.entries(groupedTechnologies).map(([category, techs], i) => (
+        <div
+          id="expertise-details"
+          aria-live="polite"
+          className="min-h-[22rem] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[0_1px_4px_rgb(0_0_0/_0.04)] sm:p-7 lg:min-h-[30rem] lg:p-8"
+        >
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={category}
-              custom={i}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
+              key={selectedCategory}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
             >
-              <Card className="overflow-hidden p-0">
-                <CardContent className="p-0">
-                  <button
-                    onClick={() => toggleCategory(category)}
-                    className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--background-secondary)]"
-                  >
-                    <h3 className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-[var(--foreground)]">{category}</h3>
-                    {expandedCategories.has(category) ? (
-                      <ChevronUp className="h-4 w-4 text-[var(--text-muted)]" />
-                    ) : (
-                      <ChevronDown className="h-4 w-4 text-[var(--text-muted)]" />
-                    )}
-                  </button>
+              <div className="flex items-start gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] sm:h-14 sm:w-14">
+                  <SelectedIcon aria-hidden="true" className="h-6 w-6 sm:h-7 sm:w-7" />
+                </span>
+                <div className="min-w-0 pt-0.5">
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-subtle)]">
+                    Expertise area
+                  </p>
+                  <h3 className="mt-1 text-xl font-semibold leading-tight tracking-[-0.03em] text-[var(--foreground)] sm:text-2xl">
+                    {selectedLabel}
+                  </h3>
+                </div>
+              </div>
 
-                  <AnimatePresence>
-                    {expandedCategories.has(category) && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="flex flex-wrap gap-2 px-6 pb-5 pt-1">
-                          {techs.map((tech) => (
-                            <Badge
-                              key={tech.name}
-                              variant="outline"
-                              size="sm"
-                              className={cn('border', levelStyles[tech.level] ?? '')}
-                            >
-                              {tech.name}
-                            </Badge>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </CardContent>
-              </Card>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--text-muted)] sm:mt-6 sm:text-base">
+                {techCategoryDescriptions[selectedCategory]}
+              </p>
+
+              <div className="mt-6 border-t border-[var(--border)] pt-5 sm:mt-7 sm:pt-6">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <h4 className="text-sm font-semibold text-[var(--foreground)]">
+                    Tools &amp; technologies
+                  </h4>
+                  <span className="text-xs text-[var(--text-subtle)]">
+                    {selectedTechnologies.length} skills
+                  </span>
+                </div>
+                <ul className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-6 xl:grid-cols-4">
+                  {selectedTechnologies.map((tech) => (
+                    <li key={tech.name} className="flex min-w-0 flex-col items-center gap-2.5 text-center">
+                      <div className="flex aspect-square w-full max-w-24 items-center justify-center rounded-xl bg-[var(--background-secondary)] p-3 transition-colors duration-200 hover:bg-[var(--border)] sm:max-w-28 sm:p-4">
+                        <TechnologyLogo name={tech.name} />
+                      </div>
+                      <span className="max-w-full text-xs font-medium leading-snug text-[var(--foreground)] sm:text-sm">
+                        {tech.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
-
-        {filteredTechnologies.length === 0 && (
-          <p className="py-12 text-center text-[var(--text-muted)]">
-            No technologies found matching your search.
-          </p>
-        )}
       </div>
     </Section>
   );
