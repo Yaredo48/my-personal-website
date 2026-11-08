@@ -62,7 +62,7 @@ export const Navigation = () => {
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
-            className="text-2xl font-bold tracking-tight text-[var(--foreground)]"
+            className="font-heading text-2xl font-bold tracking-tight text-[var(--foreground)]"
           >
             YA<span className="text-[var(--primary)]">.</span>
           </a>
