@@ -67,9 +67,9 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit ${label}`}
-                  className="group flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white hover:shadow-[0_8px_20px_color-mix(in_srgb,var(--primary)_24%,transparent)]"
+                  className="social-icon-link group flex h-11 w-11 items-center justify-center rounded-xl border text-[var(--foreground)] shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white hover:shadow-[0_8px_20px_color-mix(in_srgb,var(--primary)_24%,transparent)]"
                 >
-                  <ContactIcon name={icon} className="h-[1.125rem] w-[1.125rem] transition-colors" />
+                  <ContactIcon name={icon} className="h-5 w-5 transition-colors" />
                 </a>
               ))}
             </div>

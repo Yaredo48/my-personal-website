@@ -27,6 +27,7 @@ type ContactIconProps = {
 
 export const ContactIcon = ({ name, className, style }: ContactIconProps) => {
   const iconClassName = [
+    'contact-icon',
     className,
     name === 'GitHub' || name === 'X' ? 'contact-brand-neutral' : undefined,
   ]
