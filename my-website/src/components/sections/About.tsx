@@ -1,31 +1,31 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BrainCircuit, Cloud, Gauge, Network } from 'lucide-react';
+import { BrainCircuit, Code2, GraduationCap, Layers3 } from 'lucide-react';
 import Image from 'next/image';
 import { Section, SectionTitle } from '@/components/ui/Section';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
 const strengths = [
   {
+    icon: Code2,
+    title: 'Python Development',
+    detail: 'Building backend services and full-stack applications with Python.',
+  },
+  {
+    icon: Layers3,
+    title: 'Full-Stack Engineering',
+    detail: 'Connecting frontend experiences with dependable backend systems.',
+  },
+  {
     icon: BrainCircuit,
-    title: 'AI engineering',
-    detail: 'Scalable, LLM-powered applications built for production.',
+    title: 'AI & Machine Learning',
+    detail: 'Creating practical solutions with machine learning and generative AI.',
   },
   {
-    icon: Network,
-    title: 'RAG & agentic workflows',
-    detail: 'LangChain, LlamaIndex, LangGraph, and vector databases.',
-  },
-  {
-    icon: Cloud,
-    title: 'Cloud infrastructure',
-    detail: 'Docker and AWS for scalable AI applications.',
-  },
-  {
-    icon: Gauge,
-    title: 'Performance',
-    detail: 'Reduced latency and operational costs by 30%.',
+    icon: GraduationCap,
+    title: 'Educator & Creator',
+    detail: 'Sharing technical knowledge through teaching and creative content.',
   },
 ];
 
