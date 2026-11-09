@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { BrainCircuit, Cloud, Gauge, Network } from 'lucide-react';
 import Image from 'next/image';
-import { Section, SectionLabel, SectionTitle } from '@/components/ui/Section';
+import { Section, SectionTitle } from '@/components/ui/Section';
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion';
 
 const strengths = [
@@ -39,7 +39,6 @@ export const About = () => (
         viewport={viewportOnce}
       >
         <motion.div variants={fadeUp}>
-          <SectionLabel>Professional profile</SectionLabel>
           <SectionTitle className="mb-0 bg-none bg-clip-border font-heading font-extrabold tracking-[-0.05em] text-[var(--accent-amber)] text-[2.5rem] sm:text-5xl lg:text-6xl">
             Who Am I ?
           </SectionTitle>

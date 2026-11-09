@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Download } from 'lucide-react';
 import { fadeUp, stagger } from '@/lib/motion';
 import { ContactIcon, type ContactMethod } from '@/components/ui/ContactIcon';
 import { profile } from '@/data/profile';
@@ -22,6 +22,7 @@ const professionalTitles = [
 ];
 
 export const Hero = () => {
+  const shouldReduceMotion = useReducedMotion();
   const [typedTitle, setTypedTitle] = useState('');
   const [activeTitleIndex, setActiveTitleIndex] = useState(0);
 
@@ -114,11 +115,17 @@ export const Hero = () => {
           {/* Name — the primary visual anchor */}
           <motion.h1
             variants={fadeUp}
-            className="mb-5 text-[2.5rem] font-bold leading-[1.06] tracking-[-0.04em] text-[var(--foreground)] sm:text-[3rem] lg:text-[3.5rem] xl:text-[4rem]"
+            className="mb-5 whitespace-nowrap text-[clamp(1.25rem,7vw,4rem)] font-bold leading-[1.06] tracking-[-0.04em] text-[var(--foreground)] sm:text-[clamp(2rem,6vw,3rem)] md:text-[clamp(1.5rem,4vw,3rem)] lg:text-[3.5rem] xl:text-[4rem]"
           >
             Hi, I&apos;m{' '}
-            <br className="hidden sm:block" />
-            <span className="text-[var(--primary)]">Yared Birhanu</span>
+            <motion.span
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 18, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-block text-[var(--primary)]"
+            >
+              Yared Birhanu
+            </motion.span>
           </motion.h1>
 
           {/* Role subtitle */}
@@ -156,6 +163,14 @@ export const Hero = () => {
               className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary)] px-7 py-3.5 text-base font-semibold text-white shadow-[0_4px_18px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_8px_26px_color-mix(in_srgb,var(--primary)_40%,transparent)] active:scale-[0.98]"
             >
               Hire Me
+            </a>
+            <a
+              href="/YaredBerhanuCV-updated.pdf"
+              download="Yared-Birhanu-CV.pdf"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+            >
+              <Download className="h-4 w-4" />
+              Download CV
             </a>
             <a
               href="#projects"
