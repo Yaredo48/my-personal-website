@@ -585,12 +585,12 @@ section { scroll-margin-top: 5rem; }
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: rgb(245 245 247 / 0.80);
+  background: rgb(245 245 247 / 0.35);
   pointer-events: none;
 }
 
 [data-theme='dark'] .site-bg-overlay {
-  background: rgb(15 15 19 / 0.85);
+  background: rgb(15 15 19 / 0.45);
 }
 
 #__next > *, body > div { position: relative; z-index: 2; }
@@ -604,10 +604,13 @@ section { scroll-margin-top: 5rem; }
 .hero-cinematic {
   background: linear-gradient(
     to right,
-    #edeaff 0%,
+    rgb(237 234 255 / 0.55) 0%,
+    rgb(237 234 255 / 0.88) 12%,
     #f3f2f9 36%,
     #fafafa 56%,
-    #ffffff 100%
+    #ffffff 82%,
+    rgb(255 255 255 / 0.88) 92%,
+    rgb(255 255 255 / 0.55) 100%
   );
   position: relative;
   isolation: isolate;
@@ -617,9 +620,12 @@ section { scroll-margin-top: 5rem; }
 [data-theme='dark'] .hero-cinematic {
   background: linear-gradient(
     to right,
-    #13101c 0%,
+    rgb(19 16 28 / 0.55) 0%,
+    rgb(19 16 28 / 0.88) 14%,
     #0f0f13 40%,
-    #0f0f13 100%
+    #0f0f13 82%,
+    rgb(15 15 19 / 0.88) 92%,
+    rgb(15 15 19 / 0.55) 100%
   );
 }
 
@@ -685,8 +691,8 @@ section { scroll-margin-top: 5rem; }
 }
 
 /* ─── Section Backgrounds ────────────────────────────────────────────────── */
-.section-default { background: var(--background); }
-.section-secondary { background: var(--background-secondary); }
+.section-default { background: color-mix(in srgb, var(--background) 55%, transparent); }
+.section-secondary { background: color-mix(in srgb, var(--background-secondary) 55%, transparent); }
 
 section + section { border-top: 1px solid var(--border); }
 
@@ -810,8 +816,4 @@ section + section { border-top: 1px solid var(--border); }
     animation-duration: var(--testimonial-duration, 40s) !important;
     animation-iteration-count: infinite !important;
   }
-}
-
-@media (max-width: 640px) {
-  .site-bg-video { display: none; }
 }
