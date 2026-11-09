@@ -49,3 +49,24 @@ The website now offers a more cohesive, elegant, and visually engaging experienc
 
 Public media is referenced by its URL path (for example, `/media/projects/image.png`).
 The CV remains at its existing public URL.
+
+## Deploying to Vercel
+
+This repository keeps the Next.js application in the `my-website` directory. When
+importing the repository into Vercel, set **Root Directory** to `my-website` and
+leave the framework preset as **Next.js**. Vercel will use the npm lockfile and
+the `npm run build` script automatically.
+
+The site can build without contact-mail credentials, but contact form delivery
+will return a configuration error until these server-side environment variables
+are set in Vercel for each deployment environment:
+
+- `SMTP_HOST`
+- `SMTP_USER`
+- `SMTP_PASS`
+- `CONTACT_TO`
+
+`SMTP_PORT` is optional and defaults to `587`; use `465` for implicit TLS.
+`SMTP_FROM` is optional and defaults to `SMTP_USER`. Use `.env.example` as a
+local template and never put real SMTP credentials in source control. The
+application requires Node.js 20.9 or later.
