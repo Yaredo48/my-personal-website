@@ -26,7 +26,7 @@ const socialLinks: { href: string; icon: ContactMethod; label: string }[] = [
 
 export const Footer = () => {
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--background-secondary)]">
+    <footer className="section-secondary relative overflow-hidden border-t border-[var(--border)]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-36 -top-44 h-[28rem] w-[28rem] rounded-full opacity-[0.12]"
