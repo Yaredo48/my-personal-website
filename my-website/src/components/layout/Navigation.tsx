@@ -1,14 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/ui/ThemeProvider';
-import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Portfolio', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Research', href: '#research' },
   { name: 'Blog', href: '#blog' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -21,6 +27,7 @@ export const Navigation = () => {
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -28,131 +35,154 @@ export const Navigation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top);
+        const currentSection = visibleSections[0]?.target.id;
+        if (currentSection) setActiveSection(currentSection);
       },
-      { rootMargin: '-40% 0px -55% 0px' }
+      { rootMargin: '-20% 0px -68% 0px', threshold: 0 }
     );
+
     navItems.forEach(({ href }) => {
-      const el = document.querySelector(href);
-      if (el) observer.observe(el);
+      const section = document.querySelector(href);
+      if (section) observer.observe(section);
     });
+
     return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (href: string) => {
-    setIsMobileMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const toggleMenu = () => setIsMobileMenuOpen((isOpen) => !isOpen);
 
   return (
     <nav
+      aria-label="Main navigation"
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-[var(--nav-bg)] shadow-[0_2px_20px_rgb(0_0_0_/_0.06)] backdrop-blur-xl'
-          : 'bg-transparent'
+        'nav-shell fixed inset-x-0 top-0 z-50',
+        isScrolled && 'nav-shell-scrolled'
       )}
     >
       <div className="container">
-        <div className="flex h-[4.5rem] items-center justify-between">
-
-          {/* Logo */}
+        <div className="nav-bar">
           <a
             href="#home"
-            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
-            className="font-heading text-2xl font-bold tracking-tight text-[var(--foreground)]"
+            onClick={closeMobileMenu}
+            className="nav-brand"
+            aria-label="Yared Birihanu — home"
           >
-            YA<span className="text-[var(--primary)]">.</span>
+            <Image
+              src="/media/yaredpp.jpg"
+              alt=""
+              className="nav-avatar"
+              width={44}
+              height={44}
+              sizes="44px"
+            />
+            <span className="nav-brand-name">
+              Yared <span>Birihanu</span>
+            </span>
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
-                className={cn(
-                  'text-sm font-medium transition-colors duration-200',
-                  activeSection === item.href.slice(1)
-                    ? 'text-[var(--primary)]'
-                    : 'text-[var(--foreground)] hover:text-[var(--primary)]'
-                )}
-              >
-                {item.name}
-              </a>
-            ))}
+          <div className="nav-links">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.slice(1);
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={cn('nav-link', isActive && 'nav-link-active')}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </div>
 
-          {/* Right actions */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="nav-actions">
             <button
               onClick={toggleTheme}
-              className="rounded-full p-2 text-[var(--text-muted)] transition-colors hover:text-[var(--primary)]"
-              aria-label="Toggle theme"
+              className="nav-theme-toggle"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
-              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+              {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
             </button>
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-              className="rounded-lg bg-[var(--primary)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_color-mix(in_srgb,var(--primary)_35%,transparent)] transition-all hover:bg-[var(--primary-light)] hover:shadow-[0_6px_20px_color-mix(in_srgb,var(--primary)_40%,transparent)] active:scale-[0.98]"
-            >
-              Let&apos;s Talk
+            <a href="#contact" className="nav-contact-link">
+              Let&apos;s talk
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
-            className="rounded-lg p-2 text-[var(--foreground)] transition-colors hover:text-[var(--primary)] lg:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            type="button"
+            className="nav-menu-toggle"
+            onClick={toggleMenu}
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="border-t border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-xl lg:hidden">
-          <div className="space-y-0.5 px-6 py-4">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
-                className={cn(
-                  'block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-                  activeSection === item.href.slice(1)
-                    ? 'text-[var(--primary)]'
-                    : 'text-[var(--foreground)] hover:text-[var(--primary)]'
-                )}
-              >
-                {item.name}
-              </a>
-            ))}
-            <div className="flex items-center gap-3 pt-3">
-              <button
-                onClick={toggleTheme}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)]"
-              >
-                {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-              </button>
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-                className="ml-auto rounded-lg bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white"
-              >
-                Let&apos;s Talk
-              </a>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="nav-mobile-panel"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+          >
+            <div className="container">
+              <div className="nav-mobile-grid">
+                {navItems.map((item, index) => {
+                  const isActive = activeSection === item.href.slice(1);
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={cn('nav-mobile-link', isActive && 'nav-mobile-link-active')}
+                    >
+                      <span className="nav-mobile-number">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span>{item.name}</span>
+                      <span className="nav-mobile-arrow" aria-hidden="true">↗</span>
+                    </a>
+                  );
+                })}
+              </div>
+              <div className="nav-mobile-footer">
+                <span>Building intelligent systems</span>
+                <button onClick={toggleTheme} className="nav-mobile-theme">
+                  {theme === 'light' ? (
+                    <Moon aria-hidden="true" />
+                  ) : (
+                    <Sun aria-hidden="true" />
+                  )}
+                  {theme === 'light' ? 'Dark mode' : 'Light mode'}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

@@ -44,13 +44,14 @@ export const About = () => (
           </SectionTitle>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="mx-auto mt-7 h-48 w-48 sm:mt-8 sm:h-60 sm:w-60">
+        <motion.div variants={fadeUp} className="mx-auto mt-7 h-48 w-48 overflow-hidden rounded-full border-[3px] border-[var(--primary)] bg-[var(--surface)] shadow-[0_18px_45px_rgba(109,40,217,0.18)] sm:mt-8 sm:h-60 sm:w-60">
           <Image
-            src="/media/portrait.png"
-            alt="Portrait of Yared Asfaw"
-            width={853}
-            height={1280}
-            className="h-full w-full rounded-full border-[3px] border-[var(--primary)] bg-[var(--surface)] object-cover object-[center_20%]"
+            src="/media/yaredpp.jpg"
+            alt="Portrait of Yared Birihanu"
+            width={768}
+            height={1152}
+            sizes="(min-width: 640px) 15rem, 12rem"
+            className="h-full w-full object-cover object-[center_18%]"
           />
         </motion.div>
 

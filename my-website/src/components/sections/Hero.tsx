@@ -124,7 +124,7 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="inline-block text-[var(--primary)]"
             >
-              Yared Birhanu
+              Yared Birihanu
             </motion.span>
           </motion.h1>
 
@@ -166,7 +166,7 @@ export const Hero = () => {
             </a>
             <a
               href="/YaredBerhanuCV-updated.pdf"
-              download="Yared-Birhanu-CV.pdf"
+              download="Yared-Birihanu-CV.pdf"
               className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
             >
               <Download className="h-4 w-4" />

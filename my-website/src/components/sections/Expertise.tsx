@@ -57,7 +57,7 @@ export const Expertise = () => {
   const SelectedIcon = categoryIcons[selectedCategory];
 
   return (
-    <Section id="expertise" background="secondary">
+    <Section id="skills" background="secondary">
       <SectionHeader className="mb-9 md:mb-12">
         <SectionLabel>Skills &amp; Tools</SectionLabel>
         <SectionTitle>Technical Expertise</SectionTitle>
