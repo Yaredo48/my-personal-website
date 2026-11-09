@@ -676,25 +676,22 @@ section + section { border-top: 1px solid var(--border); }
   animation: hero-cursor-blink 1s steps(2, start) infinite;
 }
 
-.download-cv-cta {
-  animation: download-cv-attention 2.4s ease-in-out infinite;
+.download-icon-bounce {
+  animation: download-icon-bounce 1.1s ease-in-out infinite;
+  will-change: transform;
 }
 
-.download-cv-cta:hover,
-.download-cv-cta:focus-visible {
-  animation-play-state: paused;
-  opacity: 1;
+.download-icon-stopped {
+  animation: none;
 }
 
-@keyframes download-cv-attention {
+@keyframes download-icon-bounce {
   0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent);
+    transform: translateY(0);
   }
 
   50% {
-    opacity: 0.72;
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 12%, transparent);
+    transform: translateY(-3px);
   }
 }
 
@@ -715,7 +712,7 @@ section + section { border-top: 1px solid var(--border); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .site-bg-video { display: none; }
-  .download-cv-cta { animation: none; }
+  .download-icon-bounce { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

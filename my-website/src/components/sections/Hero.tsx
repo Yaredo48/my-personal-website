@@ -25,6 +25,7 @@ export const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
   const [typedTitle, setTypedTitle] = useState('');
   const [activeTitleIndex, setActiveTitleIndex] = useState(0);
+  const [cvDownloadActivated, setCvDownloadActivated] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -167,9 +168,13 @@ export const Hero = () => {
             <a
               href="/YaredBerhanuCV-updated.pdf"
               download="Yared-Birihanu-CV.pdf"
-              className="download-cv-cta inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+              onClick={() => setCvDownloadActivated(true)}
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
             >
-              <Download className="h-4 w-4" />
+              <Download
+                className={`h-4 w-4 ${cvDownloadActivated ? 'download-icon-stopped' : 'download-icon-bounce'}`}
+                aria-hidden="true"
+              />
               Download CV
             </a>
             <a
