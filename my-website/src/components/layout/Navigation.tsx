@@ -33,23 +33,34 @@ export const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top);
-        const currentSection = visibleSections[0]?.target.id;
-        if (currentSection) setActiveSection(currentSection);
-      },
-      { rootMargin: '-20% 0px -68% 0px', threshold: 0 }
-    );
+    let observer: IntersectionObserver | undefined;
+    const updateObserver = () => {
+      observer?.disconnect();
+      const topOffset = Math.round(window.innerHeight * 0.25);
+      const bottomOffset = Math.round(window.innerHeight * 0.65);
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visibleSections = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top);
+          const currentSection = visibleSections[0]?.target.id;
+          if (currentSection) setActiveSection(currentSection);
+        },
+        { rootMargin: `-${topOffset}px 0px -${bottomOffset}px 0px`, threshold: 0 }
+      );
 
-    navItems.forEach(({ href }) => {
-      const section = document.querySelector(href);
-      if (section) observer.observe(section);
-    });
+      navItems.forEach(({ href }) => {
+        const section = document.querySelector(href);
+        if (section) observer?.observe(section);
+      });
+    };
 
-    return () => observer.disconnect();
+    updateObserver();
+    window.addEventListener('resize', updateObserver);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', updateObserver);
+    };
   }, []);
 
   useEffect(() => {
@@ -80,18 +91,18 @@ export const Navigation = () => {
             href="#home"
             onClick={closeMobileMenu}
             className="nav-brand"
-            aria-label="Yared Birihanu — home"
+            aria-label="Yared Birhanu — home"
           >
             <Image
               src="/media/yaredpp.jpg"
               alt=""
               className="nav-avatar"
-              width={44}
-              height={44}
-              sizes="44px"
+              width={48}
+              height={48}
+              sizes="48px"
             />
             <span className="nav-brand-name">
-              Yared <span>Birihanu</span>
+              Yared <span>Birhanu</span>
             </span>
           </a>
 

@@ -81,7 +81,7 @@ export const Hero = () => {
       ── Outer shell: full-viewport flex column, centers the inner grid
          vertically. Nav is fixed so we compensate with pt for the nav bar.
     */}
-    <div className="flex min-h-[100svh] flex-col justify-center pt-[4.5rem]">
+    <div className="flex min-h-[100svh] flex-col justify-center pt-[5rem]">
 
       {/*
         ── Inner grid: two equal columns.
@@ -124,7 +124,7 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="inline-block text-[var(--primary)]"
             >
-              Yared Birihanu
+              Yared Birhanu
             </motion.span>
           </motion.h1>
 
@@ -167,7 +167,7 @@ export const Hero = () => {
             <a
               href="/YaredBerhanuCV-updated.pdf"
               download="Yared-Birihanu-CV.pdf"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
+              className="download-cv-cta inline-flex items-center gap-2 rounded-xl border-2 border-[var(--primary)] bg-transparent px-7 py-3.5 text-base font-semibold text-[var(--primary)] transition-all hover:bg-[var(--primary)] hover:text-white active:scale-[0.98]"
             >
               <Download className="h-4 w-4" />
               Download CV
@@ -234,7 +234,7 @@ export const Hero = () => {
         >
           <img
             src="/media/portrait.png"
-            alt="Yared Asfaw — Senior AI Engineer"
+            alt="Yared Birhanu — Senior AI Engineer"
             className="portrait-blend"
             style={{
               width: '100%',

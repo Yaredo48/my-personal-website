@@ -1,7 +1,7 @@
 import { Technology, Project, Experience, BlogPost } from '@/types';
 
 export const profile = {
-  name: 'Yared Asfaw',
+  name: 'Yared Birhanu',
   title: 'Senior AI Engineer | Software Engineer',
   tagline: 'Building Intelligent Systems. Engineering the Future.',
   bio: 'I architect, engineer, and deploy scalable AI solutions that transform complex challenges into intelligent products.',

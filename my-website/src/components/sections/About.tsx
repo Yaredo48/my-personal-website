@@ -47,7 +47,7 @@ export const About = () => (
         <motion.div variants={fadeUp} className="mx-auto mt-7 h-48 w-48 overflow-hidden rounded-full border-[3px] border-[var(--primary)] bg-[var(--surface)] shadow-[0_18px_45px_rgba(109,40,217,0.18)] sm:mt-8 sm:h-60 sm:w-60">
           <Image
             src="/media/yaredpp.jpg"
-            alt="Portrait of Yared Birihanu"
+            alt="Portrait of Yared Birhanu"
             width={768}
             height={1152}
             sizes="(min-width: 640px) 15rem, 12rem"

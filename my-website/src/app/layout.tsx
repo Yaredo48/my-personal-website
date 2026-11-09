@@ -16,13 +16,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Yared Asfaw | Senior AI Engineer & Software Engineer',
+  title: 'Yared Birhanu | Senior AI Engineer & Software Engineer',
   description:
     'I architect, engineer, and deploy scalable AI solutions that transform complex challenges into intelligent products. Specializing in Machine Learning, Deep Learning, Generative AI, RAG Systems, and Agentic AI.',
   keywords: ['AI Engineer', 'Software Engineer', 'Machine Learning', 'Deep Learning', 'Generative AI', 'LLM', 'RAG', 'Agentic AI', 'MLOps'],
-  authors: [{ name: 'Yared Asfaw' }],
+  authors: [{ name: 'Yared Birhanu' }],
   openGraph: {
-    title: 'Yared Asfaw | Senior AI Engineer & Software Engineer',
+    title: 'Yared Birhanu | Senior AI Engineer & Software Engineer',
     description: 'Building Intelligent Systems. Engineering the Future.',
     type: 'website',
   },
