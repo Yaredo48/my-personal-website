@@ -37,3 +37,15 @@ I have successfully enhanced the website with a cohesive, professional design sy
 - **Maintainability**: Clear separation of concerns with reusable component
 
 The website now offers a more cohesive, elegant, and visually engaging experience while maintaining excellent performance and accessibility standards.
+
+## Project structure
+
+- `src/app` contains the App Router pages, route handlers, and global styles.
+- `src/components` groups shared UI, page sections, and layout components.
+- `src/data` contains portfolio content, while `src/lib` contains shared helpers.
+- `src/types` contains shared TypeScript types.
+- `public/media` is the central home for site visuals, grouped into `general`,
+  `icons`, `logos`, `projects`, `technology-logos`, and `testimonials`.
+
+Public media is referenced by its URL path (for example, `/media/projects/image.png`).
+The CV remains at its existing public URL.
