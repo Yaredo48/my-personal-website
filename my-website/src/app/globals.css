@@ -168,6 +168,86 @@ section { scroll-margin-top: 5rem; }
   padding-inline: var(--section-pad-x);
 }
 
+/* ─── Floating Profile Shortcut ──────────────────────────────────────────── */
+.floating-profile-shortcut {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primary-light) 70%, white);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 26%, rgb(255 255 255 / 0.24), transparent 35%),
+    linear-gradient(145deg, color-mix(in srgb, var(--primary) 88%, #211344), #171327);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--primary) 8%, transparent),
+    0 5px 16px color-mix(in srgb, var(--primary) 30%, transparent);
+  isolation: isolate;
+  transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
+}
+
+.floating-profile-shortcut:hover {
+  transform: scale(1.08);
+  filter: brightness(1.16);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--primary) 12%, transparent),
+    0 8px 22px color-mix(in srgb, var(--primary) 42%, transparent);
+}
+
+.floating-profile-shortcut:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.floating-profile-orbit {
+  position: absolute;
+  display: block;
+  border: 1px solid color-mix(in srgb, var(--primary-light) 78%, white);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.floating-profile-orbit-outer {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-left-color: transparent;
+  border-right-color: color-mix(in srgb, #22d3ee 72%, white);
+  animation: profile-shortcut-orbit 8s linear infinite;
+}
+
+.floating-profile-orbit-inner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-top-color: transparent;
+  border-bottom-color: color-mix(in srgb, #22d3ee 82%, white);
+  animation: profile-shortcut-orbit 5s linear infinite reverse;
+}
+
+.floating-profile-core {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #e4dcff;
+  box-shadow:
+    0 0 8px 3px color-mix(in srgb, var(--primary-light) 72%, transparent),
+    0 0 16px 4px color-mix(in srgb, #22d3ee 38%, transparent);
+  animation: profile-shortcut-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes profile-shortcut-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes profile-shortcut-pulse {
+  0%, 100% { opacity: 0.72; transform: scale(0.82); }
+  50% { opacity: 1; transform: scale(1.16); }
+}
+
 /* ─── Premium Navigation ─────────────────────────────────────────────────── */
 .nav-shell {
   border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
@@ -481,6 +561,11 @@ section { scroll-margin-top: 5rem; }
   .nav-mobile-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .floating-profile-shortcut {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }
 
 /* ─── Global Background Video ────────────────────────────────────────────── */
@@ -713,6 +798,8 @@ section + section { border-top: 1px solid var(--border); }
   html { scroll-behavior: auto; }
   .site-bg-video { display: none; }
   .download-icon-bounce { animation: none; }
+  .floating-profile-orbit,
+  .floating-profile-core { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

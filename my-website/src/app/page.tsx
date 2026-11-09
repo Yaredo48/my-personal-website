@@ -9,6 +9,7 @@ import { Testimonials } from '@/components/sections/Testimonials';
 import { Research } from '@/components/sections/Research';
 import { Blog } from '@/components/sections/Blog';
 import { Contact } from '@/components/sections/Contact';
+import { FloatingProfileShortcut } from '@/components/ui/FloatingProfileShortcut';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <FloatingProfileShortcut />
     </div>
   );
 }
