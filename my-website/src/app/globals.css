@@ -357,6 +357,14 @@ section + section { border-top: 1px solid var(--border); }
   to { transform: translate3d(-50%, 0, 0); }
 }
 
+.hero-typewriter-cursor {
+  animation: hero-cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes hero-cursor-blink {
+  to { visibility: hidden; }
+}
+
 @media (min-width: 640px) {
   .testimonials-set { gap: 1.75rem; padding-right: 1.75rem; }
   .testimonial-card { flex-basis: calc((100cqw - 1.75rem) / 2); }

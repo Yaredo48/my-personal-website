@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { Section, SectionLabel } from '@/components/ui/Section';
+import { Section, SectionLabel, SectionTitle } from '@/components/ui/Section';
 import { cn } from '@/lib/utils';
 
 const researchTopics = [
@@ -48,9 +48,9 @@ export const Research = () => {
     <Section id="research" background="secondary">
       <header className="mb-9 md:mb-11">
         <SectionLabel>Research &amp; Publications</SectionLabel>
-        <h2 className="mb-4 text-[2.4rem] font-semibold leading-[1.08] tracking-[-0.055em] text-[var(--foreground)] sm:text-5xl lg:text-[3.5rem]">
+        <SectionTitle>
           Publications
-        </h2>
+        </SectionTitle>
         <p className="max-w-2xl text-base leading-[1.75] text-[var(--text-muted)] sm:text-lg">
           Selected research directions and proposed studies. These working ideas are not
           published papers.

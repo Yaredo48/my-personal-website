@@ -131,9 +131,9 @@ export const Projects = () => {
       )}
       <div className="mb-6 mt-14 text-center md:mt-20">
         <SectionLabel>Future work</SectionLabel>
-        <h2 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-[var(--foreground)] sm:text-4xl">
+        <SectionTitle className="mt-2 text-3xl sm:text-4xl lg:text-5xl">
           Planned Projects
-        </h2>
+        </SectionTitle>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-[1.7] text-[var(--text-muted)]">
           New projects will be added here when they are ready to share.
         </p>

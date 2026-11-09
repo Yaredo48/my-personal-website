@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { fadeUp, stagger } from '@/lib/motion';
@@ -12,7 +12,65 @@ const socialLinks: { label: ContactMethod; href: string }[] = [
   { label: 'GitHub', href: profile.github },
 ];
 
-export const Hero = () => (
+const professionalTitles = [
+  'Python Full-Stack Developer',
+  'Software Engineer',
+  'Machine Learning Engineer',
+  'AI Engineer',
+  'Content Creator',
+  'Educator',
+];
+
+export const Hero = () => {
+  const [typedTitle, setTypedTitle] = useState('');
+  const [activeTitleIndex, setActiveTitleIndex] = useState(0);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches) {
+      const frame = window.requestAnimationFrame(() => setTypedTitle(professionalTitles[0]));
+      return () => window.cancelAnimationFrame(frame);
+    }
+
+    let titleIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const animateTitle = () => {
+      const title = professionalTitles[titleIndex];
+
+      if (deleting) {
+        characterIndex -= 1;
+        setTypedTitle(title.slice(0, characterIndex));
+
+        if (characterIndex === 0) {
+          deleting = false;
+          titleIndex = (titleIndex + 1) % professionalTitles.length;
+          setActiveTitleIndex(titleIndex);
+          timeout = setTimeout(animateTitle, 250);
+        } else {
+          timeout = setTimeout(animateTitle, 45);
+        }
+        return;
+      }
+
+      characterIndex += 1;
+      setTypedTitle(title.slice(0, characterIndex));
+
+      if (characterIndex === title.length) {
+        deleting = true;
+        timeout = setTimeout(animateTitle, 1400);
+      } else {
+        timeout = setTimeout(animateTitle, 85);
+      }
+    };
+
+    timeout = setTimeout(animateTitle, 300);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
   <section
     id="home"
     className="hero-cinematic relative overflow-hidden"
@@ -60,15 +118,21 @@ export const Hero = () => (
           >
             Hi, I&apos;m{' '}
             <br className="hidden sm:block" />
-            <span className="text-[var(--primary)]">Yared Asfaw</span>
+            <span className="text-[var(--primary)]">Yared Birhanu</span>
           </motion.h1>
 
           {/* Role subtitle */}
           <motion.p
             variants={fadeUp}
-            className="mb-5 text-lg font-semibold tracking-[-0.01em] text-[var(--foreground)] sm:text-xl"
+            className="mb-5 min-h-[3.5rem] font-heading text-xl font-bold leading-tight tracking-[-0.03em] sm:min-h-[3.5rem] sm:text-2xl md:min-h-[4rem] lg:min-h-[2.25rem] lg:text-[1.75rem]"
           >
-            AI Engineer · ML Researcher · Software Architect
+            <span aria-hidden="true">
+              <span className="bg-gradient-to-r from-[var(--foreground)] via-[var(--foreground)] to-[var(--primary-dark)] bg-clip-text text-transparent">
+                {typedTitle}
+              </span>
+              <span className="hero-typewriter-cursor ml-0.5 inline-block h-[1.15em] w-0.5 translate-y-[0.15em] bg-[var(--primary)]" />
+            </span>
+            <span className="sr-only">{professionalTitles[activeTitleIndex]}</span>
           </motion.p>
 
           {/* Bio */}
@@ -180,4 +244,5 @@ export const Hero = () => (
       style={{ background: 'radial-gradient(circle, #6d28d9 0%, transparent 70%)' }}
     />
   </section>
-);
+  );
+};

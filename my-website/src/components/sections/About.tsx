@@ -40,8 +40,8 @@ export const About = () => (
       >
         <motion.div variants={fadeUp}>
           <SectionLabel>Professional profile</SectionLabel>
-          <SectionTitle className="mb-0 text-[2.5rem] sm:text-5xl lg:text-6xl">
-            About Me
+          <SectionTitle className="mb-0 bg-none bg-clip-border font-heading font-extrabold tracking-[-0.05em] text-[var(--accent-amber)] text-[2.5rem] sm:text-5xl lg:text-6xl">
+            Who Am I ?
           </SectionTitle>
         </motion.div>
 

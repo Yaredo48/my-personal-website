@@ -64,7 +64,7 @@ export const SectionTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      'mb-4 text-[2.25rem] font-bold leading-[1.15] tracking-[-0.04em] text-[var(--foreground)] sm:text-[2.625rem] lg:text-[3rem]',
+      'mb-4 bg-gradient-to-r from-[var(--foreground)] via-[var(--foreground)] to-[var(--primary-dark)] bg-clip-text text-[2.25rem] font-bold leading-[1.15] tracking-[-0.04em] text-transparent sm:text-[2.625rem] lg:text-[3rem]',
       className
     )}
     {...props}
