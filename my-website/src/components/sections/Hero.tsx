@@ -115,7 +115,7 @@ export const Hero = () => {
           {/* Name — the primary visual anchor */}
           <motion.h1
             variants={fadeUp}
-            className="mb-5 whitespace-nowrap text-[clamp(1.25rem,7vw,4rem)] font-bold leading-[1.06] tracking-[-0.04em] text-[var(--foreground)] sm:text-[clamp(2rem,6vw,3rem)] md:text-[clamp(1.5rem,4vw,3rem)] lg:text-[3.5rem] xl:text-[4rem]"
+            className="mb-5 whitespace-nowrap text-[clamp(1.375rem,7.5vw,4.25rem)] font-bold leading-[1.06] tracking-[-0.045em] text-[var(--foreground)] sm:text-[clamp(2.125rem,6.25vw,3.25rem)] md:text-[clamp(1.75rem,4.25vw,3.25rem)] lg:text-[3.75rem] xl:text-[4.25rem]"
           >
             Hi, I&apos;m{' '}
             <motion.span
@@ -131,10 +131,10 @@ export const Hero = () => {
           {/* Role subtitle */}
           <motion.p
             variants={fadeUp}
-            className="mb-5 min-h-[3.5rem] font-heading text-xl font-bold leading-tight tracking-[-0.03em] sm:min-h-[3.5rem] sm:text-2xl md:min-h-[4rem] lg:min-h-[2.25rem] lg:text-[1.75rem]"
+            className="mb-5 min-h-[4.5rem] font-heading text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:min-h-[5rem] sm:text-[1.75rem] md:min-h-[5.5rem] md:text-3xl lg:min-h-[2.75rem] lg:text-[2.25rem]"
           >
             <span aria-hidden="true">
-              <span className="bg-gradient-to-r from-[var(--foreground)] via-[var(--foreground)] to-[var(--primary-dark)] bg-clip-text text-transparent">
+              <span className="text-[var(--accent-amber)]">
                 {typedTitle}
               </span>
               <span className="hero-typewriter-cursor ml-0.5 inline-block h-[1.15em] w-0.5 translate-y-[0.15em] bg-[var(--primary)]" />
