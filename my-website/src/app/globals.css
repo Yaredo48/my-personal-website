@@ -172,7 +172,8 @@ section { scroll-margin-top: 5rem; }
 .floating-profile-shortcut {
   position: fixed;
   right: max(1.25rem, env(safe-area-inset-right));
-  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  top: max(1.25rem, env(safe-area-inset-top));
+  bottom: auto;
   z-index: 60;
   display: grid;
   width: 3rem;
@@ -564,7 +565,7 @@ section { scroll-margin-top: 5rem; }
 
   .floating-profile-shortcut {
     right: max(1rem, env(safe-area-inset-right));
-    bottom: max(1rem, env(safe-area-inset-bottom));
+    top: max(1rem, env(safe-area-inset-top));
   }
 }
 
